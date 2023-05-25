@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Portfolio</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="images/favicon.ico">
+</head>
+<body>
+  <header>
+    <h1>iuto.work</h1>
+  </header>
+
+  <div class="container">
+    <img src="images/iuto.png">
+    <div class="self">
+      <p>こんにちは、<b>いうと</b>です！</p>
+      <p>WEBライターとして<a href="https://bento.me/iuto">様々な記事</a>を書いています。</p>
+      <p>今サイトの大半は、ChatGPTを活用して制作しました。</p>
+      <p>私のSNSアカウントについては、以下のリンクからアクセスできます。</p>
+    </div>
+    <ul>
+      <li><a href="https://twitter.com/iuto_025">Twitter</a></li>
+      <li><a href="https://www.instagram.com/iuto_025/">Instagram</a></li>
+    </ul>
+  </div>
+
+  <section>
+    <div class="container">
+      <h2>経歴</h2>
+      <ul>
+        <li>
+          <span class="company"><a href="https://henkan.llc/">合同会社HENKAN</a></span>, 
+          <span class="title">代表</span>, 
+          <span class="date">2022年11月 - 現在</span>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <span class="company"><a href="https://kabin.life/">感覚過敏研究所</a></span>, 
+          <span class="title">長期インターン生</span>, 
+          <span class="date">2022年12月 - 現在</span>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <span class="company">株式会社ノックラーン</span>, 
+          <span class="title">長期インターン生</span>, 
+          <span class="date">2023年1月 - 現在</span>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <span class="company"><a href="https://www.moved.co.jp/">株式会社MOVED</a></span>, 
+          <span class="title">ライター</span>, 
+          <span class="date">2023年1月 - 現在</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="margin">
+      <h2>サービス</h2>
+      <ul class="portfolio-list">
+        <li>
+          <a href="https://bunsho-bunkatsu.herokuapp.com/">
+            <img src="images/bunsho-bunkatsu.png">
+            <h3>文章分割ツール</h3>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="margin">
+      <h2>イベント参加</h2>
+      <ul class="portfolio-list">
+        <li>
+          <a href="idea.html">
+            <h3>IDEA Creation Workshop サポーター</h3>
+            <p>2022年11月5日 - 13日</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <script>
+    // ダークモードの切り替えを処理する関数
+    function toggleDarkMode() {
+      var body = document.body;
+      body.classList.toggle("dark-mode");
+    }
+
+    // ダークモードの自動切り替えを検出する関数
+    function detectDarkMode() {
+      var darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      if (darkModeMediaQuery.matches) {
+        var body = document.body;
+        body.classList.add("dark-mode");
+      }
+    }
+
+    // ページの読み込み完了時に自動切り替えの検出を行う
+    window.addEventListener("DOMContentLoaded", detectDarkMode);
+  </script>
+</body>
+</html>
