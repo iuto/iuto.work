@@ -174,3 +174,10 @@
     .container.dark-mode a:hover {
       color: #007bff;
     }
+
+    @media screen and (max-width:480px) {
+      .self img {
+        width: 355px;
+        height: 355px;
+      }
+    }
