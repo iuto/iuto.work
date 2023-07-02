@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>iuto.work</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="images/favicon.ico">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.1/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<header>
+    <div class="flex flex-wrap justify-center lg:space-x-4">
+        <nav class="bg-white border-gray-200 dark:bg-gray-900">
+            <div class="max-w-screen-xl flex items-center justify-between mx-auto p-2">
+              <div class="w-full" id="navbar-default">
+                <ul class="font-medium flex flex-row space-x-4 mt-0 border-0 bg-white dark:bg-gray-900 dark:border-gray-900">
+                    <li>
+                        <a href="index.html" class="block py-1 pl-1.5 pr-2 text-gray-900 hover:text-blue-700">About</a>
+                      </li>
+                  <li>
+                    <a href="#" class="block py-1 pl-1.5 pr-2 text-blue-700" aria-current="page">Programming</a>
+                  </li>
+                  <li>
+                    <a href="article.html" class="block py-1 pl-1.5 pr-2 text-gray-900 hover:text-blue-700">Article</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>          
+    </nav>
+</header>
+
+<body>
+    <section>
+        <div class="flex flex-wrap justify-center lg:space-x-8">
+        <ol class="relative border-l border-gray-200 dark:border-gray-700">                  
+            <li class="mb-10 ml-4">
+                <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">2022/10-2023/3</time>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Life is Tech! WEBデザインコース</h3>
+                <div class="flex">
+                    <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+                      <span class="flex w-2.5 h-2.5 bg-indigo-600 rounded-full mr-1.5 flex-shrink-0"></span>HTML
+                    </span>
+                    <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white ml-4">
+                      <span class="flex w-2.5 h-2.5 bg-red-600 rounded-full mr-1.5 flex-shrink-0"></span>CSS
+                    </span>
+                </div> 
+            </li>
+            <li class="ml-4">
+                <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+                <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">2023/4-</time>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Life is Tech! WEBサービスコース</h3>
+                <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white">
+                    <span class="flex w-2.5 h-2.5 bg-red-900 rounded-full mr-1.5 flex-shrink-0"></span>Ruby
+                  </span>                                 
+                <p class="text-base font-normal text-gray-500 dark:text-gray-400">勉強に特化したTODOリストサービスを作成しています。</p>
+            </li>
+        </div>      
+    </section>
+    <section>
+        <div class="flex flex-wrap justify-center lg:space-x-8">
+        <div class="max-w-sm p-6 m-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 lg:m-0">
+            <a href="https://bunsho-bunkatsu.herokuapp.com/">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 hover:text-blue-700 dark:text-white">文章分割ツール</h5>
+            </a>
+            <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white"><span class="flex w-2.5 h-2.5 bg-blue-600 rounded-full mr-1.5 flex-shrink-0"></span>Python</span>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">文字数ごとに分割するのはもちろん、読点を考慮して分割したり、URLだけ抽出/削除することも可能です。<br><br>ChatGPTを使う際に、手動で文章を分割することに煩わしさを感じていたので開発しました。</p>
+        </div>
+    
+        <div class="max-w-sm p-6 m-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 lg:m-0">
+            <a href="https://artain.app/">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 hover:text-blue-700 dark:text-white">ArtAIn</h5>
+            </a>
+            <span class="flex items-center text-sm font-medium text-gray-900 dark:text-white"><span class="flex w-2.5 h-2.5 bg-yellow-300 rounded-full mr-1.5 flex-shrink-0"></span>JavaScript</span>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">世界の名画とAI生成したものを見分けるゲームです。<br><br>Stable Diffusion Onlineを使用している際に、有名な名画を入力したところ、類似の画像が表示されて面白いと思ったので、開発しました。</p>
+            <a href="https://zenn.dev/iuto/articles/b9d80b7820aa91" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                開発ブログ
+                <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </a>
+        </div>
+      </div>
+    </section>
+</body>
+<script>
+    // ダークモードの切り替えを処理する関数
+    function toggleDarkMode() {
+      var body = document.body;
+      body.classList.toggle("dark-mode");
+    }
+
+    // ダークモードの自動切り替えを検出する関数
+    function detectDarkMode() {
+      var darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      if (darkModeMediaQuery.matches) {
+        var body = document.body;
+        body.classList.add("dark-mode");
+      }
+    }
+
+    // ページの読み込み完了時に自動切り替えの検出を行う
+    window.addEventListener("DOMContentLoaded", detectDarkMode);
+  </script>
+  </html>
