@@ -180,4 +180,8 @@
         width: 355px;
         height: 355px;
       }
+
+      .article a {
+        margin-bottom: 20px;
+      }
     }
