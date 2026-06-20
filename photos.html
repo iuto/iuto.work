@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photos | iuto</title>
+  <meta name="description" content="iutoが撮影した写真を掲載するページです。" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="photo-page">
+  <div class="bg-blob blob1"></div>
+  <div class="bg-blob blob2"></div>
+  <div class="bg-blob blob3"></div>
+
+  <main class="page">
+    <nav class="nav">
+      <div class="nav-links">
+        <a href="index.html#about" aria-label="About" title="About">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M5 21a7 7 0 0 1 14 0" />
+          </svg>
+        </a>
+        <a class="is-current nav-camera" href="photos.html" aria-current="page" aria-label="Camera" title="Camera">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 8.5h3.4L9.2 6h5.6l1.8 2.5H20a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 19.5H4A1.5 1.5 0 0 1 2.5 18v-8A1.5 1.5 0 0 1 4 8.5Z" />
+            <circle cx="12" cy="14" r="3.2" />
+            <circle cx="18" cy="11" r="1" />
+          </svg>
+        </a>
+      </div>
+    </nav>
+
+    <section class="photo-intro glass">
+      <div class="hero-content">
+        <div class="profile-card">
+          <img class="profile-icon" src="photos/icon.png" alt="iuto icon" />
+          <div class="profile-copy">
+            <h1>iuto</h1>
+            <div class="photo-meta-list" aria-label="Photography profile">
+              <span class="photo-meta photo-meta-camera">
+                <svg class="photo-meta-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 19V8.5L12 4l8 4.5V19" />
+                  <path d="M7 19v-6h10v6" />
+                  <path d="M10 19v-3h4v3" />
+                </svg>
+                <span class="photo-meta-value">関西大学 写真部 デジタルパート</span>
+              </span>
+              <span class="photo-meta">
+                <svg class="photo-meta-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 8.5h3.4L9.2 6h5.6l1.8 2.5H20a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 19.5H4A1.5 1.5 0 0 1 2.5 18v-8A1.5 1.5 0 0 1 4 8.5Z" />
+                  <circle cx="12" cy="14" r="3.2" />
+                  <circle cx="18" cy="11" r="1" />
+                </svg>
+                <span class="photo-meta-value">LUMIX GX7MK2</span>
+              </span>
+              <span class="photo-meta">
+                <svg class="photo-meta-icon photo-lens-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 6.8C6 4.15 8.7 2.4 12 2.4s6 1.75 6 4.4v9.9c0 2.45-2.7 4.9-6 4.9s-6-2.45-6-4.9V6.8Z" />
+                  <path class="lens-cut" d="M7.35 7.15c0-1.78 2.08-3.08 4.65-3.08s4.65 1.3 4.65 3.08-2.08 3.08-4.65 3.08-4.65-1.3-4.65-3.08Z" />
+                  <path d="M9.35 7.35c0-1.05 1.2-1.85 2.65-1.85s2.65.8 2.65 1.85v.9h-5.3v-.9Z" />
+                  <path class="lens-cut" d="M6.9 13.1c1.07 1.03 2.87 1.7 5.1 1.7s4.03-.67 5.1-1.7v1.28c-1.27.88-3.05 1.42-5.1 1.42s-3.83-.54-5.1-1.42V13.1Z" />
+                  <path class="lens-cut" d="M7.35 16.2h1v1.55h-1V16.2Zm2.2.44h1v1.68h-1v-1.68Zm2.2.16h1v1.72h-1V16.8Zm2.2-.16h1v1.68h-1v-1.68Zm2.2-.44h1v1.55h-1V16.2Z" />
+                  <path d="M8.15 20.05c.98.97 2.36 1.55 3.85 1.55s2.87-.58 3.85-1.55v1.6c-.97.74-2.33 1.15-3.85 1.15s-2.88-.41-3.85-1.15v-1.6Z" />
+                </svg>
+                <span class="photo-meta-value">LEICA DG SUMMILUX 25mm F1.4 ASPH. / OLYMPUS M.ZUIKO DIGITAL ED 40-150mm F4.0-5.6 R</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-large photo-section">
+      <div class="photo-gallery">
+        <div class="photo-grid">
+          <article class="photo-card" data-tags="animal park" data-camera="Panasonic DMC-GX7MK2" data-lens="Olympus M.Zuiko Digital ED 40-150mm F4.0-5.6 R" data-exif="150mm / f5.6 / 1/320s / ISO 200" data-date="2026.02.17 11:13" data-place="&#29287;&#37326;&#12534;&#27744;&#32209;&#22320;" data-map="https://www.google.com/maps/search/?api=1&query=%E7%89%A7%E9%87%8E%E3%83%B6%E6%B1%A0%E7%B7%91%E5%9C%B0" data-src="photos/P1180860.JPG">
+            <div class="photo-card-media">
+              <button class="photo-open" type="button" aria-label="Open photo details">
+                <img src="photos/P1180860.JPG" alt="Cat photo" />
+              </button>
+            </div>
+            <div class="photo-info">
+              <button class="photo-tag" type="button" data-tag="animal">#&#21205;&#29289;</button>
+              <button class="photo-tag" type="button" data-tag="park">#&#20844;&#22290;</button>
+            </div>
+          </article>
+
+          <article class="photo-card" data-tags="airplane" data-camera="Panasonic DMC-GX7MK2" data-lens="Olympus M.Zuiko Digital ED 40-150mm F4.0-5.6 R" data-exif="150mm / f7.1 / 1/2000s / ISO 400" data-date="2026.05.09 15:47" data-place="&#21315;&#37324;&#24029;&#22303;&#25163;" data-map="https://www.google.com/maps/search/?api=1&query=%E5%8D%83%E9%87%8C%E5%B7%9D%E5%9C%9F%E6%89%8B" data-src="photos/P1260700.JPG">
+            <div class="photo-card-media">
+              <button class="photo-open" type="button" aria-label="Open photo details">
+                <img src="photos/P1260700.JPG" alt="Airplane on runway" />
+              </button>
+            </div>
+            <div class="photo-info">
+              <button class="photo-tag" type="button" data-tag="airplane">#&#39131;&#34892;&#27231;</button>
+            </div>
+          </article>
+
+          <article class="photo-card" data-tags="airplane" data-camera="Panasonic DMC-GX7MK2" data-lens="Olympus M.Zuiko Digital ED 40-150mm F4.0-5.6 R" data-exif="120mm / f7.1 / 1/2500s / ISO 400" data-date="2026.05.09 16:40" data-place="&#20234;&#20025;&#31354;&#28207;" data-map="https://www.google.com/maps/search/?api=1&query=%E4%BC%8A%E4%B8%B9%E7%A9%BA%E6%B8%AF" data-src="photos/P1260953.JPG">
+            <div class="photo-card-media">
+              <button class="photo-open" type="button" aria-label="Open photo details">
+                <img src="photos/P1260953.JPG" alt="Airplane taking off" />
+              </button>
+            </div>
+            <div class="photo-info">
+              <button class="photo-tag" type="button" data-tag="airplane">#&#39131;&#34892;&#27231;</button>
+            </div>
+          </article>
+
+          <article class="photo-card" data-tags="airplane" data-camera="Panasonic DMC-GX7MK2" data-lens="Olympus M.Zuiko Digital ED 40-150mm F4.0-5.6 R" data-exif="150mm / f6.3 / 1/3200s / ISO 400" data-date="2026.05.29 11:56" data-place="&#21315;&#37324;&#24029;&#22303;&#25163;" data-map="https://www.google.com/maps/search/?api=1&query=%E5%8D%83%E9%87%8C%E5%B7%9D%E5%9C%9F%E6%89%8B" data-src="photos/P1290100.JPG">
+            <div class="photo-card-media">
+              <button class="photo-open" type="button" aria-label="Open photo details">
+                <img src="photos/P1290100.JPG" alt="ANA airplane" />
+              </button>
+            </div>
+            <div class="photo-info">
+              <button class="photo-tag" type="button" data-tag="airplane">#&#39131;&#34892;&#27231;</button>
+            </div>
+          </article>
+
+          <article class="photo-card" data-tags="airplane" data-camera="Panasonic DMC-GX7MK2" data-lens="Olympus M.Zuiko Digital ED 40-150mm F4.0-5.6 R" data-exif="150mm / f6.3 / 1/3200s / ISO 400" data-date="2026.05.29 12:00" data-place="&#21315;&#37324;&#24029;&#22303;&#25163;" data-map="https://www.google.com/maps/search/?api=1&query=%E5%8D%83%E9%87%8C%E5%B7%9D%E5%9C%9F%E6%89%8B" data-src="photos/P1290195.JPG">
+            <div class="photo-card-media">
+              <button class="photo-open" type="button" aria-label="Open photo details">
+                <img src="photos/P1290195.JPG" alt="Airplane moving on runway" />
+              </button>
+            </div>
+            <div class="photo-info">
+              <button class="photo-tag" type="button" data-tag="airplane">#&#39131;&#34892;&#27231;</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="photo-controls" aria-label="Gallery controls">
+          <button class="photo-control" type="button" data-photo-scroll="prev" aria-label="Previous photo">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M15 5 8 12l7 7" />
+            </svg>
+          </button>
+          <button class="photo-control" type="button" data-photo-scroll="next" aria-label="Next photo">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m9 5 7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <dialog class="photo-dialog" id="photo-dialog" aria-label="Photo details">
+      <div class="photo-dialog-panel">
+        <button class="photo-dialog-close" type="button" data-photo-dialog-close aria-label="Close">&times;</button>
+        <div class="photo-dialog-media" id="photo-dialog-media"></div>
+        <button class="photo-dialog-like" type="button" id="photo-dialog-like" aria-label="Like photo">
+          <span aria-hidden="true">&#9825;</span>
+          <strong id="photo-like-count">0</strong>
+        </button>
+        <div class="photo-dialog-copy">
+          <dl class="photo-detail-list">
+            <div data-detail-row="camera">
+              <dt>Camera</dt>
+              <dd id="photo-detail-camera"></dd>
+            </div>
+            <div data-detail-row="lens">
+              <dt>Lens</dt>
+              <dd id="photo-detail-lens"></dd>
+            </div>
+            <div data-detail-row="exif">
+              <dt>EXIF</dt>
+              <dd id="photo-detail-exif"></dd>
+            </div>
+            <div data-detail-row="date">
+              <dt>Date</dt>
+              <dd id="photo-detail-date"></dd>
+            </div>
+          </dl>
+          <a class="photo-map-link" id="photo-map-link" href="#" target="_blank" rel="noopener" hidden>
+            <span class="photo-map-pin" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 21s7-6.1 7-12A7 7 0 0 0 5 9c0 5.9 7 12 7 12Z" />
+                <circle cx="12" cy="9" r="2.4" />
+              </svg>
+            </span>
+            <span>
+              <small>Google Maps</small>
+              <strong id="photo-map-place"></strong>
+            </span>
+          </a>
+          <div class="photo-dialog-tags" id="photo-dialog-tags"></div>
+        </div>
+      </div>
+    </dialog>
+
+  </main>
+  <script>
+    const photoGrid = document.querySelector(".photo-grid");
+    const photoCards = [...document.querySelectorAll(".photo-card")];
+    const photoDialog = document.getElementById("photo-dialog");
+    const photoDialogMedia = document.getElementById("photo-dialog-media");
+    const photoDialogTags = document.getElementById("photo-dialog-tags");
+    const photoDetailCamera = document.getElementById("photo-detail-camera");
+    const photoDetailLens = document.getElementById("photo-detail-lens");
+    const photoDetailExif = document.getElementById("photo-detail-exif");
+    const photoDetailDate = document.getElementById("photo-detail-date");
+    const photoMapLink = document.getElementById("photo-map-link");
+    const photoMapPlace = document.getElementById("photo-map-place");
+    const photoDialogLike = document.getElementById("photo-dialog-like");
+    const photoLikeCount = document.getElementById("photo-like-count");
+    let activeTag = "";
+    let activePhotoId = "";
+
+    document.querySelectorAll("[data-photo-scroll]").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (!photoGrid) return;
+
+        const card = photoGrid.querySelector(".photo-card:not(.is-hidden)") || photoGrid.querySelector(".photo-card");
+        const gap = parseFloat(getComputedStyle(photoGrid).columnGap) || 18;
+        const distance = card ? card.getBoundingClientRect().width + gap : 340;
+        const direction = button.dataset.photoScroll === "next" ? 1 : -1;
+
+        photoGrid.scrollBy({
+          left: direction * distance,
+          behavior: "smooth"
+        });
+      });
+    });
+
+    const tagLabel = {
+      animal: "&#21205;&#29289;",
+      park: "&#20844;&#22290;",
+      airplane: "&#39131;&#34892;&#27231;",
+    };
+
+    const setActiveTag = (tag) => {
+      activeTag = activeTag === tag ? "" : tag;
+
+      photoCards.forEach((card) => {
+        const tags = card.dataset.tags?.split(" ") || [];
+        card.classList.toggle("is-hidden", Boolean(activeTag) && !tags.includes(activeTag));
+      });
+
+      document.querySelectorAll(".photo-tag").forEach((button) => {
+        button.classList.toggle("is-active", button.dataset.tag === activeTag);
+      });
+
+      photoGrid?.scrollTo({ left: 0, behavior: "smooth" });
+    };
+
+    document.querySelectorAll(".photo-tag").forEach((button) => {
+      button.addEventListener("click", () => setActiveTag(button.dataset.tag));
+    });
+
+    const openPhotoDialog = (card) => {
+      if (!photoDialog) return;
+
+      const src = card.dataset.src;
+      activePhotoId = src ? src.split("/").pop().replace(/\.[^.]+$/, "") : "";
+      photoDialogMedia.innerHTML = src
+        ? `<img src="${src}" alt="">`
+        : `<div class="photo-dialog-placeholder">Details not added yet</div>`;
+
+      const setDetail = (key, element, value) => {
+        const row = document.querySelector(`[data-detail-row="${key}"]`);
+        const shouldShow = value && value !== "-" && value !== "Location TBD";
+        row.hidden = !shouldShow;
+        element.textContent = shouldShow ? value : "";
+      };
+
+      setDetail("camera", photoDetailCamera, card.dataset.camera);
+      setDetail("lens", photoDetailLens, card.dataset.lens);
+      setDetail("exif", photoDetailExif, card.dataset.exif);
+      setDetail("date", photoDetailDate, card.dataset.date);
+
+      const hasMap = card.dataset.place && card.dataset.map;
+      photoMapLink.hidden = !hasMap;
+      if (hasMap) {
+        photoMapLink.href = card.dataset.map;
+        photoMapPlace.textContent = card.dataset.place;
+      }
+
+      photoDialogTags.innerHTML = "";
+      (card.dataset.tags?.split(" ") || []).forEach((tag) => {
+        const button = document.createElement("button");
+        button.className = "photo-tag";
+        button.type = "button";
+        button.dataset.tag = tag;
+        button.innerHTML = `#${tagLabel[tag] || tag}`;
+        button.addEventListener("click", () => {
+          photoDialog.close();
+          setActiveTag(tag);
+        });
+        photoDialogTags.append(button);
+      });
+
+      syncDialogLike();
+      photoDialog.showModal();
+    };
+
+    document.querySelectorAll(".photo-open").forEach((button) => {
+      button.addEventListener("click", () => {
+        openPhotoDialog(button.closest(".photo-card"));
+      });
+    });
+
+    const likeCounts = JSON.parse(localStorage.getItem("photoLikeCounts") || "{}");
+
+    const syncDialogLike = () => {
+      if (!photoDialogLike || !activePhotoId) return;
+      const count = likeCounts[activePhotoId] || 0;
+      photoDialogLike.classList.toggle("is-liked", count > 0);
+      photoDialogLike.querySelector("span").innerHTML = "&#9829;";
+      photoLikeCount.textContent = count;
+    };
+
+    photoDialogLike?.addEventListener("click", () => {
+      if (!activePhotoId) return;
+
+      likeCounts[activePhotoId] = (likeCounts[activePhotoId] || 0) + 1;
+
+      localStorage.setItem("photoLikeCounts", JSON.stringify(likeCounts));
+      syncDialogLike();
+      photoDialogLike.classList.remove("is-popping");
+      void photoDialogLike.offsetWidth;
+      photoDialogLike.classList.add("is-popping");
+    });
+
+    document.querySelector("[data-photo-dialog-close]")?.addEventListener("click", () => {
+      photoDialog?.close();
+    });
+
+    photoDialog?.addEventListener("click", (event) => {
+      if (event.target === photoDialog) photoDialog.close();
+    });
+  </script>
+</body>
+</html>
