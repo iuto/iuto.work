@@ -61,29 +61,6 @@ body::after {
   z-index: -2;
 }
 
-.photo-page {
-  background:
-    radial-gradient(ellipse 760px 460px at 18% 8%, rgba(255, 197, 100, 0.18), transparent 60%),
-    radial-gradient(ellipse 820px 540px at 92% 18%, rgba(96, 143, 145, 0.42), transparent 62%),
-    radial-gradient(ellipse 720px 520px at 20% 100%, rgba(10, 37, 35, 0.38), transparent 64%),
-    linear-gradient(122deg, transparent 0%, transparent 36%, rgba(255, 255, 255, 0.08) 50%, transparent 68%),
-    linear-gradient(180deg, #6f999b 0%, #7ea8aa 42%, #587f82 100%);
-}
-
-.photo-page::before {
-  background-image:
-    linear-gradient(rgba(255,255,255,0.032) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.032) 1px, transparent 1px),
-    radial-gradient(circle at center, rgba(255,255,255,0.08) 1px, transparent 1.5px);
-  background-size: 52px 52px, 52px 52px, 18px 18px;
-}
-
-.photo-page::after {
-  background:
-    radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.16) 100%),
-    linear-gradient(90deg, rgba(0,0,0,0.10), transparent 18%, transparent 82%, rgba(0,0,0,0.10));
-}
-
 .bg-blob {
   position: fixed;
   width: 760px;
