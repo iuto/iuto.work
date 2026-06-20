@@ -288,6 +288,20 @@
     let activePhotoId = "";
     let currentLikeRequest = 0;
 
+    const shufflePhotoCards = () => {
+      if (!photoGrid) return;
+
+      const shuffledCards = [...photoCards];
+      for (let index = shuffledCards.length - 1; index > 0; index -= 1) {
+        const randomIndex = Math.floor(Math.random() * (index + 1));
+        [shuffledCards[index], shuffledCards[randomIndex]] = [shuffledCards[randomIndex], shuffledCards[index]];
+      }
+
+      shuffledCards.forEach((card) => photoGrid.append(card));
+    };
+
+    shufflePhotoCards();
+
     document.querySelectorAll("[data-photo-scroll]").forEach((button) => {
       button.addEventListener("click", () => {
         if (!photoGrid) return;
