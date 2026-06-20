@@ -191,6 +191,7 @@
     </dialog>
 
   </main>
+  <script src="likes-config.js"></script>
   <script>
     const photoGrid = document.querySelector(".photo-grid");
     const photoCards = [...document.querySelectorAll(".photo-card")];
@@ -205,8 +206,64 @@
     const photoMapPlace = document.getElementById("photo-map-place");
     const photoDialogLike = document.getElementById("photo-dialog-like");
     const photoLikeCount = document.getElementById("photo-like-count");
+    const likesConfig = window.IUTO_LIKES_CONFIG || {};
+    const hasSharedLikes = Boolean(likesConfig.supabaseUrl && likesConfig.supabaseAnonKey);
+    const likeStore = {
+      localKey: "photoLikeCounts",
+      getLocalCounts() {
+        try {
+          return JSON.parse(localStorage.getItem(this.localKey) || "{}");
+        } catch {
+          return {};
+        }
+      },
+      setLocalCount(photoId, count) {
+        const counts = this.getLocalCounts();
+        counts[photoId] = count;
+        localStorage.setItem(this.localKey, JSON.stringify(counts));
+      },
+      headers() {
+        return {
+          apikey: likesConfig.supabaseAnonKey,
+          Authorization: `Bearer ${likesConfig.supabaseAnonKey}`,
+          "Content-Type": "application/json"
+        };
+      },
+      async get(photoId) {
+        if (!hasSharedLikes) return this.getLocalCounts()[photoId] || 0;
+
+        const params = new URLSearchParams({
+          photo_id: `eq.${photoId}`,
+          select: "count"
+        });
+        const response = await fetch(`${likesConfig.supabaseUrl}/rest/v1/photo_likes?${params}`, {
+          headers: this.headers()
+        });
+
+        if (!response.ok) throw new Error("Could not load shared likes");
+        const rows = await response.json();
+        return rows[0]?.count || 0;
+      },
+      async increment(photoId) {
+        if (!hasSharedLikes) {
+          const nextCount = (this.getLocalCounts()[photoId] || 0) + 1;
+          this.setLocalCount(photoId, nextCount);
+          return nextCount;
+        }
+
+        const response = await fetch(`${likesConfig.supabaseUrl}/rest/v1/rpc/increment_photo_like`, {
+          method: "POST",
+          headers: this.headers(),
+          body: JSON.stringify({ photo_key: photoId })
+        });
+
+        if (!response.ok) throw new Error("Could not save shared like");
+        return response.json();
+      }
+    };
     let activeTag = "";
     let activePhotoId = "";
+    let currentLikeRequest = 0;
 
     document.querySelectorAll("[data-photo-scroll]").forEach((button) => {
       button.addEventListener("click", () => {
@@ -301,26 +358,48 @@
       });
     });
 
-    const likeCounts = JSON.parse(localStorage.getItem("photoLikeCounts") || "{}");
-
-    const syncDialogLike = () => {
-      if (!photoDialogLike || !activePhotoId) return;
-      const count = likeCounts[activePhotoId] || 0;
+    const renderLikeCount = (count) => {
       photoDialogLike.classList.toggle("is-liked", count > 0);
       photoDialogLike.querySelector("span").innerHTML = "&#9829;";
-      photoLikeCount.textContent = count;
+      photoLikeCount.textContent = count.toLocaleString();
     };
 
-    photoDialogLike?.addEventListener("click", () => {
+    const syncDialogLike = async () => {
+      if (!photoDialogLike || !activePhotoId) return;
+
+      const requestId = ++currentLikeRequest;
+      photoDialogLike.disabled = true;
+      photoDialogLike.classList.add("is-loading");
+
+      try {
+        const count = await likeStore.get(activePhotoId);
+        if (requestId === currentLikeRequest) renderLikeCount(count);
+      } catch {
+        const count = likeStore.getLocalCounts()[activePhotoId] || 0;
+        renderLikeCount(count);
+      } finally {
+        if (requestId === currentLikeRequest) {
+          photoDialogLike.disabled = false;
+          photoDialogLike.classList.remove("is-loading");
+        }
+      }
+    };
+
+    photoDialogLike?.addEventListener("click", async () => {
       if (!activePhotoId) return;
 
-      likeCounts[activePhotoId] = (likeCounts[activePhotoId] || 0) + 1;
-
-      localStorage.setItem("photoLikeCounts", JSON.stringify(likeCounts));
-      syncDialogLike();
       photoDialogLike.classList.remove("is-popping");
       void photoDialogLike.offsetWidth;
       photoDialogLike.classList.add("is-popping");
+
+      try {
+        const nextCount = await likeStore.increment(activePhotoId);
+        renderLikeCount(nextCount);
+      } catch {
+        const nextCount = (likeStore.getLocalCounts()[activePhotoId] || 0) + 1;
+        likeStore.setLocalCount(activePhotoId, nextCount);
+        renderLikeCount(nextCount);
+      }
     });
 
     document.querySelector("[data-photo-dialog-close]")?.addEventListener("click", () => {
