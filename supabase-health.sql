@@ -15,7 +15,7 @@ on public.health_daily
 for select
 using (true);
 
-create extension if not exists pgcrypto;
+create extension if not exists pgcrypto with schema extensions;
 
 create table if not exists public.health_sync_tokens (
   id text primary key,
@@ -46,7 +46,7 @@ begin
     select 1
     from public.health_sync_tokens
     where id = 'galaxy-s24'
-      and token_hash = crypt(sync_token, token_hash)
+      and token_hash = extensions.crypt(sync_token, token_hash)
   )
   into token_is_valid;
 
@@ -88,6 +88,6 @@ grant execute on function public.upsert_health_daily(text, date, integer, numeri
 
 -- Run once after replacing CHANGE_ME_WITH_LONG_RANDOM_TEXT.
 -- insert into public.health_sync_tokens (id, token_hash)
--- values ('galaxy-s24', crypt('CHANGE_ME_WITH_LONG_RANDOM_TEXT', gen_salt('bf')))
+-- values ('galaxy-s24', extensions.crypt('CHANGE_ME_WITH_LONG_RANDOM_TEXT', extensions.gen_salt('bf')))
 -- on conflict (id)
 -- do update set token_hash = excluded.token_hash, updated_at = now();
