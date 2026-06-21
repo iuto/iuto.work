@@ -464,6 +464,20 @@
       button.addEventListener("click", () => setActiveTag(button.dataset.tag));
     });
 
+    const formatPhotoDate = (value) => {
+      if (!value) return value;
+
+      const match = value.match(/^(\d{4})\.(\d{2})\.(\d{2})\s+(\d{2}:\d{2})$/);
+      if (!match) return value;
+
+      const [, year, month, day, time] = match;
+      const date = new Date(`${year}-${month}-${day}T00:00:00`);
+      if (Number.isNaN(date.getTime())) return value;
+
+      const weekday = new Intl.DateTimeFormat("ja-JP", { weekday: "short" }).format(date);
+      return `${year}.${month}.${day}（${weekday}）${time}`;
+    };
+
     const openPhotoDialog = (card) => {
       if (!photoDialog) return;
 
@@ -483,7 +497,7 @@
       setDetail("camera", photoDetailCamera, card.dataset.camera);
       setDetail("lens", photoDetailLens, card.dataset.lens);
       setDetail("exif", photoDetailExif, card.dataset.exif);
-      setDetail("date", photoDetailDate, card.dataset.date);
+      setDetail("date", photoDetailDate, formatPhotoDate(card.dataset.date));
 
       const hasMap = card.dataset.place && card.dataset.map;
       photoMapLink.hidden = !hasMap;
