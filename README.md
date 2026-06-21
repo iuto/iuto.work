@@ -37,9 +37,10 @@ Galaxy Watch -> Samsung Health -> Health Connect -> Android sync app -> Supabase
 
 1. Run `supabase-health.sql` in the Supabase SQL editor.
 2. Put the same Supabase Project URL and anon public key into `health-config.js`.
-3. Build an Android sync app that reads Health Connect records and writes the latest daily row to `health_daily`.
+3. Replace the sync token placeholder at the bottom of `supabase-health.sql` and run that insert once.
+4. Build an Android sync app that reads Health Connect records and calls `upsert_health_daily`.
 
-Do not ship a Supabase service role key in the website or Android app. Use a Supabase Edge Function or another private backend for writes.
+Do not ship a Supabase service role key in the website or Android app. The Android app should use the anon key plus a private sync token, and the database function should reject writes without that token.
 
 ## Deploy
 
