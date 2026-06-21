@@ -74,6 +74,9 @@
 
     <section class="section-large photo-section">
       <div class="photo-gallery">
+        <div class="photo-gallery-count" aria-label="Total photos">
+          <span id="photo-total-count">0 photos</span>
+        </div>
         <div class="photo-grid">
           <article class="photo-card" data-tags="aquarium" data-camera="Panasonic DMC-GX7MK2" data-lens="Leica DG Summilux 25mm F1.4 ASPH." data-exif="25mm / f1.4 / 1/160s / ISO 1600" data-date="2026.02.03 11:38" data-place="&#21517;&#21476;&#23627;&#28207;&#27700;&#26063;&#39208;" data-map="https://www.google.com/maps/search/?api=1&query=%E5%90%8D%E5%8F%A4%E5%B1%8B%E6%B8%AF%E6%B0%B4%E6%97%8F%E9%A4%A8" data-map-icon="🐠" data-src="photos/P1170314.JPG">
             <div class="photo-card-media">
@@ -324,6 +327,7 @@
   <script>
     const photoGrid = document.querySelector(".photo-grid");
     const photoCards = [...document.querySelectorAll(".photo-card")];
+    const photoTotalCount = document.getElementById("photo-total-count");
     const photoDialog = document.getElementById("photo-dialog");
     const photoDialogMedia = document.getElementById("photo-dialog-media");
     const photoDialogTags = document.getElementById("photo-dialog-tags");
@@ -394,6 +398,10 @@
     let activeTag = "";
     let activePhotoId = "";
     let currentLikeRequest = 0;
+
+    if (photoTotalCount) {
+      photoTotalCount.textContent = `${photoCards.length} photos`;
+    }
 
     const shufflePhotoCards = () => {
       if (!photoGrid) return;
