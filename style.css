@@ -449,11 +449,24 @@ h1 {
   box-shadow: 0 3px 10px rgba(0,0,0,0.10);
 }
 
-.profile-social-link img {
+.profile-social-link img,
+.profile-social-link svg {
   width: 20px;
   height: 20px;
   display: block;
+}
+
+.profile-social-link img {
   object-fit: contain;
+}
+
+.profile-social-link svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  color: rgba(247,248,255,0.9);
 }
 
 .lead {
