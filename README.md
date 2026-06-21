@@ -28,9 +28,22 @@ window.IUTO_LIKES_CONFIG = {
 
 The anon key is safe to publish here because the database only allows public reads and the `increment_photo_like` function.
 
+## Health Sync
+
+The home page can show the latest Galaxy Watch data for steps, distance, and sleep.
+The static site only reads public rows from Supabase; automatic updates need a phone-side sync path such as:
+
+Galaxy Watch -> Samsung Health -> Health Connect -> Android sync app -> Supabase -> iuto.work
+
+1. Run `supabase-health.sql` in the Supabase SQL editor.
+2. Put the same Supabase Project URL and anon public key into `health-config.js`.
+3. Build an Android sync app that reads Health Connect records and writes the latest daily row to `health_daily`.
+
+Do not ship a Supabase service role key in the website or Android app. Use a Supabase Edge Function or another private backend for writes.
+
 ## Deploy
 
-This site is static, so GitHub Pages can serve it directly from the repository root.
+This site is static and is deployed from the repository root with Vercel.
 
 ## Links
 
