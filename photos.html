@@ -164,7 +164,7 @@
               </button>
             </div>
             <div class="photo-info">
-              <button class="photo-tag" type="button" data-tag="airplane">#&#39131;&#34892;&#27231;</button>
+              <button class="photo-tag" type="button" data-tag="airplane">✈️&#39131;&#34892;&#27231;</button>
             </div>
           </article>
 
@@ -175,7 +175,7 @@
               </button>
             </div>
             <div class="photo-info">
-              <button class="photo-tag" type="button" data-tag="airplane">#&#39131;&#34892;&#27231;</button>
+              <button class="photo-tag" type="button" data-tag="airplane">✈️&#39131;&#34892;&#27231;</button>
             </div>
           </article>
 
@@ -186,7 +186,7 @@
               </button>
             </div>
             <div class="photo-info">
-              <button class="photo-tag" type="button" data-tag="airplane">#&#39131;&#34892;&#27231;</button>
+              <button class="photo-tag" type="button" data-tag="airplane">✈️&#39131;&#34892;&#27231;</button>
             </div>
           </article>
 
@@ -208,7 +208,7 @@
               </button>
             </div>
             <div class="photo-info">
-              <button class="photo-tag" type="button" data-tag="airplane">#&#39131;&#34892;&#27231;</button>
+              <button class="photo-tag" type="button" data-tag="airplane">✈️&#39131;&#34892;&#27231;</button>
             </div>
           </article>
 
@@ -436,7 +436,7 @@
     const tagLabel = {
       animal: "&#21205;&#29289;",
       park: "&#20844;&#22290;",
-      airplane: "&#39131;&#34892;&#27231;",
+      airplane: "✈️&#39131;&#34892;&#27231;",
       aquarium: "&#27700;&#26063;&#39208;",
       building: "&#24314;&#29289;",
       shrine: "神社",
@@ -513,7 +513,7 @@
         button.className = "photo-tag";
         button.type = "button";
         button.dataset.tag = tag;
-        button.innerHTML = `#${tagLabel[tag] || tag}`;
+        button.innerHTML = tag === "airplane" ? tagLabel[tag] : `#${tagLabel[tag] || tag}`;
         button.addEventListener("click", () => {
           photoDialog.close();
           setActiveTag(tag);
