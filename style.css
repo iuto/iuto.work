@@ -1782,25 +1782,15 @@ h1 {
   .timeline-item {
     grid-template-columns: 1fr;
     gap: 6px;
-    padding-left: 20px;
+    padding-left: 0;
   }
 
   .timeline-item::before {
-    top: 20px;
-    left: 0;
+    display: none;
   }
 
   .timeline-item::after {
-    top: 32px;
-    left: 4px;
-  }
-
-  .timeline-item:first-child::before {
-    top: 5px;
-  }
-
-  .timeline-item:first-child::after {
-    top: 17px;
+    display: none;
   }
 
   .work-dialog {
