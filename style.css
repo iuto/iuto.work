@@ -1041,7 +1041,7 @@ h1 {
 
 .photo-controls {
   position: absolute;
-  top: 0;
+  top: 28px;
   left: 0;
   right: 0;
   height: min(425px, 102.5vw);
