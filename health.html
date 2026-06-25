@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>Health | iuto</title>
+  <meta name="description" content="iutoのGalaxy Watchヘルスデータを表示するページです。" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-blob blob1"></div>
+  <div class="bg-blob blob2"></div>
+  <div class="bg-blob blob3"></div>
+
+  <main class="page">
+    <nav class="nav">
+      <div class="nav-links">
+        <a href="index.html" aria-label="Home" title="Home">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M5 21a7 7 0 0 1 14 0" />
+          </svg>
+        </a>
+        <a class="nav-camera" href="photos.html" aria-label="Camera" title="Camera">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 8.5h3.4L9.2 6h5.6l1.8 2.5H20a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 20 19.5H4A1.5 1.5 0 0 1 2.5 18v-8A1.5 1.5 0 0 1 4 8.5Z" />
+            <circle cx="12" cy="14" r="3.2" />
+            <circle cx="18" cy="11" r="1" />
+          </svg>
+        </a>
+        <a class="is-current nav-health" href="health.html" aria-current="page" aria-label="Health" title="Health">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.8 4.9a5.5 5.5 0 0 0-7.8 0L12 5.9l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21.5l8.8-8.8a5.5 5.5 0 0 0 0-7.8Z" />
+            <path d="M7.2 12h2.2l1.1-2.4 2.1 5.2 1.4-2.8h2.8" />
+          </svg>
+        </a>
+      </div>
+    </nav>
+
+    <section class="health-page-hero glass" aria-labelledby="health-title">
+      <div>
+        <p class="health-kicker">Galaxy Watch</p>
+        <h1 id="health-title">Health</h1>
+      </div>
+      <span class="health-status" id="health-status">Sync pending</span>
+    </section>
+
+    <section class="section health-section" aria-label="Health data">
+      <div class="health-card glass">
+        <div class="health-grid" aria-live="polite">
+          <article class="health-metric">
+            <span class="health-icon" aria-hidden="true">👟</span>
+            <span class="health-label">&#27497;&#25968;</span>
+            <strong id="health-steps">--</strong>
+          </article>
+          <article class="health-metric">
+            <span class="health-icon" aria-hidden="true">📍</span>
+            <span class="health-label">&#36317;&#38626;</span>
+            <strong id="health-distance">--</strong>
+          </article>
+          <article class="health-metric">
+            <span class="health-icon" aria-hidden="true">☾</span>
+            <span class="health-label">&#30561;&#30496;</span>
+            <strong id="health-sleep">--</strong>
+          </article>
+          <article class="health-metric">
+            <span class="health-icon" aria-hidden="true">&#10022;</span>
+            <span class="health-label">&#30561;&#30496;&#12398;&#36074;</span>
+            <strong id="health-score">--</strong>
+          </article>
+        </div>
+
+        <p class="health-updated" id="health-updated">Health Connect auto sync will appear here.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="health-config.js"></script>
+  <script>
+    const healthConfig = window.IUTO_HEALTH_CONFIG || {};
+    const healthStatus = document.getElementById("health-status");
+    const healthSteps = document.getElementById("health-steps");
+    const healthDistance = document.getElementById("health-distance");
+    const healthSleep = document.getElementById("health-sleep");
+    const healthScore = document.getElementById("health-score");
+    const healthUpdated = document.getElementById("health-updated");
+    const numberFormatter = new Intl.NumberFormat("ja-JP");
+
+    const setHealthStatus = (text, state = "pending") => {
+      if (!healthStatus) return;
+      healthStatus.textContent = text;
+      healthStatus.dataset.state = state;
+    };
+
+    const formatSleep = (minutes) => {
+      if (!Number.isFinite(minutes)) return "--";
+      const hours = Math.floor(minutes / 60);
+      const mins = Math.round(minutes % 60);
+      return `${hours}h ${mins}m`;
+    };
+
+    const formatHealthDate = (value) => {
+      if (!value) return "";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return value;
+      return date.toLocaleString("ja-JP", {
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+    };
+
+    const loadHealthData = async () => {
+      if (!healthConfig.supabaseUrl || !healthConfig.supabaseAnonKey) {
+        setHealthStatus("Setup pending");
+        return;
+      }
+
+      try {
+        setHealthStatus("Syncing...");
+        const tableName = healthConfig.tableName || "health_daily";
+        const endpoint = `${healthConfig.supabaseUrl}/rest/v1/${tableName}?select=date,steps,distance_m,sleep_minutes,sleep_score,updated_at&order=date.desc&limit=1`;
+        const response = await fetch(endpoint, {
+          headers: {
+            apikey: healthConfig.supabaseAnonKey,
+            Authorization: `Bearer ${healthConfig.supabaseAnonKey}`
+          }
+        });
+
+        if (!response.ok) throw new Error("Could not load health data");
+
+        const [latest] = await response.json();
+        if (!latest) {
+          setHealthStatus("No data yet");
+          return;
+        }
+
+        const steps = Number(latest.steps);
+        const distanceM = Number(latest.distance_m);
+        const sleepMinutes = Number(latest.sleep_minutes);
+        const sleepScore = Number(latest.sleep_score);
+
+        healthSteps.textContent = Number.isFinite(steps)
+          ? numberFormatter.format(steps)
+          : "--";
+        healthDistance.textContent = Number.isFinite(distanceM)
+          ? `${(distanceM / 1000).toFixed(2)} km`
+          : "--";
+        healthSleep.textContent = formatSleep(sleepMinutes);
+        healthScore.textContent = Number.isFinite(sleepScore)
+          ? `${sleepScore}/100`
+          : "--";
+
+        healthUpdated.textContent = `${latest.date} / Updated ${formatHealthDate(latest.updated_at)}`;
+        setHealthStatus("Live", "live");
+      } catch (error) {
+        setHealthStatus("Offline", "error");
+        healthUpdated.textContent = "Health data could not be loaded.";
+      }
+    };
+
+    loadHealthData();
+  </script>
+</body>
+</html>
