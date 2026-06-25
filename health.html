@@ -66,12 +66,47 @@
           </article>
           <article class="health-metric">
             <span class="health-icon" aria-hidden="true">&#10022;</span>
-            <span class="health-label">&#30561;&#30496;&#12398;&#36074;</span>
-            <strong id="health-score">--</strong>
+            <span class="health-label">&#28145;&#12356;&#30561;&#30496;</span>
+            <strong id="health-deep">--</strong>
           </article>
         </div>
 
         <p class="health-updated" id="health-updated">Health Connect auto sync will appear here.</p>
+      </div>
+    </section>
+
+    <section class="section health-sleep-section" aria-labelledby="sleep-detail-title">
+      <div class="health-sleep-card glass">
+        <div class="health-chart-head">
+          <div>
+            <p class="health-kicker">Sleep detail</p>
+            <h2 id="sleep-detail-title">Sleep rhythm</h2>
+          </div>
+        </div>
+
+        <div class="sleep-detail-grid">
+          <article class="sleep-detail-item">
+            <span>寝た時間</span>
+            <strong id="sleep-start">--</strong>
+          </article>
+          <article class="sleep-detail-item">
+            <span>起きた時間</span>
+            <strong id="sleep-end">--</strong>
+          </article>
+          <article class="sleep-detail-item">
+            <span>寝つくまで</span>
+            <strong id="sleep-latency">--</strong>
+          </article>
+        </div>
+
+        <div class="sleep-stage-card">
+          <div class="sleep-stage-head">
+            <span>睡眠ステージ</span>
+            <strong id="sleep-stage-total">--</strong>
+          </div>
+          <div class="sleep-stage-bar" id="sleep-stage-bar" aria-label="Sleep stage breakdown"></div>
+          <div class="sleep-stage-legend" id="sleep-stage-legend"></div>
+        </div>
       </div>
     </section>
 
@@ -103,8 +138,14 @@
     const healthSteps = document.getElementById("health-steps");
     const healthDistance = document.getElementById("health-distance");
     const healthSleep = document.getElementById("health-sleep");
-    const healthScore = document.getElementById("health-score");
+    const healthDeep = document.getElementById("health-deep");
     const healthUpdated = document.getElementById("health-updated");
+    const sleepStart = document.getElementById("sleep-start");
+    const sleepEnd = document.getElementById("sleep-end");
+    const sleepLatency = document.getElementById("sleep-latency");
+    const sleepStageTotal = document.getElementById("sleep-stage-total");
+    const sleepStageBar = document.getElementById("sleep-stage-bar");
+    const sleepStageLegend = document.getElementById("sleep-stage-legend");
     const healthChart = document.getElementById("health-chart");
     const healthChartSummary = document.getElementById("health-chart-summary");
     const healthChartButtons = [...document.querySelectorAll("[data-health-chart]")];
@@ -123,6 +164,22 @@
       const hours = Math.floor(minutes / 60);
       const mins = Math.round(minutes % 60);
       return `${hours}h ${mins}m`;
+    };
+
+    const formatMinutes = (minutes) => {
+      if (!Number.isFinite(minutes)) return "--";
+      if (minutes < 60) return `${Math.round(minutes)}m`;
+      return formatSleep(minutes);
+    };
+
+    const formatClock = (value) => {
+      if (!value) return "--";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return "--";
+      return date.toLocaleTimeString("ja-JP", {
+        hour: "2-digit",
+        minute: "2-digit"
+      });
     };
 
     const formatHealthDate = (value) => {
@@ -160,6 +217,43 @@
       steps: "歩数",
       distance: "距離",
       sleep: "睡眠"
+    };
+
+    const renderSleepStages = (latest) => {
+      if (!sleepStageBar || !sleepStageLegend) return;
+      const stages = [
+        { key: "deep_sleep_minutes", label: "深い", className: "is-deep" },
+        { key: "rem_sleep_minutes", label: "REM", className: "is-rem" },
+        { key: "light_sleep_minutes", label: "浅い", className: "is-light" },
+        { key: "awake_minutes", label: "覚醒", className: "is-awake" }
+      ].map((stage) => ({
+        ...stage,
+        value: Number(latest?.[stage.key])
+      })).filter((stage) => Number.isFinite(stage.value) && stage.value > 0);
+
+      sleepStageBar.innerHTML = "";
+      sleepStageLegend.innerHTML = "";
+
+      const total = stages.reduce((sum, stage) => sum + stage.value, 0);
+      sleepStageTotal.textContent = Number.isFinite(total) && total > 0 ? formatSleep(total) : "--";
+
+      if (!total) {
+        sleepStageBar.innerHTML = '<span class="sleep-stage-empty">No stage data yet</span>';
+        return;
+      }
+
+      stages.forEach((stage) => {
+        const segment = document.createElement("span");
+        segment.className = `sleep-stage-segment ${stage.className}`;
+        segment.style.width = `${Math.max((stage.value / total) * 100, 4)}%`;
+        segment.title = `${stage.label}: ${formatMinutes(stage.value)}`;
+        sleepStageBar.append(segment);
+
+        const item = document.createElement("span");
+        item.className = `sleep-stage-label ${stage.className}`;
+        item.innerHTML = `<i></i>${stage.label} ${formatMinutes(stage.value)}`;
+        sleepStageLegend.append(item);
+      });
     };
 
     const renderHealthChart = () => {
@@ -293,7 +387,7 @@
       try {
         setHealthStatus("Syncing...");
         const tableName = healthConfig.tableName || "health_daily";
-        const endpoint = `${healthConfig.supabaseUrl}/rest/v1/${tableName}?select=date,steps,distance_m,sleep_minutes,sleep_score,updated_at&order=date.desc&limit=30`;
+        const endpoint = `${healthConfig.supabaseUrl}/rest/v1/${tableName}?select=*&order=date.desc&limit=30`;
         const response = await fetch(endpoint, {
           headers: {
             apikey: healthConfig.supabaseAnonKey,
@@ -314,7 +408,8 @@
         const steps = Number(latest.steps);
         const distanceM = Number(latest.distance_m);
         const sleepMinutes = Number(latest.sleep_minutes);
-        const sleepScore = Number(latest.sleep_score);
+        const deepMinutes = Number(latest.deep_sleep_minutes);
+        const latencyMinutes = Number(latest.sleep_latency_minutes);
 
         healthSteps.textContent = Number.isFinite(steps)
           ? numberFormatter.format(steps)
@@ -323,9 +418,11 @@
           ? `${(distanceM / 1000).toFixed(2)} km`
           : "--";
         healthSleep.textContent = formatSleep(sleepMinutes);
-        healthScore.textContent = Number.isFinite(sleepScore)
-          ? `${sleepScore}/100`
-          : "--";
+        healthDeep.textContent = formatMinutes(deepMinutes);
+        sleepStart.textContent = formatClock(latest.sleep_start_at);
+        sleepEnd.textContent = formatClock(latest.sleep_end_at);
+        sleepLatency.textContent = formatMinutes(latencyMinutes);
+        renderSleepStages(latest);
 
         healthUpdated.textContent = `${latest.date} / Updated ${formatHealthDate(latest.updated_at)}`;
         renderHealthChart();

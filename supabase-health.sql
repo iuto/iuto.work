@@ -4,8 +4,24 @@ create table if not exists public.health_daily (
   distance_m numeric,
   sleep_minutes integer,
   sleep_score integer,
+  sleep_start_at timestamptz,
+  sleep_end_at timestamptz,
+  sleep_latency_minutes integer,
+  deep_sleep_minutes integer,
+  rem_sleep_minutes integer,
+  light_sleep_minutes integer,
+  awake_minutes integer,
   updated_at timestamptz not null default now()
 );
+
+alter table public.health_daily
+  add column if not exists sleep_start_at timestamptz,
+  add column if not exists sleep_end_at timestamptz,
+  add column if not exists sleep_latency_minutes integer,
+  add column if not exists deep_sleep_minutes integer,
+  add column if not exists rem_sleep_minutes integer,
+  add column if not exists light_sleep_minutes integer,
+  add column if not exists awake_minutes integer;
 
 alter table public.health_daily enable row level security;
 
@@ -26,6 +42,7 @@ create table if not exists public.health_sync_tokens (
 alter table public.health_sync_tokens enable row level security;
 
 drop function if exists public.upsert_health_daily(text, date, integer, numeric, integer, integer);
+drop function if exists public.upsert_health_daily(text, date, integer, numeric, integer, integer, timestamptz, timestamptz, integer, integer, integer, integer, integer);
 
 create or replace function public.upsert_health_daily(
   sync_token text,
@@ -33,7 +50,14 @@ create or replace function public.upsert_health_daily(
   steps_count integer,
   distance_meters numeric,
   sleep_total_minutes integer,
-  sleep_quality_score integer default null
+  sleep_quality_score integer default null,
+  sleep_start_at timestamptz default null,
+  sleep_end_at timestamptz default null,
+  sleep_latency_minutes integer default null,
+  deep_sleep_minutes integer default null,
+  rem_sleep_minutes integer default null,
+  light_sleep_minutes integer default null,
+  awake_minutes integer default null
 )
 returns public.health_daily
 language plpgsql
@@ -63,6 +87,13 @@ begin
     distance_m,
     sleep_minutes,
     sleep_score,
+    sleep_start_at,
+    sleep_end_at,
+    sleep_latency_minutes,
+    deep_sleep_minutes,
+    rem_sleep_minutes,
+    light_sleep_minutes,
+    awake_minutes,
     updated_at
   )
   values (
@@ -71,6 +102,13 @@ begin
     distance_meters,
     sleep_total_minutes,
     sleep_quality_score,
+    sleep_start_at,
+    sleep_end_at,
+    sleep_latency_minutes,
+    deep_sleep_minutes,
+    rem_sleep_minutes,
+    light_sleep_minutes,
+    awake_minutes,
     now()
   )
   on conflict (date)
@@ -79,6 +117,13 @@ begin
     distance_m = excluded.distance_m,
     sleep_minutes = excluded.sleep_minutes,
     sleep_score = excluded.sleep_score,
+    sleep_start_at = excluded.sleep_start_at,
+    sleep_end_at = excluded.sleep_end_at,
+    sleep_latency_minutes = excluded.sleep_latency_minutes,
+    deep_sleep_minutes = excluded.deep_sleep_minutes,
+    rem_sleep_minutes = excluded.rem_sleep_minutes,
+    light_sleep_minutes = excluded.light_sleep_minutes,
+    awake_minutes = excluded.awake_minutes,
     updated_at = now()
   returning * into saved_row;
 
@@ -86,7 +131,7 @@ begin
 end;
 $$;
 
-grant execute on function public.upsert_health_daily(text, date, integer, numeric, integer, integer) to anon, authenticated;
+grant execute on function public.upsert_health_daily(text, date, integer, numeric, integer, integer, timestamptz, timestamptz, integer, integer, integer, integer, integer) to anon, authenticated;
 
 -- Run once after replacing CHANGE_ME_WITH_LONG_RANDOM_TEXT.
 -- insert into public.health_sync_tokens (id, token_hash)
