@@ -105,6 +105,11 @@
             <span class="health-label">&#30561;&#30496;</span>
             <strong id="health-sleep">--</strong>
           </article>
+          <article class="health-metric">
+            <span class="health-icon" aria-hidden="true">&#10022;</span>
+            <span class="health-label">&#30561;&#30496;&#12398;&#36074;</span>
+            <strong id="health-score">--</strong>
+          </article>
         </div>
 
         <p class="health-updated" id="health-updated">Health Connect auto sync will appear here.</p>
@@ -285,6 +290,7 @@
     const healthSteps = document.getElementById("health-steps");
     const healthDistance = document.getElementById("health-distance");
     const healthSleep = document.getElementById("health-sleep");
+    const healthScore = document.getElementById("health-score");
     const healthUpdated = document.getElementById("health-updated");
     const numberFormatter = new Intl.NumberFormat("ja-JP");
 
@@ -350,11 +356,11 @@
           ? `${(distanceM / 1000).toFixed(2)} km`
           : "--";
         healthSleep.textContent = formatSleep(sleepMinutes);
+        healthScore.textContent = Number.isFinite(sleepScore)
+          ? `${sleepScore}/100`
+          : "--";
 
-        const scoreText = Number.isFinite(sleepScore)
-          ? ` / Sleep score ${sleepScore}`
-          : "";
-        healthUpdated.textContent = `${latest.date}${scoreText} / Updated ${formatHealthDate(latest.updated_at)}`;
+        healthUpdated.textContent = `${latest.date} / Updated ${formatHealthDate(latest.updated_at)}`;
         setHealthStatus("Live", "live");
       } catch (error) {
         setHealthStatus("Offline", "error");
