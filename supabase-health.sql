@@ -25,6 +25,8 @@ create table if not exists public.health_sync_tokens (
 
 alter table public.health_sync_tokens enable row level security;
 
+drop function if exists public.upsert_health_daily(text, date, integer, numeric, integer, integer);
+
 create or replace function public.upsert_health_daily(
   sync_token text,
   target_date date,
