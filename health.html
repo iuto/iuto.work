@@ -74,6 +74,26 @@
         <p class="health-updated" id="health-updated">Health Connect auto sync will appear here.</p>
       </div>
     </section>
+
+    <section class="section health-chart-section" aria-labelledby="health-chart-title">
+      <div class="health-chart-card glass">
+        <div class="health-chart-head">
+          <div>
+            <p class="health-kicker">Last 30 days</p>
+            <h2 id="health-chart-title">Daily trend</h2>
+          </div>
+          <div class="health-chart-tabs" aria-label="Chart metric">
+            <button class="is-active" type="button" data-health-chart="steps">歩数</button>
+            <button type="button" data-health-chart="distance">距離</button>
+            <button type="button" data-health-chart="sleep">睡眠</button>
+          </div>
+        </div>
+        <div class="health-chart-wrap">
+          <svg class="health-chart" id="health-chart" viewBox="0 0 720 260" role="img" aria-label="Health trend chart"></svg>
+        </div>
+        <div class="health-chart-summary" id="health-chart-summary">Daily sync history will appear here.</div>
+      </div>
+    </section>
   </main>
 
   <script src="health-config.js"></script>
@@ -85,7 +105,12 @@
     const healthSleep = document.getElementById("health-sleep");
     const healthScore = document.getElementById("health-score");
     const healthUpdated = document.getElementById("health-updated");
+    const healthChart = document.getElementById("health-chart");
+    const healthChartSummary = document.getElementById("health-chart-summary");
+    const healthChartButtons = [...document.querySelectorAll("[data-health-chart]")];
     const numberFormatter = new Intl.NumberFormat("ja-JP");
+    let healthRows = [];
+    let activeChartMetric = "steps";
 
     const setHealthStatus = (text, state = "pending") => {
       if (!healthStatus) return;
@@ -112,6 +137,153 @@
       });
     };
 
+    const formatShortDate = (value) => {
+      const date = new Date(`${value}T00:00:00`);
+      if (Number.isNaN(date.getTime())) return value;
+      return `${date.getMonth() + 1}/${date.getDate()}`;
+    };
+
+    const getMetricValue = (row, metric) => {
+      if (metric === "distance") return Number(row.distance_m) / 1000;
+      if (metric === "sleep") return Number(row.sleep_minutes) / 60;
+      return Number(row.steps);
+    };
+
+    const formatMetricValue = (value, metric) => {
+      if (!Number.isFinite(value)) return "--";
+      if (metric === "distance") return `${value.toFixed(2)} km`;
+      if (metric === "sleep") return `${value.toFixed(1)} h`;
+      return numberFormatter.format(Math.round(value));
+    };
+
+    const metricLabels = {
+      steps: "歩数",
+      distance: "距離",
+      sleep: "睡眠"
+    };
+
+    const renderHealthChart = () => {
+      if (!healthChart || !healthChartSummary) return;
+      healthChart.innerHTML = "";
+
+      const rows = healthRows
+        .map((row) => ({
+          date: row.date,
+          value: getMetricValue(row, activeChartMetric)
+        }))
+        .filter((row) => Number.isFinite(row.value));
+
+      if (!rows.length) {
+        healthChartSummary.textContent = "No chart data yet.";
+        return;
+      }
+
+      const width = 720;
+      const height = 260;
+      const padding = { top: 24, right: 18, bottom: 38, left: 46 };
+      const chartWidth = width - padding.left - padding.right;
+      const chartHeight = height - padding.top - padding.bottom;
+      const maxValue = Math.max(...rows.map((row) => row.value), 1);
+      const average = rows.reduce((sum, row) => sum + row.value, 0) / rows.length;
+      const points = rows.map((row, index) => {
+        const x = rows.length === 1
+          ? padding.left + chartWidth
+          : padding.left + (chartWidth / (rows.length - 1)) * index;
+        const y = padding.top + chartHeight - (row.value / maxValue) * chartHeight;
+        return { ...row, x, y };
+      });
+      const path = points.map((point, index) => `${index === 0 ? "M" : "L"} ${point.x.toFixed(2)} ${point.y.toFixed(2)}`).join(" ");
+      const areaPath = `${path} L ${points[points.length - 1].x.toFixed(2)} ${padding.top + chartHeight} L ${points[0].x.toFixed(2)} ${padding.top + chartHeight} Z`;
+      const gridValues = [0.25, 0.5, 0.75, 1];
+
+      const makeSvg = (tag, attrs = {}) => {
+        const element = document.createElementNS("http://www.w3.org/2000/svg", tag);
+        Object.entries(attrs).forEach(([key, value]) => element.setAttribute(key, value));
+        return element;
+      };
+
+      const defs = makeSvg("defs");
+      const gradient = makeSvg("linearGradient", {
+        id: "health-chart-gradient",
+        x1: "0",
+        y1: "0",
+        x2: "0",
+        y2: "1"
+      });
+      [
+        ["0%", "0.34"],
+        ["58%", "0.12"],
+        ["100%", "0"]
+      ].forEach(([offset, opacity]) => {
+        gradient.append(makeSvg("stop", {
+          offset,
+          "stop-color": "#ffbd5b",
+          "stop-opacity": opacity
+        }));
+      });
+      defs.append(gradient);
+      healthChart.append(defs);
+
+      gridValues.forEach((ratio) => {
+        const y = padding.top + chartHeight - chartHeight * ratio;
+        healthChart.append(makeSvg("line", {
+          x1: padding.left,
+          x2: width - padding.right,
+          y1: y,
+          y2: y,
+          class: "health-chart-grid"
+        }));
+      });
+
+      healthChart.append(makeSvg("path", {
+        d: areaPath,
+        class: "health-chart-area"
+      }));
+      healthChart.append(makeSvg("path", {
+        d: path,
+        class: "health-chart-line"
+      }));
+
+      points.forEach((point) => {
+        healthChart.append(makeSvg("circle", {
+          cx: point.x,
+          cy: point.y,
+          r: 4.8,
+          class: "health-chart-dot"
+        }));
+        const title = makeSvg("title");
+        title.textContent = `${point.date}: ${formatMetricValue(point.value, activeChartMetric)}`;
+        healthChart.lastElementChild.append(title);
+      });
+
+      const firstDate = points[0].date;
+      const lastDate = points[points.length - 1].date;
+      [
+        { text: formatShortDate(firstDate), x: padding.left, anchor: "start" },
+        { text: formatShortDate(lastDate), x: width - padding.right, anchor: "end" }
+      ].forEach((label) => {
+        const text = makeSvg("text", {
+          x: label.x,
+          y: height - 12,
+          class: "health-chart-axis",
+          "text-anchor": label.anchor
+        });
+        text.textContent = label.text;
+        healthChart.append(text);
+      });
+
+      const maxText = makeSvg("text", {
+        x: padding.left,
+        y: 16,
+        class: "health-chart-axis"
+      });
+      maxText.textContent = formatMetricValue(maxValue, activeChartMetric);
+      healthChart.append(maxText);
+
+      healthChartSummary.textContent =
+        `${metricLabels[activeChartMetric]} / ${rows.length} days / Avg ${formatMetricValue(average, activeChartMetric)}`;
+    };
+
     const loadHealthData = async () => {
       if (!healthConfig.supabaseUrl || !healthConfig.supabaseAnonKey) {
         setHealthStatus("Setup pending");
@@ -121,7 +293,7 @@
       try {
         setHealthStatus("Syncing...");
         const tableName = healthConfig.tableName || "health_daily";
-        const endpoint = `${healthConfig.supabaseUrl}/rest/v1/${tableName}?select=date,steps,distance_m,sleep_minutes,sleep_score,updated_at&order=date.desc&limit=1`;
+        const endpoint = `${healthConfig.supabaseUrl}/rest/v1/${tableName}?select=date,steps,distance_m,sleep_minutes,sleep_score,updated_at&order=date.desc&limit=30`;
         const response = await fetch(endpoint, {
           headers: {
             apikey: healthConfig.supabaseAnonKey,
@@ -131,7 +303,9 @@
 
         if (!response.ok) throw new Error("Could not load health data");
 
-        const [latest] = await response.json();
+        const rows = await response.json();
+        healthRows = [...rows].reverse();
+        const latest = rows[0];
         if (!latest) {
           setHealthStatus("No data yet");
           return;
@@ -154,12 +328,21 @@
           : "--";
 
         healthUpdated.textContent = `${latest.date} / Updated ${formatHealthDate(latest.updated_at)}`;
+        renderHealthChart();
         setHealthStatus("Live", "live");
       } catch (error) {
         setHealthStatus("Offline", "error");
         healthUpdated.textContent = "Health data could not be loaded.";
       }
     };
+
+    healthChartButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        activeChartMetric = button.dataset.healthChart;
+        healthChartButtons.forEach((item) => item.classList.toggle("is-active", item === button));
+        renderHealthChart();
+      });
+    });
 
     loadHealthData();
   </script>
