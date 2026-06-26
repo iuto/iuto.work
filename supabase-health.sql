@@ -23,6 +23,10 @@ alter table public.health_daily
   add column if not exists light_sleep_minutes integer,
   add column if not exists awake_minutes integer;
 
+update public.health_daily
+set sleep_latency_minutes = null
+where sleep_latency_minutes is not null;
+
 alter table public.health_daily enable row level security;
 
 drop policy if exists "Public read health daily" on public.health_daily;

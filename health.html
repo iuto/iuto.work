@@ -93,10 +93,6 @@
             <span>起きた時間</span>
             <strong id="sleep-end">--</strong>
           </article>
-          <article class="sleep-detail-item">
-            <span>入眠潜時</span>
-            <strong id="sleep-latency">--</strong>
-          </article>
         </div>
 
         <div class="sleep-stage-card">
@@ -142,7 +138,6 @@
     const healthUpdated = document.getElementById("health-updated");
     const sleepStart = document.getElementById("sleep-start");
     const sleepEnd = document.getElementById("sleep-end");
-    const sleepLatency = document.getElementById("sleep-latency");
     const sleepStageTotal = document.getElementById("sleep-stage-total");
     const sleepStageBar = document.getElementById("sleep-stage-bar");
     const sleepStageLegend = document.getElementById("sleep-stage-legend");
@@ -409,7 +404,6 @@
         const distanceM = Number(latest.distance_m);
         const sleepMinutes = Number(latest.sleep_minutes);
         const deepMinutes = Number(latest.deep_sleep_minutes);
-        const latencyMinutes = Number(latest.sleep_latency_minutes);
 
         healthSteps.textContent = Number.isFinite(steps)
           ? numberFormatter.format(steps)
@@ -421,9 +415,6 @@
         healthDeep.textContent = formatMinutes(deepMinutes);
         sleepStart.textContent = formatClock(latest.sleep_start_at);
         sleepEnd.textContent = formatClock(latest.sleep_end_at);
-        sleepLatency.textContent = Number.isFinite(latencyMinutes)
-          ? formatMinutes(latencyMinutes)
-          : "記録なし";
         renderSleepStages(latest);
 
         healthUpdated.textContent = `${latest.date} / Updated ${formatHealthDate(latest.updated_at)}`;
