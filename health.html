@@ -94,7 +94,7 @@
             <strong id="sleep-end">--</strong>
           </article>
           <article class="sleep-detail-item">
-            <span>寝つくまで</span>
+            <span>入眠潜時</span>
             <strong id="sleep-latency">--</strong>
           </article>
         </div>
@@ -421,7 +421,9 @@
         healthDeep.textContent = formatMinutes(deepMinutes);
         sleepStart.textContent = formatClock(latest.sleep_start_at);
         sleepEnd.textContent = formatClock(latest.sleep_end_at);
-        sleepLatency.textContent = formatMinutes(latencyMinutes);
+        sleepLatency.textContent = Number.isFinite(latencyMinutes)
+          ? formatMinutes(latencyMinutes)
+          : "記録なし";
         renderSleepStages(latest);
 
         healthUpdated.textContent = `${latest.date} / Updated ${formatHealthDate(latest.updated_at)}`;
