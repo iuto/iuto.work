@@ -1075,7 +1075,8 @@ h1 {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
-  margin-top: 10px;
+  width: calc(100% - 32px);
+  margin: 10px auto 0;
 }
 
 .health-card > .health-grid:first-child {
@@ -1398,6 +1399,22 @@ h1 {
   fill: rgba(247,248,255,0.58);
   font-size: 12px;
   font-weight: 900;
+}
+
+.health-chart-value-axis {
+  fill: rgba(247,248,255,0.68);
+  font-size: 11px;
+  font-weight: 950;
+}
+
+.health-chart-point-label {
+  fill: #fff7df;
+  paint-order: stroke;
+  stroke: rgba(9,34,32,0.62);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+  font-size: 12px;
+  font-weight: 950;
 }
 
 .health-chart-summary {
