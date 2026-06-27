@@ -57,16 +57,6 @@
             <span class="health-label">&#36317;&#38626;</span>
             <strong id="health-distance">--</strong>
           </article>
-          <article class="health-metric">
-            <span class="health-icon" aria-hidden="true">☾</span>
-            <span class="health-label">&#30561;&#30496;</span>
-            <strong id="health-sleep">--</strong>
-          </article>
-          <article class="health-metric">
-            <span class="health-icon" aria-hidden="true">&#10022;</span>
-            <span class="health-label">&#28145;&#12356;&#30561;&#30496;</span>
-            <strong id="health-deep">--</strong>
-          </article>
         </div>
 
         <p class="health-updated" id="health-updated">Health Connect auto sync will appear here.</p>
@@ -120,8 +110,6 @@
     const healthDateSelect = document.getElementById("health-date-select");
     const healthSteps = document.getElementById("health-steps");
     const healthDistance = document.getElementById("health-distance");
-    const healthSleep = document.getElementById("health-sleep");
-    const healthDeep = document.getElementById("health-deep");
     const healthUpdated = document.getElementById("health-updated");
     const sleepStart = document.getElementById("sleep-start");
     const sleepEnd = document.getElementById("sleep-end");
@@ -248,8 +236,6 @@
 
       const steps = Number(row.steps);
       const distanceM = Number(row.distance_m);
-      const sleepMinutes = Number(row.sleep_minutes);
-      const deepMinutes = Number(row.deep_sleep_minutes);
 
       healthSteps.textContent = Number.isFinite(steps)
         ? numberFormatter.format(steps)
@@ -257,8 +243,6 @@
       healthDistance.textContent = Number.isFinite(distanceM)
         ? `${(distanceM / 1000).toFixed(2)} km`
         : "--";
-      healthSleep.textContent = formatSleep(sleepMinutes);
-      healthDeep.textContent = formatMinutes(deepMinutes);
       sleepStart.textContent = formatClock(row.sleep_start_at);
       sleepEnd.textContent = formatClock(row.sleep_end_at);
       renderSleepStages(row);
