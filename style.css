@@ -264,15 +264,6 @@ a {
   fill: #ffb84d;
 }
 
-.nav-links a.nav-health svg {
-  fill: none;
-  stroke: currentColor;
-}
-
-.nav-links a.nav-health.is-current {
-  color: #fff5df;
-}
-
 .nav-links a:hover {
   color: #fff6df;
   background:

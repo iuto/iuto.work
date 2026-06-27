@@ -29,12 +29,6 @@
             <circle cx="18" cy="11" r="1" />
           </svg>
         </a>
-        <a class="nav-health" href="health.html" aria-label="Health" title="Health">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M20.8 4.9a5.5 5.5 0 0 0-7.8 0L12 5.9l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21.5l8.8-8.8a5.5 5.5 0 0 0 0-7.8Z" />
-            <path d="M7.2 12h2.2l1.1-2.4 2.1 5.2 1.4-2.8h2.8" />
-          </svg>
-        </a>
       </div>
     </nav>
 
@@ -295,6 +289,24 @@
         if (event.target === dialog) dialog.close();
       });
     });
+
+    (() => {
+      const sequence = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
+      let progress = 0;
+
+      window.addEventListener("keydown", (event) => {
+        const key = event.key.length === 1 ? event.key.toLowerCase() : event.key;
+        if (key === sequence[progress]) {
+          progress += 1;
+          if (progress === sequence.length) {
+            window.location.href = "health.html";
+            progress = 0;
+          }
+          return;
+        }
+        progress = key === sequence[0] ? 1 : 0;
+      });
+    })();
   </script>
 </body>
 </html>
