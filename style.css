@@ -965,7 +965,7 @@ h1 {
 .health-card {
   position: relative;
   overflow: hidden;
-  padding: clamp(12px, 2vw, 16px);
+  padding: clamp(12px, 2vw, 16px) clamp(20px, 3vw, 28px);
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
   background:
