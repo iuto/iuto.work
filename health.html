@@ -37,7 +37,7 @@
         <div class="health-card-tools">
           <label class="health-date-picker">
             <span>Date</span>
-            <select id="health-date-select" aria-label="Health date"></select>
+            <input id="health-date-select" type="date" aria-label="Health date" />
           </label>
         </div>
         <div class="health-grid" aria-live="polite">
@@ -158,17 +158,6 @@
       return `${date.getMonth() + 1}/${date.getDate()}`;
     };
 
-    const formatDateOption = (value) => {
-      const date = new Date(`${value}T00:00:00`);
-      if (Number.isNaN(date.getTime())) return value;
-      return date.toLocaleDateString("ja-JP", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        weekday: "short"
-      });
-    };
-
     const getMetricValue = (row, metric) => {
       if (metric === "distance") return Number(row.distance_m) / 1000;
       if (metric === "sleep") return Number(row.sleep_minutes) / 60;
@@ -244,18 +233,19 @@
       healthUpdated.textContent = `${row.date} / Updated ${formatHealthDate(row.updated_at)}`;
     };
 
-    const populateHealthDateSelect = (rows) => {
+    const setupHealthDateInput = (rows) => {
       if (!healthDateSelect) return;
-      healthDateSelect.innerHTML = "";
-
-      rows.forEach((row) => {
-        const option = document.createElement("option");
-        option.value = row.date;
-        option.textContent = formatDateOption(row.date);
-        healthDateSelect.append(option);
-      });
-
       healthDateSelect.disabled = rows.length === 0;
+      if (!rows.length) {
+        healthDateSelect.removeAttribute("min");
+        healthDateSelect.removeAttribute("max");
+        healthDateSelect.value = "";
+        return;
+      }
+
+      const dates = rows.map((row) => row.date).sort();
+      healthDateSelect.min = dates[0];
+      healthDateSelect.max = dates[dates.length - 1];
     };
 
     const renderHealthChart = () => {
@@ -415,12 +405,12 @@
         healthRows = [...rows].reverse();
         const latest = rows[0];
         if (!latest) {
-          populateHealthDateSelect([]);
+          setupHealthDateInput([]);
           healthUpdated.textContent = "No health data yet.";
           return;
         }
 
-        populateHealthDateSelect(rows);
+        setupHealthDateInput(rows);
         healthDateSelect.value = latest.date;
         renderHealthRow(latest);
         renderHealthChart();
@@ -431,7 +421,11 @@
 
     healthDateSelect?.addEventListener("change", () => {
       const row = healthRows.find((item) => item.date === healthDateSelect.value);
-      renderHealthRow(row);
+      if (row) {
+        renderHealthRow(row);
+        return;
+      }
+      healthUpdated.textContent = `${healthDateSelect.value} / No health data.`;
     });
 
     healthChartButtons.forEach((button) => {

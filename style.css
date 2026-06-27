@@ -1048,11 +1048,11 @@ h1 {
   text-transform: uppercase;
 }
 
-.health-date-picker select {
+.health-date-picker input {
   min-width: 156px;
   border: 0;
   border-radius: 999px;
-  padding: 8px 30px 8px 12px;
+  padding: 8px 12px;
   background: rgba(255,255,255,0.16);
   color: #fff;
   font: inherit;
@@ -1060,15 +1060,18 @@ h1 {
   font-weight: 950;
   outline: none;
   cursor: pointer;
+  color-scheme: dark;
 }
 
-.health-date-picker select:disabled {
+.health-date-picker input:disabled {
   cursor: default;
   opacity: 0.55;
 }
 
-.health-date-picker option {
-  color: #15312f;
+.health-date-picker input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.86;
+  filter: invert(1);
 }
 
 .health-grid {
