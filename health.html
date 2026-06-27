@@ -40,8 +40,11 @@
 
     <section class="section health-section" aria-label="Health data">
       <div class="health-card glass">
-        <div class="health-card-status">
-          <span class="health-status" id="health-status">Sync pending</span>
+        <div class="health-card-tools">
+          <label class="health-date-picker">
+            <span>Date</span>
+            <select id="health-date-select" aria-label="Health date"></select>
+          </label>
         </div>
         <div class="health-grid" aria-live="polite">
           <article class="health-metric">
@@ -114,7 +117,7 @@
   <script src="health-config.js"></script>
   <script>
     const healthConfig = window.IUTO_HEALTH_CONFIG || {};
-    const healthStatus = document.getElementById("health-status");
+    const healthDateSelect = document.getElementById("health-date-select");
     const healthSteps = document.getElementById("health-steps");
     const healthDistance = document.getElementById("health-distance");
     const healthSleep = document.getElementById("health-sleep");
@@ -131,12 +134,6 @@
     const numberFormatter = new Intl.NumberFormat("ja-JP");
     let healthRows = [];
     let activeChartMetric = "steps";
-
-    const setHealthStatus = (text, state = "pending") => {
-      if (!healthStatus) return;
-      healthStatus.textContent = text;
-      healthStatus.dataset.state = state;
-    };
 
     const formatSleep = (minutes) => {
       if (!Number.isFinite(minutes)) return "--";
@@ -177,6 +174,17 @@
       const date = new Date(`${value}T00:00:00`);
       if (Number.isNaN(date.getTime())) return value;
       return `${date.getMonth() + 1}/${date.getDate()}`;
+    };
+
+    const formatDateOption = (value) => {
+      const date = new Date(`${value}T00:00:00`);
+      if (Number.isNaN(date.getTime())) return value;
+      return date.toLocaleDateString("ja-JP", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        weekday: "short"
+      });
     };
 
     const getMetricValue = (row, metric) => {
@@ -233,6 +241,43 @@
         item.innerHTML = `<i></i>${stage.label} ${formatMinutes(stage.value)}`;
         sleepStageLegend.append(item);
       });
+    };
+
+    const renderHealthRow = (row) => {
+      if (!row) return;
+
+      const steps = Number(row.steps);
+      const distanceM = Number(row.distance_m);
+      const sleepMinutes = Number(row.sleep_minutes);
+      const deepMinutes = Number(row.deep_sleep_minutes);
+
+      healthSteps.textContent = Number.isFinite(steps)
+        ? numberFormatter.format(steps)
+        : "--";
+      healthDistance.textContent = Number.isFinite(distanceM)
+        ? `${(distanceM / 1000).toFixed(2)} km`
+        : "--";
+      healthSleep.textContent = formatSleep(sleepMinutes);
+      healthDeep.textContent = formatMinutes(deepMinutes);
+      sleepStart.textContent = formatClock(row.sleep_start_at);
+      sleepEnd.textContent = formatClock(row.sleep_end_at);
+      renderSleepStages(row);
+
+      healthUpdated.textContent = `${row.date} / Updated ${formatHealthDate(row.updated_at)}`;
+    };
+
+    const populateHealthDateSelect = (rows) => {
+      if (!healthDateSelect) return;
+      healthDateSelect.innerHTML = "";
+
+      rows.forEach((row) => {
+        const option = document.createElement("option");
+        option.value = row.date;
+        option.textContent = formatDateOption(row.date);
+        healthDateSelect.append(option);
+      });
+
+      healthDateSelect.disabled = rows.length === 0;
     };
 
     const renderHealthChart = () => {
@@ -359,14 +404,14 @@
 
     const loadHealthData = async () => {
       if (!healthConfig.supabaseUrl || !healthConfig.supabaseAnonKey) {
-        setHealthStatus("Setup pending");
+        healthUpdated.textContent = "Health sync is not set up yet.";
         return;
       }
 
       try {
-        setHealthStatus("Syncing...");
+        healthUpdated.textContent = "Loading health data...";
         const tableName = healthConfig.tableName || "health_daily";
-        const endpoint = `${healthConfig.supabaseUrl}/rest/v1/${tableName}?select=*&order=date.desc&limit=30`;
+        const endpoint = `${healthConfig.supabaseUrl}/rest/v1/${tableName}?select=*&order=date.desc&limit=365`;
         const response = await fetch(endpoint, {
           headers: {
             apikey: healthConfig.supabaseAnonKey,
@@ -380,35 +425,24 @@
         healthRows = [...rows].reverse();
         const latest = rows[0];
         if (!latest) {
-          setHealthStatus("No data yet");
+          populateHealthDateSelect([]);
+          healthUpdated.textContent = "No health data yet.";
           return;
         }
 
-        const steps = Number(latest.steps);
-        const distanceM = Number(latest.distance_m);
-        const sleepMinutes = Number(latest.sleep_minutes);
-        const deepMinutes = Number(latest.deep_sleep_minutes);
-
-        healthSteps.textContent = Number.isFinite(steps)
-          ? numberFormatter.format(steps)
-          : "--";
-        healthDistance.textContent = Number.isFinite(distanceM)
-          ? `${(distanceM / 1000).toFixed(2)} km`
-          : "--";
-        healthSleep.textContent = formatSleep(sleepMinutes);
-        healthDeep.textContent = formatMinutes(deepMinutes);
-        sleepStart.textContent = formatClock(latest.sleep_start_at);
-        sleepEnd.textContent = formatClock(latest.sleep_end_at);
-        renderSleepStages(latest);
-
-        healthUpdated.textContent = `${latest.date} / Updated ${formatHealthDate(latest.updated_at)}`;
+        populateHealthDateSelect(rows);
+        healthDateSelect.value = latest.date;
+        renderHealthRow(latest);
         renderHealthChart();
-        setHealthStatus("Live", "live");
       } catch (error) {
-        setHealthStatus("Offline", "error");
         healthUpdated.textContent = "Health data could not be loaded.";
       }
     };
+
+    healthDateSelect?.addEventListener("change", () => {
+      const row = healthRows.find((item) => item.date === healthDateSelect.value);
+      renderHealthRow(row);
+    });
 
     healthChartButtons.forEach((button) => {
       button.addEventListener("click", () => {
