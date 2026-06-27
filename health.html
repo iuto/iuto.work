@@ -107,7 +107,7 @@
           </div>
         </div>
         <div class="health-chart-wrap">
-          <svg class="health-chart" id="health-chart" viewBox="0 0 720 260" role="img" aria-label="Health trend chart"></svg>
+          <svg class="health-chart" id="health-chart" viewBox="0 0 720 190" role="img" aria-label="Health trend chart"></svg>
         </div>
         <div class="health-chart-summary" id="health-chart-summary">Daily sync history will appear here.</div>
       </div>
@@ -297,8 +297,8 @@
       }
 
       const width = 720;
-      const height = 260;
-      const padding = { top: 24, right: 18, bottom: 38, left: 46 };
+      const height = 190;
+      const padding = { top: 18, right: 18, bottom: 30, left: 42 };
       const chartWidth = width - padding.left - padding.right;
       const chartHeight = height - padding.top - padding.bottom;
       const maxValue = Math.max(...rows.map((row) => row.value), 1);

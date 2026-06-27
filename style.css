@@ -1145,7 +1145,7 @@ h1 {
 }
 
 .health-chart-section {
-  margin-top: 18px;
+  margin-top: 14px;
 }
 
 .health-sleep-section {
@@ -1155,7 +1155,7 @@ h1 {
 .health-chart-card {
   position: relative;
   overflow: hidden;
-  padding: clamp(20px, 3vw, 28px);
+  padding: clamp(14px, 2vw, 18px);
   background:
     radial-gradient(circle at 82% 10%, rgba(255,197,100,0.24), transparent 34%),
     linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.09) 52%, rgba(9,34,32,0.22)),
@@ -1357,7 +1357,7 @@ h1 {
 .health-chart-tabs {
   display: inline-flex;
   gap: 6px;
-  padding: 5px;
+  padding: 4px;
   border: 1px solid rgba(255,255,255,0.22);
   border-radius: 999px;
   background: rgba(255,255,255,0.10);
@@ -1367,7 +1367,7 @@ h1 {
 .health-chart-tabs button {
   border: 0;
   border-radius: 999px;
-  padding: 8px 12px;
+  padding: 6px 10px;
   background: transparent;
   color: rgba(247,248,255,0.66);
   font: inherit;
@@ -1390,9 +1390,9 @@ h1 {
 }
 
 .health-chart-wrap {
-  margin-top: 18px;
+  margin-top: 10px;
   border: 1px solid rgba(255,255,255,0.18);
-  border-radius: 24px;
+  border-radius: 18px;
   background:
     linear-gradient(180deg, rgba(255,255,255,0.13), rgba(255,255,255,0.05)),
     rgba(8,33,31,0.12);
@@ -1403,7 +1403,7 @@ h1 {
   display: block;
   width: 100%;
   height: auto;
-  min-height: 230px;
+  min-height: 150px;
 }
 
 .health-chart-grid {
@@ -1437,7 +1437,7 @@ h1 {
 }
 
 .health-chart-summary {
-  margin: 14px 0 0;
+  margin: 8px 0 0;
   color: rgba(247,248,255,0.60);
   font-size: 12px;
   font-weight: 850;
