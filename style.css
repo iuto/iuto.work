@@ -126,8 +126,8 @@ a {
 
 .nav {
   position: absolute;
-  top: 38px;
-  right: clamp(18px, 3vw, 34px);
+  top: clamp(14px, 2vw, 22px);
+  right: clamp(14px, 2vw, 22px);
   z-index: 20;
   display: flex;
   align-items: center;
@@ -2174,8 +2174,8 @@ h1 {
   }
 
   .nav {
-    top: 34px;
-    right: 18px;
+    top: 14px;
+    right: 14px;
     justify-content: flex-end;
   }
 
