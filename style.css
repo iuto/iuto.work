@@ -218,7 +218,7 @@ a {
   border-radius: inherit;
   background:
     radial-gradient(circle at 22% 0%, rgba(255,255,255,0.42), transparent 34%),
-    radial-gradient(circle at 88% 115%, rgba(255,59,48,0.16), transparent 34%);
+    radial-gradient(circle at 88% 115%, rgba(255,197,100,0.16), transparent 34%);
   pointer-events: none;
 }
 
@@ -269,14 +269,14 @@ a {
 }
 
 .nav-links a.nav-camera.is-current circle {
-  fill: #ff3b30;
+  fill: #ffb84d;
   opacity: 1;
 }
 
 .nav-links a:hover {
   color: #fff;
   background:
-    radial-gradient(circle at 70% 18%, rgba(255,59,48,0.14), transparent 34%),
+    radial-gradient(circle at 70% 18%, rgba(255,197,100,0.14), transparent 34%),
     rgba(255,255,255,0.13);
   transform: translateY(-1px);
 }
@@ -285,14 +285,14 @@ a {
   color: #ffffff;
   border-color: rgba(255,255,255,0.54);
   background:
-    radial-gradient(circle at 72% 18%, rgba(255,59,48,0.18), transparent 34%),
+    radial-gradient(circle at 72% 18%, rgba(255,197,100,0.18), transparent 34%),
     linear-gradient(145deg, rgba(255,255,255,0.60), rgba(255,255,255,0.20) 48%, rgba(255,255,255,0.34)),
     rgba(255,255,255,0.16);
   backdrop-filter: blur(18px) saturate(1.5);
   -webkit-backdrop-filter: blur(18px) saturate(1.5);
   box-shadow:
     0 10px 24px rgba(0, 0, 0, 0.14),
-    0 0 22px rgba(255,59,48,0.12),
+    0 0 22px rgba(255,197,100,0.12),
     0 0 0 1px rgba(255,255,255,0.08),
     inset 0 1px 0 rgba(255,255,255,0.66),
     inset 0 -12px 20px rgba(255,255,255,0.10);
@@ -306,8 +306,8 @@ a {
   width: 5px;
   height: 5px;
   border-radius: 999px;
-  background: #ff3b30;
-  box-shadow: 0 0 10px rgba(255,59,48,0.72);
+  background: #ffb84d;
+  box-shadow: 0 0 10px rgba(255,197,100,0.72);
 }
 
 .glass {
