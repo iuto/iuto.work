@@ -971,46 +971,6 @@ h1 {
   margin-top: 24px;
 }
 
-.health-page-hero {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 18px;
-  min-height: 220px;
-  padding: clamp(26px, 5vw, 44px);
-  background:
-    radial-gradient(circle at 16% 12%, rgba(255,197,100,0.30), transparent 34%),
-    linear-gradient(135deg, rgba(255,255,255,0.31), rgba(255,255,255,0.11) 52%, rgba(9,34,32,0.18)),
-    rgba(255,255,255,0.18);
-}
-
-.health-page-hero::before {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  border-radius: inherit;
-  pointer-events: none;
-  background:
-    linear-gradient(115deg, rgba(255,255,255,0.36), transparent 34%),
-    radial-gradient(ellipse 440px 160px at 88% 0%, rgba(255,197,100,0.20), transparent 68%);
-}
-
-.health-page-hero > * {
-  position: relative;
-  z-index: 1;
-}
-
-.health-page-hero h1 {
-  margin: 0;
-  color: #fff;
-  font-size: clamp(50px, 10vw, 104px);
-  font-weight: 950;
-  letter-spacing: -0.08em;
-  line-height: 0.86;
-}
-
 .health-card {
   position: relative;
   overflow: hidden;
@@ -1037,6 +997,7 @@ h1 {
 }
 
 .health-head,
+.health-card-status,
 .health-grid,
 .health-updated {
   position: relative;
@@ -1101,11 +1062,16 @@ h1 {
   box-shadow: 0 0 0 5px rgba(255,141,122,0.14);
 }
 
+.health-card-status {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .health-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
-  margin-top: 20px;
+  margin-top: 18px;
 }
 
 .health-card > .health-grid:first-child {
@@ -1212,9 +1178,9 @@ h1 {
 
 .sleep-detail-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
-  margin-top: 20px;
+  margin-top: 0;
 }
 
 .sleep-detail-item {
@@ -1360,7 +1326,7 @@ h1 {
 .health-chart-head {
   display: flex;
   align-items: start;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 16px;
 }
 
@@ -2222,12 +2188,6 @@ h1 {
 
   .hero {
     min-height: 270px;
-  }
-
-  .health-page-hero {
-    display: grid;
-    align-content: end;
-    min-height: 230px;
   }
 
   .health-chart-head {

@@ -38,16 +38,11 @@
       </div>
     </nav>
 
-    <section class="health-page-hero glass" aria-labelledby="health-title">
-      <div>
-        <p class="health-kicker">Galaxy Watch</p>
-        <h1 id="health-title">Health</h1>
-      </div>
-      <span class="health-status" id="health-status">Sync pending</span>
-    </section>
-
     <section class="section health-section" aria-label="Health data">
       <div class="health-card glass">
+        <div class="health-card-status">
+          <span class="health-status" id="health-status">Sync pending</span>
+        </div>
         <div class="health-grid" aria-live="polite">
           <article class="health-metric">
             <span class="health-icon" aria-hidden="true">👟</span>
@@ -75,15 +70,8 @@
       </div>
     </section>
 
-    <section class="section health-sleep-section" aria-labelledby="sleep-detail-title">
+    <section class="section health-sleep-section" aria-label="Sleep rhythm">
       <div class="health-sleep-card glass">
-        <div class="health-chart-head">
-          <div>
-            <p class="health-kicker">Sleep detail</p>
-            <h2 id="sleep-detail-title">Sleep rhythm</h2>
-          </div>
-        </div>
-
         <div class="sleep-detail-grid">
           <article class="sleep-detail-item">
             <span>寝た時間</span>
@@ -106,13 +94,9 @@
       </div>
     </section>
 
-    <section class="section health-chart-section" aria-labelledby="health-chart-title">
+    <section class="section health-chart-section" aria-label="Daily trend">
       <div class="health-chart-card glass">
         <div class="health-chart-head">
-          <div>
-            <p class="health-kicker">Last 30 days</p>
-            <h2 id="health-chart-title">Daily trend</h2>
-          </div>
           <div class="health-chart-tabs" aria-label="Chart metric">
             <button class="is-active" type="button" data-health-chart="steps">歩数</button>
             <button type="button" data-health-chart="distance">距離</button>
