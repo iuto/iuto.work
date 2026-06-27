@@ -1082,7 +1082,7 @@ h1 {
 
 .health-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
   margin-top: 10px;
 }
@@ -1194,25 +1194,6 @@ h1 {
   z-index: 1;
 }
 
-.sleep-detail-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 0;
-}
-
-.sleep-detail-item {
-  min-width: 0;
-  padding: 16px;
-  border: 1px solid rgba(255,255,255,0.18);
-  border-radius: 20px;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06)),
-    rgba(8,33,31,0.12);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.20);
-}
-
-.sleep-detail-item span,
 .sleep-stage-head span {
   display: block;
   color: rgba(247,248,255,0.62);
@@ -1222,18 +1203,7 @@ h1 {
   text-transform: uppercase;
 }
 
-.sleep-detail-item strong {
-  display: block;
-  margin-top: 6px;
-  color: #fff;
-  font-size: clamp(28px, 5vw, 46px);
-  font-weight: 950;
-  line-height: 0.95;
-  letter-spacing: -0.06em;
-}
-
 .sleep-stage-card {
-  margin-top: 12px;
   padding: 16px;
   border: 1px solid rgba(255,255,255,0.18);
   border-radius: 22px;
@@ -2218,10 +2188,6 @@ h1 {
 
   .health-chart-tabs button {
     flex: 1;
-  }
-
-  .sleep-detail-grid {
-    grid-template-columns: 1fr;
   }
 
   .photo-intro {
