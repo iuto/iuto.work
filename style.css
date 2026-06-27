@@ -974,7 +974,7 @@ h1 {
 .health-card {
   position: relative;
   overflow: hidden;
-  padding: clamp(20px, 3vw, 28px);
+  padding: clamp(12px, 2vw, 16px);
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
   background:
@@ -1083,8 +1083,8 @@ h1 {
 .health-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 18px;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .health-card > .health-grid:first-child {
@@ -1093,9 +1093,13 @@ h1 {
 
 .health-metric {
   min-width: 0;
-  padding: 16px;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px 12px;
+  padding: 12px 14px;
   border: 1px solid rgba(255,255,255,0.20);
-  border-radius: 22px;
+  border-radius: 18px;
   background:
     linear-gradient(180deg, rgba(255,255,255,0.20), rgba(255,255,255,0.08)),
     rgba(8, 33, 31, 0.12);
@@ -1107,9 +1111,10 @@ h1 {
 .health-icon {
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 13px;
+  width: 32px;
+  height: 32px;
+  grid-row: span 2;
+  border-radius: 12px;
   background:
     radial-gradient(circle at 70% 18%, rgba(255,197,100,0.34), transparent 44%),
     rgba(255,255,255,0.12);
@@ -1118,7 +1123,6 @@ h1 {
 
 .health-label {
   display: block;
-  margin-top: 12px;
   color: rgba(247,248,255,0.62);
   font-size: 11px;
   font-weight: 950;
@@ -1128,9 +1132,8 @@ h1 {
 
 .health-metric strong {
   display: block;
-  margin-top: 4px;
   color: #fff;
-  font-size: clamp(24px, 4.2vw, 38px);
+  font-size: clamp(24px, 3.6vw, 34px);
   font-weight: 950;
   line-height: 1;
   letter-spacing: -0.05em;
@@ -2257,23 +2260,18 @@ h1 {
   }
 
   .health-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .health-metric {
     display: grid;
-    grid-template-columns: 42px 1fr;
-    column-gap: 12px;
+    grid-template-columns: 32px minmax(0, 1fr);
+    column-gap: 10px;
     align-items: center;
   }
 
-  .health-label,
   .health-metric strong {
-    grid-column: 2;
-  }
-
-  .health-label {
-    margin-top: 0;
+    font-size: clamp(22px, 7vw, 30px);
   }
 
   .section-head p {
