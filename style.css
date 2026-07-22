@@ -739,6 +739,57 @@ h1 {
   letter-spacing: 0.02em;
 }
 
+.timeline-return-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 21px;
+  padding: 2px 8px;
+  border: 1px solid rgba(217, 154, 40, 0.24);
+  border-radius: 999px;
+  background: rgba(255, 197, 100, 0.18);
+  color: #a66a08;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+}
+
+.timeline-detail-current {
+  color: rgba(8, 33, 31, 0.68);
+  font-weight: 750;
+}
+
+.timeline-previous-role {
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px 8px;
+  margin-top: 4px;
+  padding: 9px 11px;
+  border-left: 2px solid rgba(14, 55, 51, 0.12);
+  border-radius: 0 10px 10px 0;
+  background: rgba(14, 55, 51, 0.045);
+  color: rgba(8, 33, 31, 0.48);
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.timeline-previous-role strong {
+  color: rgba(8, 33, 31, 0.62);
+  font-weight: 750;
+}
+
+.timeline-previous-label {
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: rgba(14, 55, 51, 0.09);
+  color: rgba(8, 33, 31, 0.58);
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+}
+
 .period-duration {
   position: relative;
   width: fit-content;
