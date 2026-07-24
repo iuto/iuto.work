@@ -491,6 +491,11 @@ h1 {
   color: rgba(247,248,255,0.9);
 }
 
+.profile-social-link .github-icon {
+  fill: currentColor;
+  stroke: none;
+}
+
 .lead {
   max-width: 740px;
   margin: 34px 0 0;
