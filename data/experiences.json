@@ -5,8 +5,8 @@
     "title": "関西大学 社会学部 社会学科 社会学専攻",
     "shortTitle": "関西大学",
     "start": "2026-04",
-    "end": null,
-    "badge": "1年次",
+    "end": "2030-03",
+    "badge": "1年次／卒業予定",
     "detail": "AO入試／第1外国語 中国語 🇨🇳・第2外国語 英語 🇬🇧",
     "dialogId": "kansai-university-dialog"
   },
@@ -79,10 +79,11 @@
     "id": "knocklearn",
     "category": "work",
     "title": "株式会社ノックラーン",
-    "shortTitle": "ノックラーン",
+    "shortTitle": "ノックラーン（過去）",
     "start": "2023-01",
     "end": "2026-03",
-    "detail": "長期インターン / オープンポジション",
+    "badge": "過去の勤務",
+    "detail": "長期インターン",
     "dialogId": "knocklearn-dialog"
   },
   {

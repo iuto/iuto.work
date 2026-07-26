@@ -89,27 +89,20 @@
       <div class="background-groups" id="experience-lists" aria-live="polite"></div>
       <p class="experience-error" id="experience-error" hidden>経歴データを読み込めませんでした。</p>
 
-      <details class="activity-map glass">
-        <summary class="activity-map-summary">
-          <span class="activity-map-summary-copy">
+      <dialog class="activity-dialog" id="activity-timeline-dialog" aria-labelledby="activity-dialog-title">
+        <div class="activity-dialog-panel">
+          <button class="work-dialog-close" type="button" data-dialog-close aria-label="閉じる">×</button>
+          <div class="activity-dialog-title">
             <span class="activity-map-kicker">Timeline</span>
-            <strong>経歴を時間軸で見る</strong>
-          </span>
-          <span class="activity-map-current" id="activity-current-count">現在の活動を集計中</span>
-          <span class="activity-map-toggle" aria-hidden="true">
-            <span>年表を開く</span>
-            <svg viewBox="0 0 24 24">
-              <path d="m7 9 5 5 5-5" />
-            </svg>
-          </span>
-        </summary>
-        <div class="activity-map-content">
+            <h2 id="activity-dialog-title">経歴を時間軸で見る</h2>
+            <span class="activity-map-current" id="activity-current-count">現在の活動を集計中</span>
+          </div>
           <div class="activity-map-head">
-            <p>学歴と活動歴を同じ時間軸で比較できます。</p>
+            <p>中学校入学から現在までの学歴と活動歴を比較できます。</p>
             <div class="activity-filters" aria-label="表示する活動">
               <button class="is-active" type="button" data-experience-filter="all">すべて</button>
-              <button type="button" data-experience-filter="education">学び</button>
-              <button type="button" data-experience-filter="work">仕事・活動</button>
+              <button class="is-education" type="button" data-experience-filter="education">学び</button>
+              <button class="is-work" type="button" data-experience-filter="work">仕事・活動</button>
               <button type="button" data-experience-filter="current">現在</button>
             </div>
           </div>
@@ -117,7 +110,7 @@
             <div class="activity-chart" id="activity-chart" aria-live="polite"></div>
           </div>
         </div>
-      </details>
+      </dialog>
     </section>
 
     <dialog class="work-dialog" id="web-writer-dialog" aria-labelledby="web-writer-title">
@@ -215,9 +208,9 @@
       <div class="work-dialog-panel">
         <button class="work-dialog-close" type="button" data-dialog-close aria-label="閉じる">×</button>
         <h2 id="knocklearn-title">株式会社ノックラーン</h2>
-        <p class="work-dialog-period">2023年1月 - 2026年3月 / 長期インターン / オープンポジション</p>
+        <p class="work-dialog-period">2023年1月 - 2026年3月 / 長期インターン</p>
         <p class="work-dialog-lead">
-          オープンポジションとして、記事制作、SNS運用、採用補助、営業アシスタントなどを担当。大学生活の開始に伴い一度勤務を終えたが、夏休みからAIワークフロービルダーとして勤務を再開した。
+          長期インターンとして、記事制作、SNS運用、採用補助、営業アシスタントなどを担当。大学生活の開始に伴い一度勤務を終えたが、夏休みからAIワークフロービルダーとして勤務を再開した。
         </p>
         <section class="work-articles" aria-labelledby="knocklearn-articles-title">
           <h3 id="knocklearn-articles-title">
@@ -368,7 +361,7 @@
     <dialog class="work-dialog university-dialog" id="kansai-university-dialog" aria-labelledby="kansai-university-title">
       <div class="work-dialog-panel university-dialog-panel">
         <button class="work-dialog-close" type="button" data-dialog-close aria-label="閉じる">×</button>
-        <p class="work-dialog-period">2026年4月 - 現在 / 在学中</p>
+        <p class="work-dialog-period">2026年4月 - 2030年3月 / 卒業予定</p>
         <h2 id="kansai-university-title">関西大学 社会学部 社会学科 社会学専攻</h2>
         <p class="university-intro">
           感覚過敏研究所でのインターンを通じ、制度の狭間に置かれるマイノリティの社会参画に関心を持った。当事者の声を社会調査で可視化し、マイノリティに関する課題を多角的に捉えるため、社会学専攻を選んだ。
@@ -693,11 +686,28 @@
           timeline.append(row);
         });
         section.append(timeline);
+        if (category === "education") {
+          const openTimeline = document.createElement("button");
+          openTimeline.className = "activity-dialog-open";
+          openTimeline.type = "button";
+          openTimeline.dataset.dialogOpen = "activity-timeline-dialog";
+          openTimeline.innerHTML = `
+            <span>
+              <small>Timeline</small>
+              学歴と活動歴を時間軸で見る
+            </span>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14M14 7l5 5-5 5" />
+            </svg>
+          `;
+          section.append(openTimeline);
+        }
         container.append(section);
       });
     };
 
     const filteredExperiences = () => experienceState.items.filter((item) => {
+      if (item.id === "elementary-school" || item.planned) return false;
       if (experienceState.filter === "all") return true;
       if (experienceState.filter === "current") return isCurrentExperience(item);
       return item.category === experienceState.filter;
@@ -711,13 +721,10 @@
 
       const nowIndex = monthIndex(currentMonth());
       const startIndex = Math.min(...items.map((item) => monthIndex(item.start)));
-      const visibleEndIndex = Math.max(nowIndex + 5, ...items.map((item) => (
-        item.end ? monthIndex(item.end) : Math.max(nowIndex, monthIndex(item.start))
-      )));
       const startYear = Math.floor(startIndex / 12);
-      const endYear = Math.floor(visibleEndIndex / 12);
-      const totalMonths = (endYear - startYear + 1) * 12;
       const axisStart = startYear * 12;
+      const endYear = Math.floor(nowIndex / 12);
+      const totalMonths = nowIndex - axisStart + 1;
       chart.style.setProperty("--activity-months", totalMonths);
       chart.style.setProperty("--activity-years", endYear - startYear + 1);
 
@@ -726,6 +733,8 @@
       for (let year = startYear; year <= endYear; year += 1) {
         const tick = document.createElement("span");
         tick.textContent = year;
+        tick.style.setProperty("--year-start", (year * 12) - axisStart + 2);
+        tick.style.setProperty("--year-span", Math.min(12, nowIndex - (year * 12) + 1));
         axis.append(tick);
       }
       chart.append(axis);
@@ -740,7 +749,7 @@
         track.className = "activity-track";
         const bar = createExperienceAction(item, true);
         const itemStart = monthIndex(item.start);
-        const itemEnd = item.end ? monthIndex(item.end) : Math.max(nowIndex, itemStart) + (item.planned ? 4 : 1);
+        const itemEnd = item.end ? Math.min(monthIndex(item.end), nowIndex) : nowIndex;
         bar.style.setProperty("--bar-start", itemStart - axisStart + 1);
         bar.style.setProperty("--bar-span", Math.max(itemEnd - itemStart + 1, 1));
         bar.title = `${item.title}｜${formatPeriod(item)}`;

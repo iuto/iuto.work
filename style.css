@@ -588,6 +588,119 @@ h1 {
   align-items: start;
 }
 
+.activity-dialog-open {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(247, 248, 255, 0.74);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 750;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.activity-dialog-open span {
+  display: grid;
+  gap: 2px;
+}
+
+.activity-dialog-open small {
+  color: rgba(247, 248, 255, 0.4);
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.activity-dialog-open svg {
+  width: 19px;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+  transition: transform 0.2s ease;
+}
+
+.activity-dialog-open:hover,
+.activity-dialog-open:focus-visible {
+  border-color: rgba(255, 197, 100, 0.4);
+  background: rgba(255, 255, 255, 0.13);
+  color: #ffc564;
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.activity-dialog-open:hover svg,
+.activity-dialog-open:focus-visible svg {
+  transform: translateX(3px);
+}
+
+.activity-dialog {
+  width: min(80vw, 1240px);
+  max-width: none;
+  height: 80vh;
+  max-height: none;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 28px;
+  background: transparent;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.45);
+}
+
+.activity-dialog::backdrop {
+  background: rgba(3, 15, 14, 0.76);
+  backdrop-filter: blur(12px);
+}
+
+.activity-dialog-panel {
+  position: relative;
+  height: 100%;
+  padding: 34px;
+  overflow: auto;
+  background:
+    radial-gradient(circle at 90% 0%, rgba(255, 197, 100, 0.18), transparent 30%),
+    #f3f5f1;
+  color: #081f1d;
+}
+
+.activity-dialog-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px 14px;
+  padding-right: 52px;
+}
+
+.activity-dialog-title .activity-map-kicker {
+  flex-basis: 100%;
+}
+
+.activity-dialog-title h2 {
+  margin: 0;
+  font-size: clamp(24px, 3vw, 38px);
+  letter-spacing: -0.055em;
+}
+
+.activity-dialog .activity-map-head {
+  margin-top: 24px;
+}
+
+.activity-dialog .activity-chart-scroll {
+  margin-top: 26px;
+}
+
 .activity-map {
   position: relative;
   margin-top: 24px;
@@ -728,6 +841,22 @@ h1 {
   outline: none;
 }
 
+.activity-filters button.is-education::before,
+.activity-filters button.is-work::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: #2f7770;
+  vertical-align: 1px;
+}
+
+.activity-filters button.is-work::before {
+  background: #d99a28;
+}
+
 .activity-chart-scroll {
   overflow-x: auto;
   margin-top: 18px;
@@ -759,16 +888,19 @@ h1 {
 
 .activity-axis > span {
   grid-row: 1;
+  grid-column: var(--year-start) / span var(--year-span);
   color: rgba(8, 33, 31, 0.38);
   font-size: 10px;
   font-weight: 800;
 }
 
 .activity-axis {
-  grid-template-columns: var(--activity-label-width) repeat(var(--activity-years), minmax(112px, 1fr));
+  grid-template-columns: var(--activity-label-width) repeat(var(--activity-months), minmax(9.333px, 1fr));
 }
 
 .activity-label {
+  width: 100%;
+  border: 0;
   position: sticky;
   left: 0;
   z-index: 3;
@@ -776,12 +908,15 @@ h1 {
   display: flex;
   align-items: center;
   min-height: 34px;
-  padding-right: 18px;
+  padding: 0 18px 0 0;
   overflow: hidden;
   background: #f3f5f1;
   color: rgba(8, 33, 31, 0.68);
+  font-family: inherit;
   font-size: 11px;
   font-weight: 800;
+  text-align: left;
+  text-decoration: none;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -868,7 +1003,7 @@ h1 {
   position: absolute;
   top: 24px;
   bottom: 0;
-  left: calc(var(--activity-label-width) + ((100% - var(--activity-label-width)) / var(--activity-months)) * (var(--now-column) - 0.5));
+  left: calc(var(--activity-label-width) + ((100% - var(--activity-label-width)) / var(--activity-months)) * var(--now-column));
   z-index: 2;
   width: 1px;
   border-left: 1px dashed rgba(210, 87, 65, 0.7);
@@ -3390,6 +3525,24 @@ h1 {
 
   .background-groups {
     grid-template-columns: 1fr;
+  }
+
+  .activity-dialog {
+    width: calc(100vw - 24px);
+    height: 86vh;
+    border-radius: 22px;
+  }
+
+  .activity-dialog-panel {
+    padding: 26px 18px;
+  }
+
+  .activity-dialog-title {
+    padding-right: 42px;
+  }
+
+  .activity-dialog .activity-map-head {
+    margin-top: 18px;
   }
 
   .activity-map {
