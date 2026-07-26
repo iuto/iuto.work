@@ -902,6 +902,127 @@ h1 {
   line-height: 1.5;
 }
 
+.university-courses {
+  margin-top: 30px;
+}
+
+.university-courses-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.university-courses-heading h3 {
+  margin: 0;
+  color: rgba(8, 33, 31, 0.46);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.university-courses-heading span {
+  color: rgba(8, 33, 31, 0.48);
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.university-timetable-wrap {
+  overflow-x: auto;
+  border: 1px solid rgba(14, 55, 51, 0.1);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.74);
+  scrollbar-width: thin;
+}
+
+.university-timetable {
+  width: 100%;
+  min-width: 690px;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+.university-timetable th,
+.university-timetable td {
+  border-right: 1px solid rgba(14, 55, 51, 0.08);
+  border-bottom: 1px solid rgba(14, 55, 51, 0.08);
+}
+
+.university-timetable tr > :last-child {
+  border-right: 0;
+}
+
+.university-timetable tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.university-timetable thead th {
+  height: 34px;
+  background: rgba(45, 126, 117, 0.08);
+  color: rgba(8, 33, 31, 0.58);
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.university-timetable thead th:first-child,
+.university-timetable tbody th {
+  width: 35px;
+}
+
+.university-timetable tbody th {
+  background: rgba(45, 126, 117, 0.05);
+  color: rgba(8, 33, 31, 0.4);
+  font-size: 10px;
+  font-weight: 850;
+}
+
+.university-timetable td {
+  height: 74px;
+  padding: 5px;
+  vertical-align: top;
+}
+
+.university-timetable td span {
+  display: flex;
+  min-height: 62px;
+  align-items: center;
+  padding: 7px;
+  border-radius: 9px;
+  background: rgba(255, 197, 100, 0.2);
+  color: #493716;
+  font-size: 10px;
+  font-weight: 750;
+  line-height: 1.42;
+}
+
+.university-on-demand {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  padding: 12px 14px;
+  border: 1px solid rgba(14, 55, 51, 0.1);
+  border-radius: 13px;
+  background: rgba(45, 126, 117, 0.06);
+}
+
+.university-on-demand span {
+  color: #2d7e75;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.university-on-demand strong {
+  color: #163b37;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
 .work-dialog {
   width: min(80vw, 920px);
   max-width: calc(100vw - 32px);
@@ -1240,15 +1361,6 @@ h1 {
   background: var(--accent-3);
 }
 
-.staff-dialog-kicker {
-  margin: 0 0 12px;
-  color: #a46d0d;
-  font-size: 10px;
-  font-weight: 950;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
 .staff-title-break {
   display: none;
 }
@@ -1295,10 +1407,52 @@ h1 {
   padding: 17px 18px 18px;
 }
 
+.admissions-dialog .staff-event-photo {
+  position: relative;
+  display: block;
+  height: 150px;
+  margin: -17px -18px 2px;
+  overflow: hidden;
+  color: #fff;
+  text-decoration: none;
+}
+
+.admissions-dialog .staff-event-photo::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 46%;
+  background: linear-gradient(transparent, rgba(4, 20, 18, 0.58));
+}
+
+.admissions-dialog .staff-event-photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.admissions-dialog .staff-event-photo:hover img,
+.admissions-dialog .staff-event-photo:focus-visible img {
+  transform: scale(1.035);
+}
+
+.admissions-dialog .staff-event-photo span {
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
+  z-index: 1;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+}
+
 .admissions-dialog .staff-event-card::before {
   content: "";
   position: absolute;
   inset: 0 auto 0 0;
+  z-index: 2;
   width: 3px;
   background: rgba(45, 126, 117, 0.55);
 }
@@ -1306,19 +1460,21 @@ h1 {
 .admissions-dialog .staff-event-card time {
   display: inline-flex;
   align-items: baseline;
-  gap: 4px;
+  gap: 2px;
   padding: 0;
   background: transparent;
   color: #8a5b08;
-  font-size: 21px;
-  letter-spacing: -0.04em;
-  line-height: 1;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1.4;
 }
 
 .admissions-dialog .staff-event-card time span {
-  color: rgba(8, 33, 31, 0.44);
-  font-size: 9px;
-  letter-spacing: 0.12em;
+  color: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
 }
 
 .admissions-dialog .staff-event-type {
