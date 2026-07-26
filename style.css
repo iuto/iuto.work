@@ -590,7 +590,7 @@ h1 {
 
 .activity-map {
   position: relative;
-  margin-bottom: 24px;
+  margin-top: 24px;
   padding: 0;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.86);
@@ -736,7 +736,7 @@ h1 {
 }
 
 .activity-chart {
-  --activity-label-width: 156px;
+  --activity-label-width: 190px;
   position: relative;
   display: grid;
   gap: 7px;
@@ -769,14 +769,37 @@ h1 {
 }
 
 .activity-label {
+  position: sticky;
+  left: 0;
+  z-index: 3;
   align-self: center;
-  padding-right: 14px;
+  display: flex;
+  align-items: center;
+  min-height: 34px;
+  padding-right: 18px;
   overflow: hidden;
-  color: rgba(8, 33, 31, 0.62);
+  background: #f3f5f1;
+  color: rgba(8, 33, 31, 0.68);
   font-size: 11px;
-  font-weight: 750;
+  font-weight: 800;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.activity-label::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 16px;
+  background: linear-gradient(to right, transparent, #f3f5f1);
+  pointer-events: none;
+}
+
+.activity-row:has(.activity-bar:hover) .activity-label,
+.activity-row:has(.activity-bar:focus-visible) .activity-label {
+  color: #a86f0d;
 }
 
 .activity-track {
@@ -797,9 +820,9 @@ h1 {
   z-index: 1;
   grid-column: var(--bar-start) / span var(--bar-span);
   align-self: center;
-  min-width: 7px;
-  height: 22px;
-  padding: 0 8px;
+  min-width: 9px;
+  height: 18px;
+  padding: 0;
   overflow: hidden;
   border: 0;
   border-radius: 7px;
@@ -807,15 +830,17 @@ h1 {
   box-shadow: 0 4px 12px rgba(17, 75, 68, 0.18);
   color: white;
   font: inherit;
-  font-size: 9px;
-  font-weight: 850;
-  line-height: 22px;
-  text-align: left;
+  font-size: 0;
+  line-height: 18px;
   text-decoration: none;
   text-overflow: ellipsis;
   white-space: nowrap;
   cursor: pointer;
   transition: filter 0.18s ease, transform 0.18s ease;
+}
+
+.activity-bar > span {
+  display: none;
 }
 
 .activity-row.is-work .activity-bar {
@@ -3400,7 +3425,7 @@ h1 {
   }
 
   .activity-chart {
-    --activity-label-width: 124px;
+    --activity-label-width: 156px;
   }
 
   .timeline-item {

@@ -86,11 +86,14 @@
     </section>
 
     <section class="section-large" id="about">
+      <div class="background-groups" id="experience-lists" aria-live="polite"></div>
+      <p class="experience-error" id="experience-error" hidden>経歴データを読み込めませんでした。</p>
+
       <details class="activity-map glass">
         <summary class="activity-map-summary">
           <span class="activity-map-summary-copy">
-            <span class="activity-map-kicker">Activity timeline</span>
-            <strong>学びと仕事の重なりを見る</strong>
+            <span class="activity-map-kicker">Timeline</span>
+            <strong>経歴を時間軸で見る</strong>
           </span>
           <span class="activity-map-current" id="activity-current-count">現在の活動を集計中</span>
           <span class="activity-map-toggle" aria-hidden="true">
@@ -115,9 +118,6 @@
           </div>
         </div>
       </details>
-
-      <div class="background-groups" id="experience-lists" aria-live="polite"></div>
-      <p class="experience-error" id="experience-error" hidden>経歴データを読み込めませんでした。</p>
     </section>
 
     <dialog class="work-dialog" id="web-writer-dialog" aria-labelledby="web-writer-title">
@@ -628,6 +628,9 @@
       const label = document.createElement("span");
       label.textContent = compact ? (item.shortTitle || item.title) : item.title;
       element.append(label);
+      if (compact) {
+        element.setAttribute("aria-label", `${item.title}、${formatPeriod(item)}`);
+      }
       if (!compact && interactive) {
         const arrow = document.createElement("span");
         arrow.className = "timeline-open-arrow";
