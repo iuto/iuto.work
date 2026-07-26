@@ -325,7 +325,7 @@ a {
 .hero {
   position: relative;
   overflow: hidden;
-  margin-top: clamp(62px, 7vw, 76px);
+  margin-top: clamp(40px, 5vw, 52px);
   padding: clamp(12px, 2vw, 20px);
   min-height: 220px;
   display: grid;
@@ -2215,7 +2215,7 @@ h1 {
   overflow: hidden;
   display: grid;
   align-content: center;
-  margin-top: clamp(62px, 7vw, 76px);
+  margin-top: clamp(40px, 5vw, 52px);
   min-height: 220px;
   padding: clamp(12px, 2vw, 20px);
   background:
