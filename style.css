@@ -683,14 +683,14 @@ h1 {
 
 .sizu-dialog .work-dialog-panel {
   background:
-    radial-gradient(circle at 12% 0%, rgba(255, 197, 100, 0.18), transparent 32%),
-    linear-gradient(160deg, #173d39, #0a2522);
+    radial-gradient(circle at 12% 0%, rgba(255, 197, 100, 0.2), transparent 32%),
+    linear-gradient(160deg, #fffaf0, #edf3f1);
 }
 
 .sizu-dialog .work-dialog-close {
-  border-color: rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(247, 248, 255, 0.74);
+  border-color: rgba(8, 33, 31, 0.12);
+  background: rgba(8, 33, 31, 0.06);
+  color: rgba(8, 33, 31, 0.68);
 }
 
 .sizu-dialog .sizu-section {
@@ -865,7 +865,7 @@ h1 {
 }
 
 .sizu-section-head > div > span {
-  color: rgba(247, 248, 255, 0.42);
+  color: rgba(8, 33, 31, 0.42);
   font-size: 9px;
   font-weight: 850;
   letter-spacing: 0.16em;
@@ -874,7 +874,7 @@ h1 {
 
 .sizu-section-head h2 {
   margin: 3px 0 0;
-  color: #f7f8ff;
+  color: #081f1d;
   font-size: 18px;
   letter-spacing: -0.035em;
 }
@@ -884,7 +884,7 @@ h1 {
   border: 1px solid rgba(255, 197, 100, 0.2);
   border-radius: 999px;
   background: rgba(255, 197, 100, 0.1);
-  color: #ffc564;
+  color: #a66b08;
   font-size: 9px;
   font-weight: 850;
 }
@@ -898,10 +898,10 @@ h1 {
 .sizu-status {
   margin: 0;
   padding: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(8, 33, 31, 0.1);
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(247, 248, 255, 0.58);
+  background: rgba(255, 255, 255, 0.52);
+  color: rgba(8, 33, 31, 0.58);
   font-size: 11px;
   font-weight: 750;
   text-align: center;
@@ -913,16 +913,16 @@ h1 {
   gap: 7px;
   min-width: 0;
   padding: 16px 42px 16px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(8, 33, 31, 0.1);
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.07);
-  color: #f7f8ff;
+  background: rgba(255, 255, 255, 0.72);
+  color: #081f1d;
   text-decoration: none;
   transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 
 .sizu-post-card time {
-  color: rgba(247, 248, 255, 0.42);
+  color: rgba(8, 33, 31, 0.44);
   font-size: 9px;
   font-weight: 750;
 }
@@ -939,7 +939,7 @@ h1 {
   position: absolute;
   top: 50%;
   right: 16px;
-  color: rgba(247, 248, 255, 0.42);
+  color: rgba(8, 33, 31, 0.42);
   transform: translateY(-50%);
   transition: color 0.2s ease, transform 0.2s ease;
 }
@@ -954,7 +954,7 @@ h1 {
   padding: 4px 7px;
   border-radius: 999px;
   background: rgba(255, 197, 100, 0.11);
-  color: rgba(255, 213, 138, 0.78);
+  color: #9b650a;
   font-size: 8px;
   font-style: normal;
   font-weight: 800;
@@ -963,14 +963,14 @@ h1 {
 .sizu-post-card:hover,
 .sizu-post-card:focus-visible {
   border-color: rgba(255, 197, 100, 0.28);
-  background: rgba(255, 255, 255, 0.11);
+  background: rgba(255, 255, 255, 0.96);
   outline: none;
   transform: translateY(-1px);
 }
 
 .sizu-post-card:hover > .sizu-post-arrow,
 .sizu-post-card:focus-visible > .sizu-post-arrow {
-  color: #ffc564;
+  color: #b9780d;
   transform: translate(2px, -50%);
 }
 
