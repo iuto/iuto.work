@@ -852,6 +852,53 @@ h1 {
   line-height: 1.85;
 }
 
+.high-school-dialog .university-courses {
+  margin-top: 30px;
+}
+
+.high-school-course-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.high-school-course-grid section {
+  overflow: hidden;
+  border: 1px solid rgba(14, 55, 51, 0.1);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.74);
+}
+
+.high-school-course-grid h4 {
+  margin: 0;
+  padding: 10px 14px;
+  background: rgba(45, 126, 117, 0.08);
+  color: #2d625c;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.high-school-course-grid ul {
+  display: grid;
+  margin: 0;
+  padding: 5px 14px;
+  list-style: none;
+}
+
+.high-school-course-grid li {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(14, 55, 51, 0.07);
+  color: #163b37;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.high-school-course-grid li:last-child {
+  border-bottom: 0;
+}
+
 .university-affiliations {
   margin-top: 30px;
 }
@@ -2975,6 +3022,10 @@ h1 {
   .university-courses-toggle::after {
     grid-column: 2;
     grid-row: 1;
+  }
+
+  .high-school-course-grid {
+    grid-template-columns: 1fr;
   }
 
   .work-article-list {

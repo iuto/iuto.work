@@ -118,7 +118,12 @@
             <div class="timeline-item is-past">
               <div class="period">2023年4月 - 2026年3月</div>
               <div class="timeline-text">
-                <h3>日本航空高等学校 通信制課程 普通科</h3>
+                <h3>
+                  <button class="timeline-open" type="button" data-dialog-open="high-school-dialog">
+                    <span>日本航空高等学校 通信制課程 普通科</span>
+                    <span class="timeline-open-arrow" aria-hidden="true">→</span>
+                  </button>
+                </h3>
               </div>
             </div>
 
@@ -306,6 +311,55 @@
             </a>
           </div>
         </section>
+      </div>
+    </dialog>
+
+    <dialog class="work-dialog high-school-dialog" id="high-school-dialog" aria-labelledby="high-school-title">
+      <div class="work-dialog-panel">
+        <button class="work-dialog-close" type="button" data-dialog-close aria-label="閉じる">×</button>
+        <p class="work-dialog-period">2023年4月 - 2026年3月 / 卒業</p>
+        <h2 id="high-school-title">日本航空高等学校 通信制課程 普通科</h2>
+        <details class="university-courses">
+          <summary class="university-courses-toggle">
+            <span>履修科目をみる</span>
+          </summary>
+          <div class="university-courses-content">
+            <h3>1年次（2023年度）</h3>
+            <div class="high-school-course-grid">
+              <section aria-labelledby="high-school-first-term">
+                <h4 id="high-school-first-term">前期</h4>
+                <ul>
+                  <li>現代の国語A</li>
+                  <li>言語文化A</li>
+                  <li>歴史総合A</li>
+                  <li>数学ⅠA</li>
+                  <li>科学と人間生活A</li>
+                  <li>体育ⅠA</li>
+                  <li>保健A</li>
+                  <li>英語コミュニケーションⅠA</li>
+                  <li>論理・表現ⅠA</li>
+                  <li>総合的な探究の時間AⅠ</li>
+                </ul>
+              </section>
+              <section aria-labelledby="high-school-second-term">
+                <h4 id="high-school-second-term">後期</h4>
+                <ul>
+                  <li>現代の国語B</li>
+                  <li>言語文化B</li>
+                  <li>歴史総合B</li>
+                  <li>公共</li>
+                  <li>数学ⅠB</li>
+                  <li>数学A</li>
+                  <li>科学と人間生活B</li>
+                  <li>体育ⅠB</li>
+                  <li>英語コミュニケーションⅠB</li>
+                  <li>論理・表現ⅠB</li>
+                  <li>総合的な探究の時間AⅡ</li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </details>
       </div>
     </dialog>
 
