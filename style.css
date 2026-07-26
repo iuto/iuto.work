@@ -713,6 +713,13 @@ h1 {
   font-weight: 750;
 }
 
+.timeline-text .timeline-description {
+  margin-top: 6px;
+  color: rgba(8, 33, 31, 0.56);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
 .period-duration {
   position: relative;
   width: fit-content;
