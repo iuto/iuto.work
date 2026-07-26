@@ -637,6 +637,17 @@ h1 {
   box-shadow: 0 0 0 5px rgba(255, 197, 100, 0.22);
 }
 
+.timeline-item.is-planned::before {
+  border: 2px solid #d99829;
+  background: #fff8e9;
+  box-shadow: 0 0 0 5px rgba(255, 197, 100, 0.16);
+}
+
+.timeline-item.is-planned .period,
+.timeline-item.is-planned .timeline-detail {
+  color: #9a650c;
+}
+
 .timeline-item:first-child {
   padding-top: 0;
   border-top: 0;
