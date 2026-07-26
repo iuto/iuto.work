@@ -4085,6 +4085,93 @@ h1 {
     grid-row: 1;
   }
 
+  .university-affiliations ul {
+    grid-template-columns: 1fr;
+  }
+
+  .university-timetable-wrap {
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .university-timetable {
+    min-width: 0;
+    border-collapse: separate;
+  }
+
+  .university-timetable thead {
+    display: none;
+  }
+
+  .university-timetable tbody {
+    display: grid;
+    gap: 10px;
+  }
+
+  .university-timetable tbody tr {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr);
+    overflow: hidden;
+    border: 1px solid rgba(14, 55, 51, 0.1);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.74);
+  }
+
+  .university-timetable tbody th {
+    grid-column: 1;
+    grid-row: 1;
+    display: grid;
+    width: auto;
+    min-height: 48px;
+    place-items: center;
+    border: 0;
+    border-right: 1px solid rgba(14, 55, 51, 0.08);
+    font-size: 11px;
+  }
+
+  .university-timetable tbody td {
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: 24px minmax(0, 1fr);
+    align-items: center;
+    gap: 7px;
+    height: auto;
+    min-height: 0;
+    padding: 6px 8px;
+    border: 0;
+    border-bottom: 1px solid rgba(14, 55, 51, 0.07);
+  }
+
+  .university-timetable tbody td:empty {
+    display: none;
+  }
+
+  .university-timetable tbody td:last-child {
+    border-bottom: 0;
+  }
+
+  .university-timetable tbody td::before {
+    color: rgba(8, 33, 31, 0.42);
+    font-size: 9px;
+    font-weight: 850;
+    text-align: center;
+  }
+
+  .university-timetable tbody td:nth-child(2)::before { content: "月"; }
+  .university-timetable tbody td:nth-child(3)::before { content: "火"; }
+  .university-timetable tbody td:nth-child(4)::before { content: "水"; }
+  .university-timetable tbody td:nth-child(5)::before { content: "木"; }
+  .university-timetable tbody td:nth-child(6)::before { content: "金"; }
+  .university-timetable tbody td:nth-child(7)::before { content: "土"; }
+
+  .university-timetable tbody td a {
+    min-height: 38px;
+    padding: 8px 10px;
+    font-size: 10px;
+  }
+
   .high-school-course-grid {
     grid-template-columns: 1fr;
   }
