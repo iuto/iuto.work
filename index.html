@@ -218,7 +218,12 @@
               <div class="period" data-start="2023-01" data-end="2024-12">2023年1月 - 2024年12月</div>
               <div class="timeline-text">
                 <div class="timeline-heading">
-                  <h3>株式会社MOVED</h3>
+                  <h3>
+                    <button class="timeline-open" type="button" data-dialog-open="moved-dialog">
+                      <span>株式会社MOVED</span>
+                      <span class="timeline-open-arrow" aria-hidden="true">→</span>
+                    </button>
+                  </h3>
                   <span class="timeline-detail">ライター・ポッドキャスト編集</span>
                 </div>
               </div>
@@ -264,6 +269,17 @@
         <p class="work-dialog-period">2020年11月 - 2023年6月</p>
         <p class="work-dialog-lead">
           クラウドソーシングサイト「ココナラ」経由で、ゲーム紹介記事やサービス紹介記事など、さまざまな分野の記事を執筆。
+        </p>
+      </div>
+    </dialog>
+
+    <dialog class="work-dialog" id="moved-dialog" aria-labelledby="moved-title">
+      <div class="work-dialog-panel">
+        <button class="work-dialog-close" type="button" data-dialog-close aria-label="閉じる">×</button>
+        <h2 id="moved-title">株式会社MOVED</h2>
+        <p class="work-dialog-period">2023年1月 - 2024年12月 / ライター・ポッドキャスト編集</p>
+        <p class="work-dialog-lead">
+          社内イベントの紹介記事の制作や、ポッドキャスト「むーラヂ〜こころがうごくラヂオ」の編集などを担当。
         </p>
       </div>
     </dialog>
