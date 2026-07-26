@@ -431,7 +431,7 @@
         <p class="work-dialog-period">2023年4月 - 2026年3月 / 卒業</p>
         <h2 id="high-school-title">日本航空高等学校 通信制課程 普通科</h2>
         <p class="university-intro">
-          長期インターンなど、学業以外の活動に充てる時間を多く取りたいと考え、通信制高校に進学した。
+          長期インターンなど、学業以外の活動に充てる時間を多く取りたいと考え、通信制高校に進学した。高校1年次に、高卒認定試験に合格した。
         </p>
         <details class="university-courses">
           <summary class="university-courses-toggle">
@@ -708,6 +708,35 @@
 
   </main>
   <script>
+    const experienceState = {
+      items: [],
+      filter: "all"
+    };
+
+    const monthIndex = (value) => {
+      const [year, month] = value.split("-").map(Number);
+      return (year * 12) + month - 1;
+    };
+
+    const currentMonth = () => {
+      const now = new Date();
+      return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+    };
+
+    const isCurrentExperience = (item) => {
+      const now = monthIndex(currentMonth());
+      return !item.planned && monthIndex(item.start) <= now && (!item.end || monthIndex(item.end) >= now);
+    };
+
+    const formatPeriod = (item) => {
+      const formatMonth = (value) => {
+        const [year, month] = value.split("-").map(Number);
+        return `${year}年${month}月`;
+      };
+      const end = item.planned ? "" : (item.end ? formatMonth(item.end) : "現在");
+      return `${formatMonth(item.start)} - ${end}`;
+    };
+
     const formatDuration = (startValue, endValue) => {
       const [startYear, startMonth] = startValue.split("-").map(Number);
       const now = new Date();
@@ -726,17 +755,183 @@
       return `${years}年${months}ヶ月`;
     };
 
-    document.querySelectorAll(".period[data-start][data-end]").forEach((period) => {
-      const duration = document.createElement("span");
-      duration.className = "period-duration";
-      duration.textContent = formatDuration(period.dataset.start, period.dataset.end);
-      period.append(duration);
+    const createExperienceAction = (item, compact = false) => {
+      const element = document.createElement(item.url ? "a" : "button");
+      element.className = compact ? "activity-bar" : "timeline-open";
+      if (item.url) {
+        element.href = item.url;
+        element.target = "_blank";
+        element.rel = "noopener";
+      } else {
+        element.type = "button";
+        if (item.dialogId) element.dataset.dialogOpen = item.dialogId;
+      }
+      if (!item.url && !item.dialogId) element.classList.add("is-static");
+
+      const label = document.createElement("span");
+      label.textContent = compact ? (item.shortTitle || item.title) : item.title;
+      element.append(label);
+
+      if (!compact && (item.url || item.dialogId)) {
+        const arrow = document.createElement("span");
+        arrow.className = "timeline-open-arrow";
+        arrow.ariaHidden = "true";
+        arrow.textContent = item.url ? "↗" : "→";
+        element.append(arrow);
+      }
+      return element;
+    };
+
+    const renderExperienceLists = () => {
+      const container = document.getElementById("experience-lists");
+      container.replaceChildren();
+
+      ["education", "work"].forEach((category) => {
+        const section = document.createElement("section");
+        section.className = "background-group";
+        const timeline = document.createElement("div");
+        timeline.className = "timeline glass";
+
+        experienceState.items
+          .filter((item) => item.category === category)
+          .forEach((item) => {
+            const active = isCurrentExperience(item);
+            const row = document.createElement("div");
+            row.className = `timeline-item ${item.planned ? "is-planned" : (active ? "is-active" : "is-past")}`;
+
+            const period = document.createElement("div");
+            period.className = "period";
+            const range = document.createElement("span");
+            range.textContent = formatPeriod(item);
+            period.append(range);
+            if (item.badge) {
+              const badge = document.createElement("span");
+              badge.className = "period-year";
+              badge.textContent = item.badge;
+              period.append(badge);
+            }
+            if (!item.planned && (active || item.category === "work")) {
+              const duration = document.createElement("span");
+              duration.className = "period-duration";
+              duration.textContent = formatDuration(item.start, item.end || "current");
+              period.append(duration);
+            }
+
+            const text = document.createElement("div");
+            text.className = "timeline-text";
+            const heading = document.createElement("div");
+            heading.className = "timeline-heading";
+            const title = document.createElement("h3");
+            if (active) title.className = "is-active";
+            title.append(createExperienceAction(item));
+            heading.append(title);
+            if (item.detail) {
+              const detail = document.createElement("span");
+              detail.className = `timeline-detail${active ? " timeline-detail-current" : ""}`;
+              detail.textContent = item.detail;
+              heading.append(detail);
+            }
+            text.append(heading);
+            row.append(period, text);
+            timeline.append(row);
+          });
+
+        section.append(timeline);
+        container.append(section);
+      });
+    };
+
+    const filteredExperiences = () => experienceState.items.filter((item) => {
+      if (experienceState.filter === "all") return true;
+      if (experienceState.filter === "current") return isCurrentExperience(item);
+      return item.category === experienceState.filter;
     });
 
-    document.querySelectorAll("[data-dialog-open]").forEach((button) => {
-      button.addEventListener("click", () => {
-        document.getElementById(button.dataset.dialogOpen)?.showModal();
+    const renderActivityChart = () => {
+      const chart = document.getElementById("activity-chart");
+      const items = filteredExperiences();
+      chart.replaceChildren();
+      if (!items.length) return;
+
+      const nowIndex = monthIndex(currentMonth());
+      const startIndex = Math.min(...items.map((item) => monthIndex(item.start)));
+      const visibleEndIndex = Math.max(
+        nowIndex + 5,
+        ...items.map((item) => item.end ? monthIndex(item.end) : Math.max(nowIndex, monthIndex(item.start)))
+      );
+      const startYear = Math.floor(startIndex / 12);
+      const endYear = Math.floor(visibleEndIndex / 12);
+      const totalMonths = ((endYear - startYear + 1) * 12);
+      const axisStart = startYear * 12;
+      chart.style.setProperty("--activity-months", totalMonths);
+      chart.style.setProperty("--activity-years", endYear - startYear + 1);
+
+      const axis = document.createElement("div");
+      axis.className = "activity-axis";
+      for (let year = startYear; year <= endYear; year += 1) {
+        const tick = document.createElement("span");
+        tick.textContent = year;
+        axis.append(tick);
+      }
+      chart.append(axis);
+
+      items.forEach((item) => {
+        const row = document.createElement("div");
+        row.className = `activity-row is-${item.category}`;
+        const label = document.createElement("span");
+        label.className = "activity-label";
+        label.textContent = item.shortTitle || item.title;
+        const track = document.createElement("div");
+        track.className = "activity-track";
+        const bar = createExperienceAction(item, true);
+        const itemStart = monthIndex(item.start);
+        const itemEnd = item.end
+          ? monthIndex(item.end)
+          : Math.max(nowIndex, itemStart) + (item.planned ? 4 : 1);
+        bar.style.setProperty("--bar-start", itemStart - axisStart + 1);
+        bar.style.setProperty("--bar-span", Math.max(itemEnd - itemStart + 1, 1));
+        bar.title = `${item.title}｜${formatPeriod(item)}`;
+        if (item.planned) bar.classList.add("is-planned");
+        track.append(bar);
+        row.append(label, track);
+        chart.append(row);
       });
+
+      if (nowIndex >= axisStart && nowIndex < axisStart + totalMonths) {
+        const nowLine = document.createElement("span");
+        nowLine.className = "activity-now";
+        nowLine.style.setProperty("--now-column", nowIndex - axisStart + 1);
+        nowLine.ariaHidden = "true";
+        chart.append(nowLine);
+      }
+    };
+
+    const loadExperiences = async () => {
+      try {
+        const response = await fetch("data/experiences.json");
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        experienceState.items = await response.json();
+        renderExperienceLists();
+        renderActivityChart();
+      } catch (error) {
+        console.error("Experience data could not be loaded.", error);
+        document.getElementById("experience-error").hidden = false;
+      }
+    };
+
+    document.querySelectorAll("[data-experience-filter]").forEach((button) => {
+      button.addEventListener("click", () => {
+        experienceState.filter = button.dataset.experienceFilter;
+        document.querySelectorAll("[data-experience-filter]").forEach((item) => {
+          item.classList.toggle("is-active", item === button);
+        });
+        renderActivityChart();
+      });
+    });
+
+    document.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-dialog-open]");
+      if (button) document.getElementById(button.dataset.dialogOpen)?.showModal();
     });
 
     document.querySelectorAll("[data-dialog-close]").forEach((button) => {
@@ -750,6 +945,8 @@
         if (event.target === dialog) dialog.close();
       });
     });
+
+    loadExperiences();
 
     (() => {
       const sequence = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
