@@ -141,10 +141,14 @@
               <div class="period" data-start="2026-07" data-end="current">2026年7月 - 現在</div>
               <div class="timeline-text">
                 <div class="timeline-heading">
-                  <h3 class="is-active">株式会社ノックラーン</h3>
+                  <h3 class="is-active">
+                    <button class="timeline-open" type="button" data-dialog-open="ai-workflow-dialog">
+                      <span>株式会社ノックラーン</span>
+                      <span class="timeline-open-arrow" aria-hidden="true">→</span>
+                    </button>
+                  </h3>
                   <span class="timeline-detail timeline-detail-current">AIワークフロービルダー</span>
                 </div>
-                <p class="timeline-description">AIを活用したワークフローを構築し、業務の効率化に取り組んでいる。</p>
               </div>
             </div>
 
@@ -230,6 +234,25 @@
         </section>
       </div>
     </section>
+
+    <dialog class="work-dialog" id="ai-workflow-dialog" aria-labelledby="ai-workflow-title">
+      <div class="work-dialog-panel">
+        <button class="work-dialog-close" type="button" data-dialog-close aria-label="閉じる">×</button>
+        <h2 id="ai-workflow-title">株式会社ノックラーン</h2>
+        <p class="work-dialog-period">2026年7月 - 現在 / AIワークフロービルダー</p>
+        <p class="work-dialog-lead">
+          AIを活用したワークフローを構築し、業務の効率化に取り組んでいる。
+        </p>
+        <section class="work-skills" aria-labelledby="ai-workflow-skills-title">
+          <h3 id="ai-workflow-skills-title">スキル・ツール</h3>
+          <ul>
+            <li>Claude</li>
+            <li>ChatGPT</li>
+            <li>Gemini</li>
+          </ul>
+        </section>
+      </div>
+    </dialog>
 
     <dialog class="work-dialog" id="bateaulavoir-dialog" aria-labelledby="bateaulavoir-title">
       <div class="work-dialog-panel">
