@@ -605,15 +605,15 @@ h1 {
   position: relative;
   display: grid;
   grid-template-columns: 154px 1fr;
-  gap: 28px;
-  padding: 14px 0;
+  gap: 42px;
+  padding: 18px 0;
   border-top: 1px solid rgba(14, 55, 51, 0.11);
 }
 
 .timeline-item::before {
   content: "";
   position: absolute;
-  top: 22px;
+  top: 26px;
   left: 164px;
   width: 9px;
   height: 9px;
@@ -625,8 +625,8 @@ h1 {
 .timeline-item::after {
   content: "";
   position: absolute;
-  top: 34px;
-  bottom: -15px;
+  top: 38px;
+  bottom: -19px;
   left: 168px;
   width: 1px;
   background: rgba(14, 55, 51, 0.12);
@@ -3090,7 +3090,7 @@ h1 {
 
   .timeline-item {
     grid-template-columns: 1fr;
-    gap: 6px;
+    gap: 10px;
     padding-left: 0;
   }
 
