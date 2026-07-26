@@ -637,11 +637,6 @@ h1 {
   box-shadow: 0 0 0 5px rgba(255, 197, 100, 0.22);
 }
 
-.timeline-item.is-planned .period,
-.timeline-item.is-planned .timeline-detail {
-  color: #9a650c;
-}
-
 .timeline-item.is-planned .timeline-text {
   padding-top: 3px;
 }
