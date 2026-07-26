@@ -1685,20 +1685,20 @@ h1 {
   transition: transform 0.2s ease, color 0.2s ease;
 }
 
-.timeline-open:hover,
-.timeline-open:focus-visible {
+.timeline-open:not(.is-static):hover,
+.timeline-open:not(.is-static):focus-visible {
   color: #d99a28;
   outline: none;
 }
 
-.timeline-open:hover::after,
-.timeline-open:focus-visible::after {
+.timeline-open:not(.is-static):hover::after,
+.timeline-open:not(.is-static):focus-visible::after {
   opacity: 0.55;
   transform: scaleX(1);
 }
 
-.timeline-open:hover .timeline-open-arrow,
-.timeline-open:focus-visible .timeline-open-arrow {
+.timeline-open:not(.is-static):hover .timeline-open-arrow,
+.timeline-open:not(.is-static):focus-visible .timeline-open-arrow {
   color: #d99a28;
   transform: translate(2px, -1px);
 }
