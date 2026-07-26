@@ -990,13 +990,13 @@ h1 {
 }
 
 .university-course-legend .is-language,
-.university-timetable td span.is-language {
+.university-timetable td a.is-language {
   background: rgba(84, 137, 194, 0.16);
   color: #244e78;
 }
 
 .university-course-legend .is-required,
-.university-timetable td span.is-required {
+.university-timetable td a.is-required {
   background: rgba(45, 126, 117, 0.16);
   color: #195a53;
 }
@@ -1068,7 +1068,7 @@ h1 {
   vertical-align: top;
 }
 
-.university-timetable td span {
+.university-timetable td a {
   display: flex;
   min-height: 62px;
   align-items: center;
@@ -1079,6 +1079,20 @@ h1 {
   font-size: 10px;
   font-weight: 750;
   line-height: 1.42;
+  text-decoration: none;
+  transition: box-shadow 160ms ease, filter 160ms ease, transform 160ms ease;
+}
+
+.university-timetable td a:hover {
+  filter: brightness(0.96);
+  box-shadow: 0 4px 12px rgba(8, 33, 31, 0.1);
+  transform: translateY(-1px);
+}
+
+.university-timetable td a:focus-visible,
+.university-on-demand-links a:focus-visible {
+  outline: 2px solid #2d7e75;
+  outline-offset: 2px;
 }
 
 .university-on-demand {
@@ -1092,7 +1106,7 @@ h1 {
   background: rgba(45, 126, 117, 0.06);
 }
 
-.university-on-demand span {
+.university-on-demand-label {
   color: #2d7e75;
   font-size: 9px;
   font-weight: 900;
@@ -1100,12 +1114,22 @@ h1 {
   line-height: 1.5;
 }
 
-.university-on-demand strong {
-  display: block;
+.university-on-demand-links {
   color: #163b37;
   font-size: 11px;
   font-weight: 750;
   line-height: 1.5;
+}
+
+.university-on-demand-links a {
+  color: inherit;
+  text-decoration-color: rgba(22, 59, 55, 0.3);
+  text-underline-offset: 3px;
+}
+
+.university-on-demand-links a:hover {
+  color: #2d7e75;
+  text-decoration-color: currentColor;
 }
 
 .work-dialog {
