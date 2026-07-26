@@ -85,6 +85,17 @@
       </div>
     </section>
 
+    <section class="sizu-section" id="sizu-posts" hidden>
+      <div class="sizu-section-head">
+        <div>
+          <span>sizu.me</span>
+          <h2>しずかなインターネット</h2>
+        </div>
+        <span class="sizu-visibility">URL限定</span>
+      </div>
+      <div class="sizu-post-list" id="sizu-post-list"></div>
+    </section>
+
     <section class="section-large" id="about">
       <div class="background-groups" id="experience-lists" aria-live="polite"></div>
       <p class="experience-error" id="experience-error" hidden>経歴データを読み込めませんでした。</p>
@@ -776,6 +787,44 @@
       }
     };
 
+    const loadSizuPosts = async () => {
+      try {
+        const response = await fetch("/api/sizu-posts");
+        if (!response.ok) return;
+        const payload = await response.json();
+        if (!Array.isArray(payload.posts) || payload.posts.length === 0) return;
+
+        const list = document.getElementById("sizu-post-list");
+        payload.posts.forEach((post) => {
+          const link = document.createElement("a");
+          link.className = "sizu-post-card";
+          link.href = `https://sizu.me/iuto/posts/${encodeURIComponent(post.slug)}`;
+          link.target = "_blank";
+          link.rel = "noopener";
+
+          const date = document.createElement("time");
+          date.dateTime = post.createdAt;
+          date.textContent = new Intl.DateTimeFormat("ja-JP", {
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+          }).format(new Date(post.createdAt));
+
+          const title = document.createElement("strong");
+          title.textContent = post.title || "無題";
+          const arrow = document.createElement("span");
+          arrow.ariaHidden = "true";
+          arrow.textContent = "↗";
+          link.append(date, title, arrow);
+          list.append(link);
+        });
+
+        document.getElementById("sizu-posts").hidden = false;
+      } catch {
+        // The profile remains usable when the external API is unavailable.
+      }
+    };
+
     document.addEventListener("click", (event) => {
       const button = event.target.closest("[data-dialog-open]");
       if (button) document.getElementById(button.dataset.dialogOpen)?.showModal();
@@ -794,6 +843,7 @@
     });
 
     loadExperiences();
+    loadSizuPosts();
 
     (() => {
       const sequence = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
