@@ -24,3 +24,5 @@ for (const file of photoFiles) {
 for (const folder of photoFolders) {
   fs.cpSync(path.join(root, "photos", folder), path.join(photoOutDir, folder), { recursive: true });
 }
+
+fs.cpSync(path.join(root, "assets"), path.join(outDir, "assets"), { recursive: true });
