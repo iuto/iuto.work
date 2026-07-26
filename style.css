@@ -751,13 +751,6 @@ h1 {
   letter-spacing: -0.055em;
 }
 
-.prefecture-dialog-head > strong {
-  padding: 7px 14px;
-  border-radius: 12px;
-  background: #ffe19a;
-  font-size: 18px;
-}
-
 .prefecture-map-layout {
   display: grid;
   grid-template-columns: 180px minmax(0, 1fr);
@@ -819,13 +812,17 @@ h1 {
   fill: var(--prefecture-color, #e8e5dc);
   stroke: #45413c;
   stroke-width: 0.7;
-  cursor: pointer;
+  cursor: default;
   transition: filter 0.16s ease, stroke 0.16s ease, stroke-width 0.16s ease;
 }
 
-.prefecture-map .prefecture:hover,
-.prefecture-map .prefecture:focus-visible,
-.prefecture-map .prefecture.is-selected {
+.prefecture-map .prefecture.is-clickable {
+  cursor: pointer;
+}
+
+.prefecture-map .prefecture.is-clickable:hover,
+.prefecture-map .prefecture.is-clickable:focus-visible,
+.prefecture-map .prefecture.is-clickable.is-selected {
   filter: brightness(0.92) saturate(1.2);
   stroke: #171412;
   stroke-width: 1.2;

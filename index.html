@@ -108,13 +108,12 @@
         <div class="prefecture-dialog-head">
           <span>Visited places</span>
           <h2 id="prefecture-dialog-title">行ったことのある都道府県</h2>
-          <strong id="prefecture-score">—</strong>
         </div>
         <div class="prefecture-map-layout">
           <div class="prefecture-legend" id="prefecture-legend"></div>
           <div class="prefecture-map" id="prefecture-map" aria-label="都道府県別の訪問状況"></div>
         </div>
-        <p class="prefecture-selection" id="prefecture-selection">都道府県を選ぶと詳細を表示します。</p>
+        <p class="prefecture-selection" id="prefecture-selection">訪問以上の都道府県を選ぶと詳細を表示します。</p>
         <small class="prefecture-map-credit">
           Map: <a href="https://github.com/geolonia/japanese-prefectures" target="_blank" rel="noopener">Geolonia</a>
         </small>
@@ -938,19 +937,19 @@
           legend.append(item);
         });
 
-        let score = 0;
         Object.entries(prefectures).forEach(([code, [name, level]]) => {
-          score += level;
           const prefecture = map.querySelector(`[data-code="${Number(code)}"], [data-code="${code}"]`);
           if (!prefecture) return;
           prefecture.style.setProperty("--prefecture-color", prefectureLevels[level].color);
           prefecture.dataset.name = name;
           prefecture.dataset.level = level;
-          prefecture.setAttribute("role", "button");
-          prefecture.setAttribute("tabindex", "0");
           prefecture.setAttribute("aria-label", `${name}：${prefectureLevels[level].label}`);
+          if (level >= 3) {
+            prefecture.classList.add("is-clickable");
+            prefecture.setAttribute("role", "button");
+            prefecture.setAttribute("tabindex", "0");
+          }
         });
-        document.getElementById("prefecture-score").textContent = `${score}点`;
 
         const selectPrefecture = (prefecture) => {
           const [name, level] = prefectures[String(prefecture.dataset.code).padStart(2, "0")] || [];
@@ -962,11 +961,11 @@
         };
 
         map.addEventListener("click", (event) => {
-          const prefecture = event.target.closest(".prefecture");
+          const prefecture = event.target.closest(".prefecture.is-clickable");
           if (prefecture) selectPrefecture(prefecture);
         });
         map.addEventListener("keydown", (event) => {
-          const prefecture = event.target.closest(".prefecture");
+          const prefecture = event.target.closest(".prefecture.is-clickable");
           if (prefecture && (event.key === "Enter" || event.key === " ")) {
             event.preventDefault();
             selectPrefecture(prefecture);
