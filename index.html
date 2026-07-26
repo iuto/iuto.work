@@ -85,21 +85,17 @@
       </div>
     </section>
 
-    <dialog class="work-dialog sizu-dialog" id="sizu-dialog" aria-labelledby="sizu-dialog-title">
+    <dialog class="work-dialog sizu-dialog" id="sizu-dialog" aria-label="限定公開記事">
       <div class="work-dialog-panel">
         <button class="work-dialog-close" type="button" data-dialog-close aria-label="閉じる">×</button>
         <section class="sizu-section" id="sizu-posts">
-          <div class="sizu-section-head">
-            <div>
-              <span>sizu.me</span>
-              <h2 id="sizu-dialog-title">しずかなインターネット</h2>
-            </div>
-            <span class="sizu-visibility">URL限定</span>
-          </div>
           <form class="sizu-access-form" id="sizu-access-form">
             <label for="sizu-access-password">限定公開記事を見るためのパスワード</label>
-            <div>
-              <input id="sizu-access-password" name="password" type="password" autocomplete="current-password" required />
+            <div class="sizu-password-row">
+              <div class="sizu-password-field">
+                <input id="sizu-access-password" name="password" type="password" autocomplete="current-password" required />
+                <button class="sizu-password-toggle" id="sizu-password-toggle" type="button" aria-controls="sizu-access-password" aria-pressed="false">表示</button>
+              </div>
               <button type="submit">記事を見る</button>
             </div>
           </form>
@@ -856,7 +852,7 @@
     const loadSizuPosts = async (password) => {
       const status = document.getElementById("sizu-status");
       const form = document.getElementById("sizu-access-form");
-      const submitButton = form.querySelector("button");
+      const submitButton = form.querySelector('button[type="submit"]');
       status.hidden = false;
       status.textContent = "記事を読み込んでいます…";
       submitButton.disabled = true;
@@ -1023,6 +1019,15 @@
     document.getElementById("sizu-access-form").addEventListener("submit", (event) => {
       event.preventDefault();
       loadSizuPosts(document.getElementById("sizu-access-password").value);
+    });
+
+    document.getElementById("sizu-password-toggle").addEventListener("click", (event) => {
+      const input = document.getElementById("sizu-access-password");
+      const showPassword = input.type === "password";
+      input.type = showPassword ? "text" : "password";
+      event.currentTarget.textContent = showPassword ? "隠す" : "表示";
+      event.currentTarget.setAttribute("aria-pressed", String(showPassword));
+      input.focus();
     });
 
     loadExperiences();

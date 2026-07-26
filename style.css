@@ -856,39 +856,6 @@ h1 {
   color: inherit;
 }
 
-.sizu-section-head {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 20px;
-  margin-bottom: 16px;
-}
-
-.sizu-section-head > div > span {
-  color: rgba(8, 33, 31, 0.42);
-  font-size: 9px;
-  font-weight: 850;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.sizu-section-head h2 {
-  margin: 3px 0 0;
-  color: #081f1d;
-  font-size: 18px;
-  letter-spacing: -0.035em;
-}
-
-.sizu-visibility {
-  padding: 6px 9px;
-  border: 1px solid rgba(255, 197, 100, 0.2);
-  border-radius: 999px;
-  background: rgba(255, 197, 100, 0.1);
-  color: #a66b08;
-  font-size: 9px;
-  font-weight: 850;
-}
-
 .sizu-post-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -910,14 +877,19 @@ h1 {
   font-weight: 800;
 }
 
-.sizu-access-form > div {
+.sizu-password-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 8px;
 }
 
+.sizu-password-field {
+  position: relative;
+  min-width: 0;
+}
+
 .sizu-access-form input,
-.sizu-access-form button {
+.sizu-password-row > button {
   min-height: 46px;
   border: 1px solid rgba(8, 33, 31, 0.12);
   border-radius: 13px;
@@ -925,14 +897,19 @@ h1 {
 }
 
 .sizu-access-form input {
+  width: 100%;
   min-width: 0;
-  padding: 0 14px;
+  min-height: 46px;
+  padding: 0 58px 0 14px;
+  border: 1px solid rgba(8, 33, 31, 0.12);
+  border-radius: 13px;
   background: rgba(255, 255, 255, 0.78);
   color: #081f1d;
+  font: inherit;
   font-size: 16px;
 }
 
-.sizu-access-form button {
+.sizu-password-row > button {
   padding: 0 18px;
   background: #173f3b;
   color: #fff;
@@ -941,7 +918,31 @@ h1 {
   cursor: pointer;
 }
 
-.sizu-access-form button:disabled {
+.sizu-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  min-width: 46px;
+  padding: 8px;
+  border: 0;
+  border-radius: 9px;
+  background: rgba(8, 33, 31, 0.07);
+  color: rgba(8, 33, 31, 0.62);
+  font: inherit;
+  font-size: 10px;
+  font-weight: 850;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.sizu-password-toggle:hover,
+.sizu-password-toggle:focus-visible {
+  background: rgba(8, 33, 31, 0.12);
+  color: #081f1d;
+  outline: none;
+}
+
+.sizu-password-row > button:disabled {
   cursor: wait;
   opacity: 0.58;
 }
