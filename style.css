@@ -694,11 +694,13 @@ h1 {
 }
 
 .activity-dialog .activity-map-head {
-  margin-top: 24px;
+  min-height: 38px;
+  padding-right: 54px;
+  justify-content: flex-end;
 }
 
 .activity-dialog .activity-chart-scroll {
-  margin-top: 26px;
+  margin-top: 30px;
 }
 
 .activity-map {
@@ -873,7 +875,7 @@ h1 {
 }
 
 .activity-axis,
-.activity-row {
+.activity-group {
   display: grid;
   grid-template-columns: var(--activity-label-width) minmax(0, 1fr);
 }
@@ -898,30 +900,23 @@ h1 {
   grid-template-columns: var(--activity-label-width) repeat(var(--activity-months), minmax(9.333px, 1fr));
 }
 
-.activity-label {
+.activity-group-label {
   width: 100%;
-  border: 0;
   position: sticky;
   left: 0;
   z-index: 3;
-  align-self: center;
-  display: flex;
-  align-items: center;
-  min-height: 34px;
-  padding: 0 18px 0 0;
+  align-self: stretch;
+  display: grid;
+  align-content: center;
+  gap: 7px;
+  padding: 8px 18px 8px 0;
   overflow: hidden;
   background: #f3f5f1;
   color: rgba(8, 33, 31, 0.68);
-  font-family: inherit;
-  font-size: 11px;
-  font-weight: 800;
   text-align: left;
-  text-decoration: none;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
-.activity-label::after {
+.activity-group-label::after {
   content: "";
   position: absolute;
   top: 0;
@@ -932,9 +927,33 @@ h1 {
   pointer-events: none;
 }
 
-.activity-row:has(.activity-bar:hover) .activity-label,
-.activity-row:has(.activity-bar:focus-visible) .activity-label {
-  color: #a86f0d;
+.activity-group-label > strong {
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.activity-group-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 10px;
+}
+
+.activity-group-legend > span {
+  color: rgba(8, 33, 31, 0.5);
+  font-size: 9px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.activity-group-legend > span::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 4px;
+  border-radius: 50%;
+  background: var(--item-color);
+  vertical-align: 1px;
 }
 
 .activity-track {
@@ -951,9 +970,16 @@ h1 {
   );
 }
 
+.activity-group-track {
+  grid-template-rows: repeat(var(--activity-lanes), 22px);
+  align-content: center;
+  min-height: calc(var(--activity-lanes) * 22px + 12px);
+}
+
 .activity-bar {
   z-index: 1;
   grid-column: var(--bar-start) / span var(--bar-span);
+  grid-row: var(--bar-lane);
   align-self: center;
   min-width: 9px;
   height: 18px;
@@ -961,7 +987,7 @@ h1 {
   overflow: hidden;
   border: 0;
   border-radius: 7px;
-  background: #2f7770;
+  background: var(--bar-color, #2f7770);
   box-shadow: 0 4px 12px rgba(17, 75, 68, 0.18);
   color: white;
   font: inherit;
@@ -976,11 +1002,6 @@ h1 {
 
 .activity-bar > span {
   display: none;
-}
-
-.activity-row.is-work .activity-bar {
-  background: #d99a28;
-  color: #231805;
 }
 
 .activity-bar.is-planned {
@@ -3542,7 +3563,7 @@ h1 {
   }
 
   .activity-dialog .activity-map-head {
-    margin-top: 18px;
+    padding-right: 44px;
   }
 
   .activity-map {

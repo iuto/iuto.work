@@ -89,16 +89,10 @@
       <div class="background-groups" id="experience-lists" aria-live="polite"></div>
       <p class="experience-error" id="experience-error" hidden>経歴データを読み込めませんでした。</p>
 
-      <dialog class="activity-dialog" id="activity-timeline-dialog" aria-labelledby="activity-dialog-title">
+      <dialog class="activity-dialog" id="activity-timeline-dialog" aria-label="経歴年表">
         <div class="activity-dialog-panel">
           <button class="work-dialog-close" type="button" data-dialog-close aria-label="閉じる">×</button>
-          <div class="activity-dialog-title">
-            <span class="activity-map-kicker">Timeline</span>
-            <h2 id="activity-dialog-title">経歴を時間軸で見る</h2>
-            <span class="activity-map-current" id="activity-current-count">現在の活動を集計中</span>
-          </div>
           <div class="activity-map-head">
-            <p>中学校入学から現在までの学歴と活動歴を比較できます。</p>
             <div class="activity-filters" aria-label="表示する活動">
               <button class="is-active" type="button" data-experience-filter="all">すべて</button>
               <button class="is-education" type="button" data-experience-filter="education">学び</button>
@@ -691,11 +685,9 @@
           openTimeline.className = "activity-dialog-open";
           openTimeline.type = "button";
           openTimeline.dataset.dialogOpen = "activity-timeline-dialog";
+          openTimeline.setAttribute("aria-label", "経歴年表を開く");
           openTimeline.innerHTML = `
-            <span>
-              <small>Timeline</small>
-              学歴と活動歴を時間軸で見る
-            </span>
+            <span>年表</span>
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M5 12h14M14 7l5 5-5 5" />
             </svg>
@@ -712,6 +704,25 @@
       if (experienceState.filter === "current") return isCurrentExperience(item);
       return item.category === experienceState.filter;
     });
+
+    const activityColors = {
+      "junior-high-school": "#4d83c3",
+      "high-school": "#4f9b72",
+      "kansai-university": "#8b6db1",
+      "web-writer": "#bd765f",
+      "sensory-lab": "#d39b36",
+      "knocklearn": "#d26876",
+      "moved": "#527f9e",
+      "bateaulavoir": "#7b8e50",
+      "admissions-staff": "#a66fa1",
+      "ai-workflow": "#d56f36"
+    };
+
+    const activityNames = {
+      "junior-high-school": "中学",
+      "high-school": "高校",
+      "kansai-university": "大学"
+    };
 
     const renderActivityChart = () => {
       const chart = document.getElementById("activity-chart");
@@ -739,22 +750,39 @@
       }
       chart.append(axis);
 
-      items.forEach((item) => {
+      ["education", "work"].forEach((category) => {
+        const categoryItems = items.filter((item) => item.category === category);
+        if (!categoryItems.length) return;
         const row = document.createElement("div");
-        row.className = `activity-row is-${item.category}`;
-        const label = document.createElement("span");
-        label.className = "activity-label";
-        label.textContent = item.shortTitle || item.title;
+        row.className = `activity-group is-${category}`;
+        const label = document.createElement("div");
+        label.className = "activity-group-label";
+        const labelTitle = document.createElement("strong");
+        labelTitle.textContent = category === "education" ? "学業" : "仕事・活動";
+        const legend = document.createElement("span");
+        legend.className = "activity-group-legend";
+        categoryItems.forEach((item) => {
+          const legendItem = document.createElement("span");
+          legendItem.style.setProperty("--item-color", activityColors[item.id]);
+          legendItem.textContent = activityNames[item.id] || item.shortTitle || item.title;
+          legend.append(legendItem);
+        });
+        label.append(labelTitle, legend);
+
         const track = document.createElement("div");
-        track.className = "activity-track";
-        const bar = createExperienceAction(item, true);
-        const itemStart = monthIndex(item.start);
-        const itemEnd = item.end ? Math.min(monthIndex(item.end), nowIndex) : nowIndex;
-        bar.style.setProperty("--bar-start", itemStart - axisStart + 1);
-        bar.style.setProperty("--bar-span", Math.max(itemEnd - itemStart + 1, 1));
-        bar.title = `${item.title}｜${formatPeriod(item)}`;
-        if (item.planned) bar.classList.add("is-planned");
-        track.append(bar);
+        track.className = "activity-track activity-group-track";
+        track.style.setProperty("--activity-lanes", category === "education" ? 1 : categoryItems.length);
+        categoryItems.forEach((item, index) => {
+          const bar = createExperienceAction(item, true);
+          const itemStart = monthIndex(item.start);
+          const itemEnd = item.end ? Math.min(monthIndex(item.end), nowIndex) : nowIndex;
+          bar.style.setProperty("--bar-start", itemStart - axisStart + 1);
+          bar.style.setProperty("--bar-span", Math.max(itemEnd - itemStart + 1, 1));
+          bar.style.setProperty("--bar-lane", category === "education" ? 1 : index + 1);
+          bar.style.setProperty("--bar-color", activityColors[item.id]);
+          bar.title = `${activityNames[item.id] || item.title}｜${formatPeriod(item)}`;
+          track.append(bar);
+        });
         row.append(label, track);
         chart.append(row);
       });
@@ -773,11 +801,6 @@
         const response = await fetch("data/experiences.json");
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         experienceState.items = await response.json();
-        const currentItems = experienceState.items.filter(isCurrentExperience);
-        const educationCount = currentItems.filter((item) => item.category === "education").length;
-        const workCount = currentItems.filter((item) => item.category === "work").length;
-        document.getElementById("activity-current-count").textContent =
-          `現在：学び ${educationCount}・活動 ${workCount}`;
         renderExperienceLists();
         renderActivityChart();
       } catch (error) {
