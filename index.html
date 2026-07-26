@@ -868,10 +868,20 @@
 
           const title = document.createElement("strong");
           title.textContent = post.title || "無題";
+          const tags = document.createElement("span");
+          tags.className = "sizu-post-tags";
+          (post.tags || []).forEach((tag) => {
+            const item = document.createElement("i");
+            item.textContent = `#${tag}`;
+            tags.append(item);
+          });
           const arrow = document.createElement("span");
+          arrow.className = "sizu-post-arrow";
           arrow.ariaHidden = "true";
           arrow.textContent = "↗";
-          link.append(date, title, arrow);
+          link.append(date, title);
+          if (tags.childElementCount > 0) link.append(tags);
+          link.append(arrow);
           list.append(link);
         });
 
