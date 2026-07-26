@@ -859,7 +859,10 @@
     const loadSizuPosts = async (password) => {
       const status = document.getElementById("sizu-status");
       const form = document.getElementById("sizu-access-form");
+      const section = document.getElementById("sizu-posts");
       const submitButton = form.querySelector('button[type="submit"]');
+      form.hidden = true;
+      section.classList.add("is-loading");
       status.hidden = false;
       status.textContent = "記事を読み込んでいます…";
       submitButton.disabled = true;
@@ -870,16 +873,21 @@
           body: JSON.stringify({ password })
         });
         if (response.status === 401) {
+          section.classList.remove("is-loading");
+          form.hidden = false;
           status.textContent = "パスワードが違います。";
           document.getElementById("sizu-access-password").select();
           return;
         }
         if (!response.ok) {
+          section.classList.remove("is-loading");
+          form.hidden = false;
           status.textContent = "記事を読み込めませんでした。";
           return;
         }
         const payload = await response.json();
         if (!Array.isArray(payload.posts) || payload.posts.length === 0) {
+          section.classList.remove("is-loading");
           status.textContent = "限定公開記事は見つかりませんでした。";
           return;
         }
@@ -920,9 +928,11 @@
           list.append(link);
         });
 
-        form.hidden = true;
+        section.classList.remove("is-loading");
         status.hidden = true;
       } catch {
+        section.classList.remove("is-loading");
+        form.hidden = false;
         status.textContent = "記事を読み込めませんでした。";
       } finally {
         submitButton.disabled = false;
