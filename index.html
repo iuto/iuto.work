@@ -88,7 +88,7 @@
     <dialog class="work-dialog sizu-dialog" id="sizu-dialog" aria-labelledby="sizu-dialog-title">
       <div class="work-dialog-panel">
         <button class="work-dialog-close" type="button" data-dialog-close aria-label="閉じる">×</button>
-        <section class="sizu-section" id="sizu-posts" hidden>
+        <section class="sizu-section" id="sizu-posts">
           <div class="sizu-section-head">
             <div>
               <span>sizu.me</span>
@@ -96,6 +96,7 @@
             </div>
             <span class="sizu-visibility">URL限定</span>
           </div>
+          <p class="sizu-status" id="sizu-status">記事を読み込んでいます…</p>
           <div class="sizu-post-list" id="sizu-post-list"></div>
         </section>
       </div>
@@ -702,7 +703,6 @@
           openSizu.className = "sizu-dialog-open";
           openSizu.type = "button";
           openSizu.dataset.dialogOpen = "sizu-dialog";
-          openSizu.hidden = true;
           openSizu.innerHTML = `
             <span>
               <small>sizu.me</small>
@@ -844,11 +844,18 @@
     };
 
     const loadSizuPosts = async () => {
+      const status = document.getElementById("sizu-status");
       try {
         const response = await fetch("/api/sizu-posts");
-        if (!response.ok) return;
+        if (!response.ok) {
+          status.textContent = "記事を読み込めませんでした。";
+          return;
+        }
         const payload = await response.json();
-        if (!Array.isArray(payload.posts) || payload.posts.length === 0) return;
+        if (!Array.isArray(payload.posts) || payload.posts.length === 0) {
+          status.textContent = "限定公開記事は見つかりませんでした。";
+          return;
+        }
 
         const list = document.getElementById("sizu-post-list");
         payload.posts.forEach((post) => {
@@ -885,10 +892,9 @@
           list.append(link);
         });
 
-        document.getElementById("sizu-posts").hidden = false;
-        document.querySelector(".sizu-dialog-open").hidden = false;
+        status.hidden = true;
       } catch {
-        // The profile remains usable when the external API is unavailable.
+        status.textContent = "記事を読み込めませんでした。";
       }
     };
 
