@@ -650,6 +650,37 @@ h1 {
   transform: translateY(-1px);
 }
 
+.background-group .timeline + .sizu-dialog-open {
+  margin-top: 20px;
+}
+
+.background-group .sizu-dialog-open + .sizu-dialog-open {
+  margin-top: 12px;
+}
+
+.sizu-dialog-open-icon {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(217, 154, 40, 0.16);
+  border-radius: 12px;
+  background: rgba(255, 197, 100, 0.15);
+  font-size: 18px;
+  font-style: normal;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.sizu-dialog-open-icon.is-map {
+  border-color: rgba(45, 126, 117, 0.16);
+  background: rgba(45, 126, 117, 0.1);
+}
+
+.sizu-dialog-open > span {
+  flex: 1;
+}
+
 .sizu-dialog .work-dialog-panel {
   background:
     radial-gradient(circle at 12% 0%, rgba(255, 197, 100, 0.18), transparent 32%),
