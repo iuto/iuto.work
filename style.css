@@ -786,17 +786,16 @@ h1 {
   stroke: #45413c;
   stroke-width: 0.7;
   cursor: pointer;
-  transition: filter 0.16s ease, transform 0.16s ease;
-  transform-box: fill-box;
-  transform-origin: center;
+  transition: filter 0.16s ease, stroke 0.16s ease, stroke-width 0.16s ease;
 }
 
 .prefecture-map .prefecture:hover,
 .prefecture-map .prefecture:focus-visible,
 .prefecture-map .prefecture.is-selected {
   filter: brightness(0.92) saturate(1.2);
+  stroke: #171412;
+  stroke-width: 1.2;
   outline: none;
-  transform: translateY(-1px);
 }
 
 .prefecture-selection {
