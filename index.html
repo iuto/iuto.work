@@ -166,8 +166,13 @@
               <div class="period" data-start="2025-06" data-end="2026-07">2025年6月 - 2026年7月</div>
               <div class="timeline-text">
                 <div class="timeline-heading">
-                  <h3>合同会社バトラヴォ</h3>
-                  <span class="timeline-detail">広報</span>
+                  <h3>
+                    <button class="timeline-open" type="button" data-dialog-open="bateaulavoir-dialog">
+                      <span>合同会社バトラヴォ</span>
+                      <span class="timeline-open-arrow" aria-hidden="true">→</span>
+                    </button>
+                  </h3>
+                  <span class="timeline-detail">Learn DIVE 運営リーダー・広報</span>
                 </div>
               </div>
             </div>
@@ -224,6 +229,35 @@
         </section>
       </div>
     </section>
+
+    <dialog class="work-dialog" id="bateaulavoir-dialog" aria-labelledby="bateaulavoir-title">
+      <div class="work-dialog-panel">
+        <button class="work-dialog-close" type="button" data-dialog-close aria-label="閉じる">×</button>
+        <h2 id="bateaulavoir-title">合同会社バトラヴォ</h2>
+        <p class="work-dialog-period">2025年6月 - 2026年7月 / Learn DIVE 運営リーダー</p>
+        <p class="work-dialog-lead">
+          株式会社ノックラーンから「KnockLearn」および「KnockLearn DIVE」事業の譲渡を受け、高校生向けオンラインプログラム「Learn DIVE」の運営リーダーとして、広報全般を担当。
+        </p>
+        <section class="work-articles" aria-labelledby="bateaulavoir-press-title">
+          <h3 id="bateaulavoir-press-title">
+            <svg class="work-articles-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 3.5h8l4 4V20a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1Z" />
+              <path d="M14 3.5V8h4" />
+              <path d="M8 12h8" />
+              <path d="M8 16h6" />
+            </svg>
+            <span>関連プレスリリース</span>
+          </h3>
+          <a class="work-press-link" href="https://prtimes.jp/main/html/rd/p/000000038.000103563.html" target="_blank" rel="noopener">
+            <span>
+              <small>PR TIMES · 2025.05.30</small>
+              <strong>教育事業「KnockLearn」「KnockLearn DIVE」の合同会社バトラヴォへの事業譲渡のお知らせ</strong>
+            </span>
+            <i aria-hidden="true">↗</i>
+          </a>
+        </section>
+      </div>
+    </dialog>
 
     <dialog class="work-dialog" id="knocklearn-dialog" aria-labelledby="knocklearn-title">
       <div class="work-dialog-panel">
