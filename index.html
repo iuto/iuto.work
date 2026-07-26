@@ -673,6 +673,10 @@
           timeline.append(row);
         });
         section.append(timeline);
+        if (category === "education") {
+          const sizuSection = document.getElementById("sizu-posts");
+          if (sizuSection) section.append(sizuSection);
+        }
         container.append(section);
       });
     };

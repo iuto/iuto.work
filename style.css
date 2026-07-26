@@ -597,6 +597,14 @@ h1 {
   backdrop-filter: blur(18px);
 }
 
+.background-group .sizu-section {
+  margin-top: 10px;
+}
+
+.background-group .sizu-post-list {
+  grid-template-columns: 1fr;
+}
+
 .sizu-section-head {
   display: flex;
   align-items: end;

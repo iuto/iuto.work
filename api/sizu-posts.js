@@ -9,20 +9,33 @@ module.exports = async function handler(request, response) {
   }
 
   try {
-    const apiResponse = await fetch("https://sizu.me/api/v1/posts", {
-      headers: {
-        Authorization: apiKey,
-        Accept: "application/json"
-      }
-    });
+    const allPosts = [];
+    const knownSlugs = new Set();
 
-    if (!apiResponse.ok) {
-      return response.status(502).json({ error: "sizu.me API request failed" });
+    for (let page = 1; page <= 50; page += 1) {
+      const apiResponse = await fetch(`https://sizu.me/api/v1/posts?page=${page}`, {
+        headers: {
+          Authorization: apiKey,
+          Accept: "application/json"
+        }
+      });
+
+      if (!apiResponse.ok) {
+        return response.status(502).json({ error: "sizu.me API request failed" });
+      }
+
+      const payload = await apiResponse.json();
+      const posts = Array.isArray(payload.posts) ? payload.posts : [];
+      const newPosts = posts.filter((post) => post.slug && !knownSlugs.has(post.slug));
+      newPosts.forEach((post) => {
+        knownSlugs.add(post.slug);
+        allPosts.push(post);
+      });
+
+      if (posts.length === 0 || newPosts.length === 0 || posts.length < 20) break;
     }
 
-    const payload = await apiResponse.json();
-    const posts = Array.isArray(payload.posts) ? payload.posts : [];
-    const urlOnlyPosts = posts
+    const urlOnlyPosts = allPosts
       .filter((post) => post.visibility === "URL_ONLY")
       .map((post) => ({
         title: post.title,
