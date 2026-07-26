@@ -590,7 +590,7 @@ h1 {
 
 .background-actions {
   display: grid;
-  grid-column: 1 / -1;
+  grid-column: 1;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
