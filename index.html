@@ -88,23 +88,6 @@
     <section class="section-large" id="about">
       <div class="background-groups" id="experience-lists" aria-live="polite"></div>
       <p class="experience-error" id="experience-error" hidden>経歴データを読み込めませんでした。</p>
-
-      <dialog class="activity-dialog" id="activity-timeline-dialog" aria-label="経歴年表">
-        <div class="activity-dialog-panel">
-          <button class="work-dialog-close" type="button" data-dialog-close aria-label="閉じる">×</button>
-          <div class="activity-map-head">
-            <div class="activity-filters" aria-label="表示する活動">
-              <button class="is-active" type="button" data-experience-filter="all">すべて</button>
-              <button class="is-education" type="button" data-experience-filter="education">学び</button>
-              <button class="is-work" type="button" data-experience-filter="work">仕事・活動</button>
-              <button type="button" data-experience-filter="current">現在</button>
-            </div>
-          </div>
-          <div class="activity-chart-scroll">
-            <div class="activity-chart" id="activity-chart" aria-live="polite"></div>
-          </div>
-        </div>
-      </dialog>
     </section>
 
     <dialog class="work-dialog" id="web-writer-dialog" aria-labelledby="web-writer-title">
@@ -680,20 +663,6 @@
           timeline.append(row);
         });
         section.append(timeline);
-        if (category === "education") {
-          const openTimeline = document.createElement("button");
-          openTimeline.className = "activity-dialog-open";
-          openTimeline.type = "button";
-          openTimeline.dataset.dialogOpen = "activity-timeline-dialog";
-          openTimeline.setAttribute("aria-label", "経歴年表を開く");
-          openTimeline.innerHTML = `
-            <span>年表</span>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M5 12h14M14 7l5 5-5 5" />
-            </svg>
-          `;
-          section.append(openTimeline);
-        }
         container.append(section);
       });
     };
@@ -802,22 +771,11 @@
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         experienceState.items = await response.json();
         renderExperienceLists();
-        renderActivityChart();
       } catch (error) {
         console.error("Experience data could not be loaded.", error);
         document.getElementById("experience-error").hidden = false;
       }
     };
-
-    document.querySelectorAll("[data-experience-filter]").forEach((button) => {
-      button.addEventListener("click", () => {
-        experienceState.filter = button.dataset.experienceFilter;
-        document.querySelectorAll("[data-experience-filter]").forEach((item) => {
-          item.classList.toggle("is-active", item === button);
-        });
-        renderActivityChart();
-      });
-    });
 
     document.addEventListener("click", (event) => {
       const button = event.target.closest("[data-dialog-open]");
