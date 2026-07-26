@@ -862,6 +862,10 @@ h1 {
   gap: 10px;
 }
 
+.high-school-course-grid + h3 {
+  margin-top: 24px;
+}
+
 .high-school-course-grid section {
   overflow: hidden;
   border: 1px solid rgba(14, 55, 51, 0.1);
