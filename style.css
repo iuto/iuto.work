@@ -590,7 +590,8 @@ h1 {
 
 .background-actions {
   display: grid;
-  grid-column: 1;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -3951,6 +3952,11 @@ h1 {
   }
 
   .background-groups {
+    grid-template-columns: 1fr;
+  }
+
+  .background-actions {
+    grid-column: auto;
     grid-template-columns: 1fr;
   }
 
