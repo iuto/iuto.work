@@ -101,7 +101,13 @@
               <div class="period">2026年4月 - 現在</div>
               <div class="timeline-text">
                 <div class="timeline-heading">
-                  <h3 class="is-active">関西大学 社会学部 社会学専攻</h3>
+                  <h3 class="is-active">
+                    <button class="timeline-open" type="button" data-dialog-open="kansai-university-dialog">
+                      <span>関西大学 社会学部 社会学科 社会学専攻</span>
+                      <span class="timeline-open-arrow" aria-hidden="true">→</span>
+                    </button>
+                  </h3>
+                  <span class="timeline-detail">1年次｜第1外国語：中国語 🀄／第2外国語：英語 🔤</span>
                 </div>
               </div>
             </div>
@@ -257,31 +263,102 @@
       </div>
     </dialog>
 
-    <dialog class="work-dialog" id="admissions-staff-dialog" aria-labelledby="admissions-staff-title">
-      <div class="work-dialog-panel">
+    <dialog class="work-dialog university-dialog" id="kansai-university-dialog" aria-labelledby="kansai-university-title">
+      <div class="work-dialog-panel university-dialog-panel">
         <button class="work-dialog-close" type="button" data-dialog-close aria-label="閉じる">×</button>
-        <h2 id="admissions-staff-title">関西大学 入試広報学生スタッフ</h2>
-        <p class="work-dialog-period">2026年6月 - 現在</p>
-        <p class="work-dialog-lead">
-          オープンキャンパスの運営や、高校生をはじめとする来校者の対応に参加。
-        </p>
+        <p class="work-dialog-period">2026年4月 - 現在 / 在学中</p>
+        <h2 id="kansai-university-title">関西大学 社会学部<br />社会学科 社会学専攻</h2>
+        <p class="work-dialog-lead">学内では、写真活動と入試広報活動に取り組んでいます。</p>
+        <section class="university-affiliations" aria-labelledby="university-affiliations-title">
+          <h3 id="university-affiliations-title">Affiliations</h3>
+          <ul>
+            <li>
+              <span>📷 写真活動</span>
+              <strong>関西大学 写真部 デジタルパート</strong>
+            </li>
+            <li>
+              <span>📣 入試広報活動</span>
+              <strong>関西大学 入試広報学生スタッフ</strong>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </dialog>
+
+    <dialog class="work-dialog admissions-dialog" id="admissions-staff-dialog" aria-labelledby="admissions-staff-title">
+      <div class="work-dialog-panel admissions-dialog-panel">
+        <button class="work-dialog-close" type="button" data-dialog-close aria-label="閉じる">×</button>
+        <header class="staff-dialog-header">
+          <p class="staff-dialog-kicker">Kansai University · Admissions PR</p>
+          <h2 id="admissions-staff-title">関西大学<br class="staff-title-break" /> 入試広報学生スタッフ</h2>
+          <div class="staff-dialog-meta">
+            <span class="staff-status"><i aria-hidden="true"></i>活動中</span>
+            <span>2026年6月 - 現在</span>
+          </div>
+          <p class="work-dialog-lead">
+            高校生に大学の魅力や学生生活を伝える入試広報活動に参加。高校対応やオープンキャンパスで、来校者との対話からキャンパス案内までを担当しています。
+          </p>
+          <div class="staff-summary" aria-label="活動概要">
+            <div><strong>04</strong><span>Activities</span></div>
+            <div><strong>02</strong><span>High Schools</span></div>
+            <div><strong>02</strong><span>Campuses</span></div>
+          </div>
+        </header>
         <section class="staff-events" aria-labelledby="admissions-staff-events-title">
           <h3 id="admissions-staff-events-title">
             <svg class="staff-events-icon" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M5 4v3M19 4v3M4 9h16M5 6h14a1 1 0 0 1 1 1v13H4V7a1 1 0 0 1 1-1Z" />
               <path d="M8 13h3v3H8z" />
             </svg>
+            <span>High School Visits</span>
+          </h3>
+          <div class="staff-event-list">
+            <article class="staff-event-card is-school">
+              <div class="staff-event-head">
+                <time datetime="2026-07-16"><span>JUL</span>16</time>
+                <span class="staff-event-tag">高校対応</span>
+              </div>
+              <div>
+                <p class="staff-event-type">School Visit</p>
+                <h4>金光八尾高等学校</h4>
+                <ul class="staff-event-roles" aria-label="担当業務">
+                  <li>パネルディスカッション</li>
+                  <li>キャンパスツアー</li>
+                </ul>
+              </div>
+            </article>
+            <article class="staff-event-card is-school">
+              <div class="staff-event-head">
+                <time datetime="2026-07-06"><span>JUL</span>06</time>
+                <span class="staff-event-tag">高校対応</span>
+              </div>
+              <div>
+                <p class="staff-event-type">School Visit</p>
+                <h4>市立飾磨高等学校</h4>
+                <ul class="staff-event-roles" aria-label="担当業務">
+                  <li>パネルディスカッション</li>
+                  <li>キャンパスツアー</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </section>
+        <section class="staff-events" aria-labelledby="admissions-open-campus-title">
+          <h3 id="admissions-open-campus-title">
+            <svg class="staff-events-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 10.5 12 4l9 6.5M5.5 9.5V20h13V9.5M9 20v-6h6v6" />
+            </svg>
             <span>Open Campus</span>
           </h3>
           <div class="staff-event-list">
             <article class="staff-event-card">
               <div class="staff-event-head">
-                <time datetime="2026-06-14">2026.06.14</time>
+                <time datetime="2026-06-14"><span>JUN</span>14</time>
                 <span class="staff-event-tag">Open Campus</span>
               </div>
               <div>
+                <p class="staff-event-type">Senriyama Campus</p>
                 <h4>千里山キャンパス</h4>
-                <p>オープンキャンパス</p>
                 <ul class="staff-event-roles" aria-label="担当業務">
                   <li>受付</li>
                   <li>キャンパスツアー</li>
@@ -291,12 +368,12 @@
             </article>
             <article class="staff-event-card">
               <div class="staff-event-head">
-                <time datetime="2026-07-25">2026.07.25</time>
+                <time datetime="2026-07-25"><span>JUL</span>25</time>
                 <span class="staff-event-tag">Open Campus</span>
               </div>
               <div>
+                <p class="staff-event-type">Sakai Campus</p>
                 <h4>堺キャンパス</h4>
-                <p>オープンキャンパス</p>
                 <ul class="staff-event-roles" aria-label="担当業務">
                   <li>受付</li>
                   <li>誘導</li>
