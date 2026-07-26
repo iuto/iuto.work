@@ -110,7 +110,7 @@
                       <span class="timeline-open-arrow" aria-hidden="true">→</span>
                     </button>
                   </h3>
-                  <span class="timeline-detail">第1外国語：中国語 🇨🇳／第2外国語：英語 🇬🇧</span>
+                  <span class="timeline-detail">AO入試／第1外国語 中国語 🇨🇳・第2外国語 英語 🇬🇧</span>
                 </div>
               </div>
             </div>
@@ -155,10 +155,21 @@
                 <div class="timeline-heading">
                   <h3 class="is-active">株式会社ノックラーン</h3>
                   <span class="timeline-detail timeline-detail-current">AIワークフロービルダー</span>
-                  <div class="timeline-previous-role">
-                    <span>2023年1月 - 2026年3月</span>
-                    <strong>長期インターン</strong>
-                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item is-past">
+              <div class="period" data-start="2023-01" data-end="2026-03">2023年1月 - 2026年3月</div>
+              <div class="timeline-text">
+                <div class="timeline-heading">
+                  <h3>
+                    <button class="timeline-open" type="button" data-dialog-open="knocklearn-dialog">
+                      <span>株式会社ノックラーン</span>
+                      <span class="timeline-open-arrow" aria-hidden="true">→</span>
+                    </button>
+                  </h3>
+                  <span class="timeline-detail">オープンポジション</span>
                 </div>
               </div>
             </div>
@@ -226,6 +237,29 @@
       </div>
     </section>
 
+    <dialog class="work-dialog" id="knocklearn-dialog" aria-labelledby="knocklearn-title">
+      <div class="work-dialog-panel">
+        <button class="work-dialog-close" type="button" data-dialog-close aria-label="閉じる">×</button>
+        <h2 id="knocklearn-title">株式会社ノックラーン</h2>
+        <div class="knocklearn-history" aria-label="在籍履歴">
+          <div>
+            <span>2026年7月 - 現在</span>
+            <strong>AIワークフロービルダー</strong>
+          </div>
+          <div>
+            <span>2023年1月 - 2026年3月</span>
+            <strong>オープンポジション</strong>
+            <ul>
+              <li>記事制作</li>
+              <li>SNS運用</li>
+              <li>採用補助</li>
+              <li>営業アシスタント</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
     <dialog class="work-dialog" id="sensory-lab-dialog" aria-labelledby="sensory-lab-title">
       <div class="work-dialog-panel">
         <button class="work-dialog-close" type="button" data-dialog-close aria-label="閉じる">×</button>
@@ -270,7 +304,7 @@
       <div class="work-dialog-panel university-dialog-panel">
         <button class="work-dialog-close" type="button" data-dialog-close aria-label="閉じる">×</button>
         <p class="work-dialog-period">2026年4月 - 現在 / 在学中</p>
-        <h2 id="kansai-university-title">関西大学 社会学部<br />社会学科 社会学専攻</h2>
+        <h2 id="kansai-university-title">関西大学 社会学部 社会学科 社会学専攻</h2>
         <section class="university-affiliations" aria-labelledby="university-affiliations-title">
           <h3 id="university-affiliations-title">所属</h3>
           <ul>
@@ -284,13 +318,14 @@
             </li>
           </ul>
         </section>
-        <section class="university-courses" aria-labelledby="university-courses-title">
-          <div class="university-courses-heading">
-            <h3 id="university-courses-title">1年次の履修科目</h3>
-            <span>2026年度 春学期</span>
-          </div>
-          <div class="university-timetable-wrap">
-            <table class="university-timetable">
+        <details class="university-courses">
+          <summary class="university-courses-toggle">
+            <span>1年次 春学期の履修科目を見る</span>
+            <small>2026年度</small>
+          </summary>
+          <div class="university-courses-content">
+            <div class="university-timetable-wrap">
+              <table class="university-timetable">
               <thead>
                 <tr>
                   <th scope="col" aria-label="時限"></th>
@@ -308,67 +343,57 @@
                   <td></td>
                   <td><span>メディア・<br />リテラシー論</span></td>
                   <td></td>
-                  <td><span>基礎研究1<br />［S2］</span></td>
+                  <td><span>基礎研究1</span></td>
                   <td></td>
                   <td></td>
                 </tr>
                 <tr>
                   <th scope="row">2</th>
                   <td></td>
-                  <td><span>スタディスキルゼミ<br />（ディベート）［A1］</span></td>
-                  <td><span>英語1 a 初級<br />［26］</span></td>
-                  <td><span>基礎社会学1<br />［A2］</span></td>
+                  <td><span>スタディスキルゼミ<br />（ディベート）</span></td>
+                  <td><span>英語1 a 初級</span></td>
+                  <td><span>基礎社会学1</span></td>
                   <td></td>
-                  <td><span>中国語2 a<br />コミュニケーション<br />クラス［C2］</span></td>
+                  <td><span>中国語2 a<br />コミュニケーション<br />クラス</span></td>
                 </tr>
                 <tr>
                   <th scope="row">3</th>
                   <td></td>
-                  <td><span>中国語1 a<br />コミュニケーション<br />クラス［C2］</span></td>
+                  <td><span>中国語1 a<br />コミュニケーション<br />クラス</span></td>
                   <td><span>社会学総論1</span></td>
-                  <td><span>社会調査入門<br />［1］</span></td>
+                  <td><span>社会調査入門</span></td>
                   <td></td>
                   <td></td>
                 </tr>
                 <tr>
                   <th scope="row">4</th>
-                  <td><span>英語2 a 初級<br />［26］</span></td>
+                  <td><span>英語2 a 初級</span></td>
                   <td></td>
-                  <td><span>宗教学を学ぶ<br />［A］</span></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <th scope="row">5</th>
-                  <td></td>
-                  <td></td>
-                  <td><span>学生生活とリスク<br />［A］</span></td>
+                  <td><span>宗教学を学ぶ</span></td>
                   <td></td>
                   <td></td>
                   <td></td>
                 </tr>
               </tbody>
-            </table>
+              </table>
+            </div>
+            <div class="university-on-demand">
+              <span>オンデマンド</span>
+              <ul>
+                <li>学生生活とリスク</li>
+                <li>日本の近現代史と関西大学 ― 知の群像</li>
+              </ul>
+            </div>
           </div>
-          <div class="university-on-demand">
-            <span>オンデマンド</span>
-            <strong>日本の近現代史と関西大学 ― 知の群像</strong>
-          </div>
-        </section>
+        </details>
       </div>
     </dialog>
 
     <dialog class="work-dialog admissions-dialog" id="admissions-staff-dialog" aria-labelledby="admissions-staff-title">
       <div class="work-dialog-panel admissions-dialog-panel">
         <button class="work-dialog-close" type="button" data-dialog-close aria-label="閉じる">×</button>
-        <header class="staff-dialog-header">
-          <h2 id="admissions-staff-title">入試広報学生スタッフ</h2>
-          <div class="staff-dialog-meta">
-            <span class="staff-status"><i aria-hidden="true"></i>活動中</span>
-            <span>2026年6月 - 現在</span>
-          </div>
-        </header>
+        <h2 id="admissions-staff-title">入試広報学生スタッフ</h2>
+        <p class="work-dialog-period">2026年6月 - 現在 / 活動中</p>
         <section class="staff-events staff-events-compact" aria-labelledby="admissions-staff-events-title">
           <h3 id="admissions-staff-events-title">
             <svg class="staff-events-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -379,9 +404,9 @@
           </h3>
           <div class="staff-visit-list">
             <article class="staff-visit-item">
-              <time datetime="2026-07-16">2026.07.16</time>
+              <time datetime="2026-07-06">2026.07.06</time>
               <div class="staff-visit-content">
-                <h4>金光八尾高等学校</h4>
+                <h4>市立飾磨高等学校（2年生）</h4>
                 <ul class="staff-event-roles" aria-label="担当業務">
                   <li>パネルディスカッション</li>
                   <li>キャンパスツアー</li>
@@ -389,9 +414,9 @@
               </div>
             </article>
             <article class="staff-visit-item">
-              <time datetime="2026-07-06">2026.07.06</time>
+              <time datetime="2026-07-16">2026.07.16</time>
               <div class="staff-visit-content">
-                <h4>市立飾磨高等学校</h4>
+                <h4>金光八尾高等学校（2年生）</h4>
                 <ul class="staff-event-roles" aria-label="担当業務">
                   <li>パネルディスカッション</li>
                   <li>キャンパスツアー</li>
