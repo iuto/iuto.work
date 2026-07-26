@@ -1336,6 +1336,9 @@ h1 {
 }
 
 .staff-visit-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 22px;
   margin-top: 10px;
   border-top: 1px solid rgba(8, 33, 31, 0.09);
 }
@@ -1378,6 +1381,10 @@ h1 {
 @media (max-width: 720px) {
   .staff-title-break {
     display: block;
+  }
+
+  .staff-visit-list {
+    grid-template-columns: 1fr;
   }
 
   .staff-visit-item {
