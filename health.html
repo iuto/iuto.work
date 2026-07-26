@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow, noarchive" />
-  <title>Health | iuto</title>
+  <title>健康記録 | iuto</title>
   <meta name="description" content="iutoのGalaxy Watchヘルスデータを表示するページです。" />
   <link rel="icon" type="image/png" href="photos/favicon.png" />
   <link rel="apple-touch-icon" href="photos/favicon.png" />
@@ -22,7 +22,7 @@
           <circle cx="12" cy="8" r="4" />
           <path d="M5 21a7 7 0 0 1 14 0" />
         </svg>
-        <span>Home</span>
+        <span>ホーム</span>
       </a>
     </div>
 
@@ -30,7 +30,7 @@
       <div class="health-card glass">
         <div class="health-card-tools">
           <label class="health-date-picker">
-            <span>Date</span>
+            <span>日付</span>
             <input id="health-date-select" type="date" aria-label="Health date" />
           </label>
         </div>
@@ -71,7 +71,7 @@
           <div class="sleep-stage-legend" id="sleep-stage-legend"></div>
         </div>
 
-        <p class="health-updated" id="health-updated">Health Connect auto sync will appear here.</p>
+        <p class="health-updated" id="health-updated">ヘルスコネクトの自動同期情報がここに表示されます。</p>
       </div>
     </section>
 
@@ -87,7 +87,7 @@
         <div class="health-chart-wrap">
           <div class="health-chart" id="health-chart" role="img" aria-label="Health trend chart"></div>
         </div>
-        <div class="health-chart-summary" id="health-chart-summary">Daily sync history will appear here.</div>
+        <div class="health-chart-summary" id="health-chart-summary">日ごとの同期履歴がここに表示されます。</div>
       </div>
     </section>
   </main>
@@ -190,7 +190,7 @@
       sleepStageTotal.textContent = Number.isFinite(total) && total > 0 ? formatSleep(total) : "--";
 
       if (!total) {
-        sleepStageBar.innerHTML = '<span class="sleep-stage-empty">No stage data yet</span>';
+        sleepStageBar.innerHTML = '<span class="sleep-stage-empty">睡眠ステージのデータはまだありません</span>';
         return;
       }
 
