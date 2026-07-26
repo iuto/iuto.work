@@ -642,6 +642,10 @@ h1 {
   color: #9a650c;
 }
 
+.timeline-item.is-planned .timeline-text {
+  padding-top: 3px;
+}
+
 .timeline-item:first-child {
   padding-top: 0;
   border-top: 0;
