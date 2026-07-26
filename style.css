@@ -587,48 +587,6 @@ h1 {
   align-items: start;
 }
 
-.background-title {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin: 0 0 12px;
-  padding-left: 10px;
-  color: rgba(247, 248, 255, 0.94);
-  font-size: 17px;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.background-title svg {
-  width: 18px;
-  height: 18px;
-  flex: 0 0 auto;
-  transform: translateY(4px);
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  opacity: 0.9;
-}
-
-.background-title .education-icon {
-  transform: translateY(4px);
-}
-
-.background-title .experience-icon {
-  transform: translateY(3px);
-}
-
-.background-title::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  transform: translateY(1px);
-  background: linear-gradient(90deg, rgba(247, 248, 255, 0.42), transparent);
-}
-
 .timeline {
   position: relative;
   padding: 24px;
