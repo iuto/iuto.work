@@ -1275,40 +1275,6 @@ h1 {
   box-shadow: 0 0 0 3px rgba(27, 150, 114, 0.12);
 }
 
-.staff-summary {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
-  overflow: hidden;
-  max-width: 500px;
-  margin-top: 24px;
-  border: 1px solid rgba(8, 33, 31, 0.08);
-  border-radius: 16px;
-  background: rgba(8, 33, 31, 0.08);
-}
-
-.staff-summary div {
-  display: grid;
-  gap: 2px;
-  padding: 13px 15px;
-  background: rgba(255,255,255,0.78);
-}
-
-.staff-summary strong {
-  color: #081f1d;
-  font-size: 18px;
-  font-weight: 950;
-  line-height: 1;
-}
-
-.staff-summary span {
-  color: rgba(8, 33, 31, 0.45);
-  font-size: 9px;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 .admissions-dialog .staff-events {
   margin-top: 30px;
 }
@@ -1329,10 +1295,6 @@ h1 {
   inset: 0 auto 0 0;
   width: 3px;
   background: rgba(45, 126, 117, 0.55);
-}
-
-.admissions-dialog .staff-event-card.is-school::before {
-  background: var(--accent-3);
 }
 
 .admissions-dialog .staff-event-card time {
@@ -1363,13 +1325,58 @@ h1 {
   text-transform: uppercase;
 }
 
+.staff-events-compact {
+  margin-top: 24px;
+}
+
+.staff-visit-list {
+  margin-top: 10px;
+  border-top: 1px solid rgba(8, 33, 31, 0.09);
+}
+
+.staff-visit-item {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: 14px;
+  align-items: start;
+  padding: 13px 2px;
+  border-bottom: 1px solid rgba(8, 33, 31, 0.09);
+}
+
+.staff-visit-item time {
+  padding-top: 2px;
+  color: rgba(8, 33, 31, 0.42);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+}
+
+.staff-visit-content h4 {
+  margin: 0;
+  color: rgba(8, 33, 31, 0.78);
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.staff-visit-item .staff-event-roles {
+  margin-top: 8px;
+}
+
+.staff-visit-item .staff-event-roles li {
+  padding: 3px 7px;
+  background: rgba(255,255,255,0.48);
+  color: rgba(8, 33, 31, 0.58);
+  font-size: 10px;
+}
+
 @media (max-width: 720px) {
   .staff-title-break {
     display: block;
   }
 
-  .staff-summary div {
-    padding: 12px 9px;
+  .staff-visit-item {
+    grid-template-columns: 78px 1fr;
+    gap: 10px;
   }
 }
 
