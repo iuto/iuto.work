@@ -597,12 +597,78 @@ h1 {
   backdrop-filter: blur(18px);
 }
 
-.background-group .sizu-section {
+.sizu-dialog-open {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  width: 100%;
   margin-top: 10px;
+  padding: 14px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(247, 248, 255, 0.76);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 
-.background-group .sizu-post-list {
-  grid-template-columns: 1fr;
+.sizu-dialog-open[hidden] {
+  display: none;
+}
+
+.sizu-dialog-open span {
+  display: grid;
+  gap: 2px;
+}
+
+.sizu-dialog-open small {
+  color: rgba(247, 248, 255, 0.4);
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+}
+
+.sizu-dialog-open svg {
+  width: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+.sizu-dialog-open:hover,
+.sizu-dialog-open:focus-visible {
+  border-color: rgba(255, 197, 100, 0.36);
+  background: rgba(255, 255, 255, 0.13);
+  color: #ffc564;
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.sizu-dialog .work-dialog-panel {
+  background:
+    radial-gradient(circle at 12% 0%, rgba(255, 197, 100, 0.18), transparent 32%),
+    linear-gradient(160deg, #173d39, #0a2522);
+}
+
+.sizu-dialog .work-dialog-close {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(247, 248, 255, 0.74);
+}
+
+.sizu-dialog .sizu-section {
+  margin-top: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  backdrop-filter: none;
 }
 
 .sizu-section-head {

@@ -85,16 +85,21 @@
       </div>
     </section>
 
-    <section class="sizu-section" id="sizu-posts" hidden>
-      <div class="sizu-section-head">
-        <div>
-          <span>sizu.me</span>
-          <h2>しずかなインターネット</h2>
-        </div>
-        <span class="sizu-visibility">URL限定</span>
+    <dialog class="work-dialog sizu-dialog" id="sizu-dialog" aria-labelledby="sizu-dialog-title">
+      <div class="work-dialog-panel">
+        <button class="work-dialog-close" type="button" data-dialog-close aria-label="閉じる">×</button>
+        <section class="sizu-section" id="sizu-posts" hidden>
+          <div class="sizu-section-head">
+            <div>
+              <span>sizu.me</span>
+              <h2 id="sizu-dialog-title">しずかなインターネット</h2>
+            </div>
+            <span class="sizu-visibility">URL限定</span>
+          </div>
+          <div class="sizu-post-list" id="sizu-post-list"></div>
+        </section>
       </div>
-      <div class="sizu-post-list" id="sizu-post-list"></div>
-    </section>
+    </dialog>
 
     <section class="section-large" id="about">
       <div class="background-groups" id="experience-lists" aria-live="polite"></div>
@@ -674,8 +679,21 @@
         });
         section.append(timeline);
         if (category === "education") {
-          const sizuSection = document.getElementById("sizu-posts");
-          if (sizuSection) section.append(sizuSection);
+          const openSizu = document.createElement("button");
+          openSizu.className = "sizu-dialog-open";
+          openSizu.type = "button";
+          openSizu.dataset.dialogOpen = "sizu-dialog";
+          openSizu.hidden = true;
+          openSizu.innerHTML = `
+            <span>
+              <small>sizu.me</small>
+              限定公開記事
+            </span>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14M14 7l5 5-5 5" />
+            </svg>
+          `;
+          section.append(openSizu);
         }
         container.append(section);
       });
@@ -824,6 +842,7 @@
         });
 
         document.getElementById("sizu-posts").hidden = false;
+        document.querySelector(".sizu-dialog-open").hidden = false;
       } catch {
         // The profile remains usable when the external API is unavailable.
       }
