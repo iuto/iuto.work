@@ -53,7 +53,7 @@
     "start": "2026-07",
     "end": null,
     "detail": "AIワークフロービルダー",
-    "dialogId": "ai-workflow-dialog"
+    "dialogId": "knocklearn-dialog"
   },
   {
     "id": "admissions-staff",
@@ -79,10 +79,9 @@
     "id": "knocklearn",
     "category": "work",
     "title": "株式会社ノックラーン",
-    "shortTitle": "ノックラーン（過去）",
+    "shortTitle": "ノックラーン",
     "start": "2023-01",
     "end": "2026-03",
-    "badge": "過去の勤務",
     "detail": "長期インターン",
     "dialogId": "knocklearn-dialog"
   },
