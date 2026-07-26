@@ -1,11 +1,35 @@
+const crypto = require("node:crypto");
+
+const matchesPassword = (provided, expected) => {
+  const providedBuffer = Buffer.from(provided);
+  const expectedBuffer = Buffer.from(expected);
+  return providedBuffer.length === expectedBuffer.length
+    && crypto.timingSafeEqual(providedBuffer, expectedBuffer);
+};
+
 module.exports = async function handler(request, response) {
-  if (request.method !== "GET") {
+  if (request.method !== "POST") {
     return response.status(405).json({ error: "Method not allowed" });
   }
 
   const apiKey = process.env.SIZU_API_KEY;
-  if (!apiKey) {
-    return response.status(500).json({ error: "SIZU_API_KEY is not configured" });
+  const accessPassword = process.env.SIZU_ACCESS_PASSWORD;
+  if (!apiKey || !accessPassword) {
+    return response.status(500).json({ error: "Server is not configured" });
+  }
+
+  let requestBody = request.body || {};
+  if (typeof requestBody === "string") {
+    try {
+      requestBody = JSON.parse(requestBody || "{}");
+    } catch {
+      requestBody = {};
+    }
+  }
+  const providedPassword = typeof requestBody.password === "string" ? requestBody.password : "";
+  if (!matchesPassword(providedPassword, accessPassword)) {
+    response.setHeader("Cache-Control", "no-store");
+    return response.status(401).json({ error: "Unauthorized" });
   }
 
   try {
@@ -45,7 +69,7 @@ module.exports = async function handler(request, response) {
         updatedAt: post.updatedAt
       }));
 
-    response.setHeader("Cache-Control", "s-maxage=300, stale-while-revalidate=3600");
+    response.setHeader("Cache-Control", "no-store");
     return response.status(200).json({ posts: urlOnlyPosts });
   } catch {
     return response.status(502).json({ error: "Could not connect to sizu.me API" });

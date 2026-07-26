@@ -96,7 +96,14 @@
             </div>
             <span class="sizu-visibility">URL限定</span>
           </div>
-          <p class="sizu-status" id="sizu-status">記事を読み込んでいます…</p>
+          <form class="sizu-access-form" id="sizu-access-form">
+            <label for="sizu-access-password">限定公開記事を見るためのパスワード</label>
+            <div>
+              <input id="sizu-access-password" name="password" type="password" autocomplete="current-password" required />
+              <button type="submit">記事を見る</button>
+            </div>
+          </form>
+          <p class="sizu-status" id="sizu-status" hidden></p>
           <div class="sizu-post-list" id="sizu-post-list"></div>
         </section>
       </div>
@@ -846,10 +853,24 @@
       }
     };
 
-    const loadSizuPosts = async () => {
+    const loadSizuPosts = async (password) => {
       const status = document.getElementById("sizu-status");
+      const form = document.getElementById("sizu-access-form");
+      const submitButton = form.querySelector("button");
+      status.hidden = false;
+      status.textContent = "記事を読み込んでいます…";
+      submitButton.disabled = true;
       try {
-        const response = await fetch("/api/sizu-posts");
+        const response = await fetch("/api/sizu-posts", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ password })
+        });
+        if (response.status === 401) {
+          status.textContent = "パスワードが違います。";
+          document.getElementById("sizu-access-password").select();
+          return;
+        }
         if (!response.ok) {
           status.textContent = "記事を読み込めませんでした。";
           return;
@@ -861,6 +882,7 @@
         }
 
         const list = document.getElementById("sizu-post-list");
+        list.replaceChildren();
         payload.posts.forEach((post) => {
           const link = document.createElement("a");
           link.className = "sizu-post-card";
@@ -895,9 +917,12 @@
           list.append(link);
         });
 
+        form.hidden = true;
         status.hidden = true;
       } catch {
         status.textContent = "記事を読み込めませんでした。";
+      } finally {
+        submitButton.disabled = false;
       }
     };
 
@@ -995,8 +1020,12 @@
       });
     });
 
+    document.getElementById("sizu-access-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      loadSizuPosts(document.getElementById("sizu-access-password").value);
+    });
+
     loadExperiences();
-    loadSizuPosts();
     loadPrefectureMap();
 
     (() => {
