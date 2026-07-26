@@ -588,6 +588,12 @@ h1 {
   align-items: start;
 }
 
+.background-actions {
+  display: grid;
+  grid-column: 1;
+  gap: 12px;
+}
+
 .sizu-section {
   margin-top: 24px;
   padding: 24px;
@@ -650,12 +656,8 @@ h1 {
   transform: translateY(-1px);
 }
 
-.background-group .timeline + .sizu-dialog-open {
-  margin-top: 20px;
-}
-
-.background-group .sizu-dialog-open + .sizu-dialog-open {
-  margin-top: 12px;
+.background-actions .sizu-dialog-open {
+  margin-top: 0;
 }
 
 .sizu-dialog-open-icon {
@@ -3184,17 +3186,6 @@ h1 {
   stroke-linecap: round;
   stroke-linejoin: round;
   opacity: 0.88;
-}
-
-.photo-lens-icon {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
-  stroke: none;
-}
-
-.photo-lens-icon .lens-cut {
-  fill: rgba(13, 45, 43, 0.58);
 }
 
 .photo-meta-value {

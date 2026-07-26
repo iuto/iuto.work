@@ -697,41 +697,43 @@
           timeline.append(row);
         });
         section.append(timeline);
-        if (category === "education") {
-          const openSizu = document.createElement("button");
-          openSizu.className = "sizu-dialog-open";
-          openSizu.type = "button";
-          openSizu.dataset.dialogOpen = "sizu-dialog";
-          openSizu.innerHTML = `
-            <i class="sizu-dialog-open-icon" aria-hidden="true">🔐</i>
-            <span>
-              <small>sizu.me</small>
-              限定公開記事
-            </span>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M5 12h14M14 7l5 5-5 5" />
-            </svg>
-          `;
-          section.append(openSizu);
-
-          const openPrefectures = document.createElement("button");
-          openPrefectures.className = "sizu-dialog-open prefecture-dialog-open";
-          openPrefectures.type = "button";
-          openPrefectures.dataset.dialogOpen = "prefecture-dialog";
-          openPrefectures.innerHTML = `
-            <i class="sizu-dialog-open-icon is-map" aria-hidden="true">🗾</i>
-            <span>
-              <small>Visited places</small>
-              行ったことのある都道府県
-            </span>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M5 12h14M14 7l5 5-5 5" />
-            </svg>
-          `;
-          section.append(openPrefectures);
-        }
         container.append(section);
       });
+
+      const actions = document.createElement("div");
+      actions.className = "background-actions";
+
+      const openSizu = document.createElement("button");
+      openSizu.className = "sizu-dialog-open";
+      openSizu.type = "button";
+      openSizu.dataset.dialogOpen = "sizu-dialog";
+      openSizu.innerHTML = `
+        <i class="sizu-dialog-open-icon" aria-hidden="true">🔐</i>
+        <span>
+          <small>sizu.me</small>
+          限定公開記事
+        </span>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 12h14M14 7l5 5-5 5" />
+        </svg>
+      `;
+
+      const openPrefectures = document.createElement("button");
+      openPrefectures.className = "sizu-dialog-open prefecture-dialog-open";
+      openPrefectures.type = "button";
+      openPrefectures.dataset.dialogOpen = "prefecture-dialog";
+      openPrefectures.innerHTML = `
+        <i class="sizu-dialog-open-icon is-map" aria-hidden="true">🗾</i>
+        <span>
+          <small>Visited places</small>
+          行ったことのある都道府県
+        </span>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 12h14M14 7l5 5-5 5" />
+        </svg>
+      `;
+      actions.append(openSizu, openPrefectures);
+      container.append(actions);
     };
 
     const filteredExperiences = () => experienceState.items.filter((item) => {
