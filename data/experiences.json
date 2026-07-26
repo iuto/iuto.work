@@ -1,0 +1,115 @@
+[
+  {
+    "id": "kansai-university",
+    "category": "education",
+    "title": "関西大学 社会学部 社会学科 社会学専攻",
+    "shortTitle": "関西大学",
+    "start": "2026-04",
+    "end": null,
+    "badge": "1年次",
+    "detail": "AO入試／第1外国語 中国語 🇨🇳・第2外国語 英語 🇬🇧",
+    "dialogId": "kansai-university-dialog"
+  },
+  {
+    "id": "high-school",
+    "category": "education",
+    "title": "日本航空高等学校 通信制課程 普通科",
+    "shortTitle": "日本航空高等学校",
+    "start": "2023-04",
+    "end": "2026-03",
+    "dialogId": "high-school-dialog"
+  },
+  {
+    "id": "junior-high-school",
+    "category": "education",
+    "title": "公立中学校",
+    "start": "2020-04",
+    "end": "2023-03"
+  },
+  {
+    "id": "elementary-school",
+    "category": "education",
+    "title": "公立小学校",
+    "start": "2014-04",
+    "end": "2020-03"
+  },
+  {
+    "id": "student-support",
+    "category": "work",
+    "title": "関西大学 学生支援スタッフ",
+    "shortTitle": "学生支援スタッフ",
+    "start": "2026-09",
+    "end": null,
+    "planned": true,
+    "badge": "勤務予定",
+    "url": "https://www.kansai-u.ac.jp/sscc/support/staff_index.html"
+  },
+  {
+    "id": "ai-workflow",
+    "category": "work",
+    "title": "株式会社ノックラーン",
+    "shortTitle": "ノックラーン（AI）",
+    "start": "2026-07",
+    "end": null,
+    "detail": "AIワークフロービルダー",
+    "dialogId": "ai-workflow-dialog"
+  },
+  {
+    "id": "admissions-staff",
+    "category": "work",
+    "title": "関西大学 入試広報学生スタッフ",
+    "shortTitle": "入試広報学生スタッフ",
+    "start": "2026-06",
+    "end": null,
+    "detail": "オープンキャンパス運営・高校見学対応",
+    "dialogId": "admissions-staff-dialog"
+  },
+  {
+    "id": "bateaulavoir",
+    "category": "work",
+    "title": "合同会社バトラヴォ",
+    "shortTitle": "バトラヴォ",
+    "start": "2025-06",
+    "end": "2026-07",
+    "detail": "長期インターン",
+    "dialogId": "bateaulavoir-dialog"
+  },
+  {
+    "id": "knocklearn",
+    "category": "work",
+    "title": "株式会社ノックラーン",
+    "shortTitle": "ノックラーン",
+    "start": "2023-01",
+    "end": "2026-03",
+    "detail": "長期インターン / オープンポジション",
+    "dialogId": "knocklearn-dialog"
+  },
+  {
+    "id": "moved",
+    "category": "work",
+    "title": "株式会社MOVED",
+    "shortTitle": "MOVED",
+    "start": "2023-01",
+    "end": "2024-12",
+    "detail": "ライター・ポッドキャスト編集",
+    "dialogId": "moved-dialog"
+  },
+  {
+    "id": "sensory-lab",
+    "category": "work",
+    "title": "株式会社クリスタルロード",
+    "shortTitle": "クリスタルロード",
+    "start": "2022-12",
+    "end": null,
+    "detail": "長期インターン",
+    "dialogId": "sensory-lab-dialog"
+  },
+  {
+    "id": "web-writer",
+    "category": "work",
+    "title": "WEBライター",
+    "start": "2020-11",
+    "end": "2023-06",
+    "dialogId": "web-writer-dialog"
+  }
+]
