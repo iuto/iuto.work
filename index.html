@@ -590,6 +590,11 @@
       return !item.planned && monthIndex(item.start) <= now && (!item.end || monthIndex(item.end) >= now);
     };
 
+    const isOngoingExperience = (item) => {
+      const now = monthIndex(currentMonth());
+      return !item.planned && !item.end && monthIndex(item.start) <= now;
+    };
+
     const formatPeriod = (item) => {
       const formatMonth = (value) => {
         const [year, month] = value.split("-").map(Number);
@@ -659,7 +664,7 @@
         timeline.className = "timeline glass";
 
         experienceState.items.filter((item) => item.category === category).forEach((item) => {
-          const active = isCurrentExperience(item);
+          const active = isOngoingExperience(item);
           const row = document.createElement("div");
           row.className = `timeline-item ${item.planned ? "is-planned" : (active ? "is-active" : "is-past")}`;
           const period = document.createElement("div");
