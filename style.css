@@ -976,28 +976,11 @@ h1 {
   letter-spacing: 0.04em;
 }
 
-.university-course-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin: -2px 0 10px;
-}
-
-.university-course-legend span {
-  padding: 4px 8px;
-  border-radius: 999px;
-  font-size: 9px;
-  font-weight: 850;
-  line-height: 1.3;
-}
-
-.university-course-legend .is-language,
 .university-timetable td a.is-language {
   background: rgba(84, 137, 194, 0.16);
   color: #244e78;
 }
 
-.university-course-legend .is-required,
 .university-timetable td a.is-required {
   background: rgba(45, 126, 117, 0.16);
   color: #195a53;
