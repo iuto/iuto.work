@@ -711,17 +711,43 @@ h1 {
 }
 
 .sizu-section.is-loading .sizu-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   padding: 0;
   border: 0;
   background: transparent;
   color: #173f3b;
-  font-size: clamp(22px, 3vw, 38px);
+  font-size: clamp(14px, 1.8vw, 20px);
   font-weight: 900;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.025em;
+}
+
+.sizu-section.is-loading .sizu-status::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+  border: 3px solid rgba(23, 63, 59, 0.16);
+  border-top-color: #d99a28;
+  border-radius: 50%;
+  animation: sizu-loading-spin 0.8s linear infinite;
 }
 
 .sizu-section.is-loading .sizu-post-list {
   display: none;
+}
+
+@keyframes sizu-loading-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sizu-section.is-loading .sizu-status::before {
+    animation: none;
+  }
 }
 
 .prefecture-dialog {
