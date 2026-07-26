@@ -656,10 +656,12 @@
     const renderExperienceLists = () => {
       const container = document.getElementById("experience-lists");
       container.replaceChildren();
+      let educationSection;
 
       ["education", "work"].forEach((category) => {
         const section = document.createElement("section");
         section.className = "background-group";
+        if (category === "education") educationSection = section;
         const timeline = document.createElement("div");
         timeline.className = "timeline glass";
 
@@ -741,7 +743,7 @@
         </svg>
       `;
       actions.append(openSizu, openPrefectures);
-      container.append(actions);
+      educationSection?.append(actions);
     };
 
     const filteredExperiences = () => experienceState.items.filter((item) => {

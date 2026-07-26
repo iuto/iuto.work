@@ -590,9 +590,9 @@ h1 {
 
 .background-actions {
   display: grid;
-  grid-column: 1;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
+  margin-top: 20px;
 }
 
 .sizu-section {
@@ -4011,9 +4011,21 @@ h1 {
     grid-template-columns: 1fr;
   }
 
+  .background-group:first-child {
+    display: contents;
+  }
+
+  .background-group:first-child .timeline {
+    order: 1;
+  }
+
+  .background-group:nth-child(2) {
+    order: 2;
+  }
+
   .background-actions {
-    grid-column: auto;
     grid-template-columns: 1fr;
+    order: 3;
   }
 
   .sizu-post-list {
