@@ -591,18 +591,97 @@ h1 {
 .activity-map {
   position: relative;
   margin-bottom: 24px;
-  padding: 28px;
+  padding: 0;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 90% 0%, rgba(255, 197, 100, 0.22), transparent 34%),
-    rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.86);
   color: #081f1d;
+}
+
+.activity-map-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 22px;
+  min-height: 78px;
+  padding: 0 22px;
+  list-style: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.activity-map-summary::-webkit-details-marker {
+  display: none;
+}
+
+.activity-map-summary:hover,
+.activity-map-summary:focus-visible {
+  background: rgba(255, 255, 255, 0.48);
+  outline: none;
+}
+
+.activity-map-summary-copy {
+  display: grid;
+  gap: 3px;
+}
+
+.activity-map-summary-copy strong {
+  font-size: 15px;
+  font-weight: 850;
+  letter-spacing: -0.025em;
+}
+
+.activity-map-current {
+  padding: 7px 11px;
+  border: 1px solid rgba(8, 33, 31, 0.08);
+  border-radius: 999px;
+  background: rgba(8, 33, 31, 0.04);
+  color: rgba(8, 33, 31, 0.52);
+  font-size: 10px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.activity-map-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(8, 33, 31, 0.5);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.activity-map-toggle svg {
+  width: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+  transition: transform 0.22s ease;
+}
+
+.activity-map[open] .activity-map-toggle svg {
+  transform: rotate(180deg);
+}
+
+.activity-map[open] .activity-map-toggle span {
+  font-size: 0;
+}
+
+.activity-map[open] .activity-map-toggle span::after {
+  content: "閉じる";
+  font-size: 10px;
+}
+
+.activity-map-content {
+  padding: 20px 22px 22px;
+  border-top: 1px solid rgba(8, 33, 31, 0.08);
 }
 
 .activity-map-head {
   display: flex;
   justify-content: space-between;
-  align-items: end;
+  align-items: center;
   gap: 24px;
 }
 
@@ -614,16 +693,10 @@ h1 {
   text-transform: uppercase;
 }
 
-.activity-map h2 {
-  margin: 5px 0 0;
-  font-size: clamp(22px, 3vw, 34px);
-  letter-spacing: -0.055em;
-}
-
-.activity-map-guide {
-  margin: 8px 0 20px;
+.activity-map-head p {
+  margin: 0;
   color: rgba(8, 33, 31, 0.5);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 650;
 }
 
@@ -657,7 +730,8 @@ h1 {
 
 .activity-chart-scroll {
   overflow-x: auto;
-  padding: 4px 0 10px;
+  margin-top: 18px;
+  padding: 4px 0 8px;
   scrollbar-color: rgba(8, 33, 31, 0.18) transparent;
 }
 
@@ -3294,7 +3368,26 @@ h1 {
   }
 
   .activity-map {
-    padding: 22px 18px;
+    padding: 0;
+  }
+
+  .activity-map-summary {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+    min-height: 72px;
+    padding: 0 16px;
+  }
+
+  .activity-map-current {
+    display: none;
+  }
+
+  .activity-map-toggle span {
+    display: none;
+  }
+
+  .activity-map-content {
+    padding: 18px 16px;
   }
 
   .activity-map-head {
@@ -3304,10 +3397,6 @@ h1 {
 
   .activity-filters {
     justify-content: flex-start;
-  }
-
-  .activity-map-guide {
-    margin-top: 12px;
   }
 
   .activity-chart {

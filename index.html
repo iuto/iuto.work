@@ -86,24 +86,35 @@
     </section>
 
     <section class="section-large" id="about">
-      <section class="activity-map glass" aria-labelledby="activity-map-title">
-        <div class="activity-map-head">
-          <div>
-            <span class="activity-map-kicker">My timeline</span>
-            <h2 id="activity-map-title">学びと仕事の重なり</h2>
+      <details class="activity-map glass">
+        <summary class="activity-map-summary">
+          <span class="activity-map-summary-copy">
+            <span class="activity-map-kicker">Activity timeline</span>
+            <strong>学びと仕事の重なりを見る</strong>
+          </span>
+          <span class="activity-map-current" id="activity-current-count">現在の活動を集計中</span>
+          <span class="activity-map-toggle" aria-hidden="true">
+            <span>年表を開く</span>
+            <svg viewBox="0 0 24 24">
+              <path d="m7 9 5 5 5-5" />
+            </svg>
+          </span>
+        </summary>
+        <div class="activity-map-content">
+          <div class="activity-map-head">
+            <p>学歴と活動歴を同じ時間軸で比較できます。</p>
+            <div class="activity-filters" aria-label="表示する活動">
+              <button class="is-active" type="button" data-experience-filter="all">すべて</button>
+              <button type="button" data-experience-filter="education">学び</button>
+              <button type="button" data-experience-filter="work">仕事・活動</button>
+              <button type="button" data-experience-filter="current">現在</button>
+            </div>
           </div>
-          <div class="activity-filters" aria-label="表示する活動">
-            <button class="is-active" type="button" data-experience-filter="all">すべて</button>
-            <button type="button" data-experience-filter="education">学び</button>
-            <button type="button" data-experience-filter="work">仕事・活動</button>
-            <button type="button" data-experience-filter="current">現在</button>
+          <div class="activity-chart-scroll">
+            <div class="activity-chart" id="activity-chart" aria-live="polite"></div>
           </div>
         </div>
-        <p class="activity-map-guide">バーを選ぶと詳しい内容を開けます。横方向にスクロールできます。</p>
-        <div class="activity-chart-scroll">
-          <div class="activity-chart" id="activity-chart" aria-live="polite"></div>
-        </div>
-      </section>
+      </details>
 
       <div class="background-groups" id="experience-lists" aria-live="polite"></div>
       <p class="experience-error" id="experience-error" hidden>経歴データを読み込めませんでした。</p>
@@ -360,7 +371,7 @@
         <p class="work-dialog-period">2026年4月 - 現在 / 在学中</p>
         <h2 id="kansai-university-title">関西大学 社会学部 社会学科 社会学専攻</h2>
         <p class="university-intro">
-          感覚過敏研究所でのインターンを通じ、制度の狭間に置かれるマイノリティの社会参画に関心を持った。当事者の声を社会調査で可視化し、マイノリティに関する課題を多角的に捉えるため、関西大学社会学部 社会学専攻を選んだ。
+          感覚過敏研究所でのインターンを通じ、制度の狭間に置かれるマイノリティの社会参画に関心を持った。当事者の声を社会調査で可視化し、マイノリティに関する課題を多角的に捉えるため、社会学専攻を選んだ。
         </p>
         <section class="university-affiliations" aria-labelledby="university-affiliations-title">
           <h3 id="university-affiliations-title">所属</h3>
@@ -653,7 +664,7 @@
             badge.textContent = item.badge;
             period.append(badge);
           }
-          if (!item.planned && (active || item.category === "work")) {
+          if (!item.planned && item.category === "work") {
             const duration = document.createElement("span");
             duration.className = "period-duration";
             duration.textContent = formatDuration(item.start, item.end || "current");
@@ -750,6 +761,11 @@
         const response = await fetch("data/experiences.json");
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         experienceState.items = await response.json();
+        const currentItems = experienceState.items.filter(isCurrentExperience);
+        const educationCount = currentItems.filter((item) => item.category === "education").length;
+        const workCount = currentItems.filter((item) => item.category === "work").length;
+        document.getElementById("activity-current-count").textContent =
+          `現在：学び ${educationCount}・活動 ${workCount}`;
         renderExperienceLists();
         renderActivityChart();
       } catch (error) {
