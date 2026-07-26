@@ -494,6 +494,7 @@ h1 {
 .profile-social-link .github-icon {
   fill: currentColor;
   stroke: none;
+  color: #111;
 }
 
 .lead {
