@@ -1064,15 +1064,7 @@ h1 {
   letter-spacing: 0.08em;
 }
 
-.university-on-demand ul {
-  display: grid;
-  gap: 5px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.university-on-demand li {
+.university-on-demand strong {
   color: #163b37;
   font-size: 11px;
   font-weight: 750;
