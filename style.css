@@ -780,6 +780,10 @@ h1 {
   max-height: 58vh;
 }
 
+.prefecture-map .boundary-line {
+  display: none;
+}
+
 .prefecture-map .prefecture {
   fill: var(--prefecture-color, #e8e5dc);
   stroke: #45413c;
