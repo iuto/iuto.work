@@ -968,14 +968,77 @@ h1 {
 }
 
 .sizu-access-form {
+  position: relative;
   display: grid;
-  width: min(760px, 100%);
-  gap: 8px;
+  width: min(700px, 100%);
+  gap: 13px;
   margin: auto;
+  padding: clamp(24px, 4vw, 40px);
+  border: 1px solid rgba(255, 255, 255, 0.86);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 8% 0%, rgba(255, 197, 100, 0.26), transparent 38%),
+    radial-gradient(circle at 100% 100%, rgba(105, 170, 161, 0.16), transparent 42%),
+    rgba(255, 255, 255, 0.62);
+  box-shadow:
+    0 26px 70px rgba(23, 63, 59, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
 }
 
 .sizu-access-form[hidden] {
   display: none;
+}
+
+.sizu-access-intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: left;
+}
+
+.sizu-access-intro > span {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(217, 154, 40, 0.2);
+  border-radius: 14px;
+  background: rgba(255, 197, 100, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  font-size: 20px;
+}
+
+.sizu-access-intro strong {
+  display: block;
+  color: #173f3b;
+  font-size: clamp(18px, 2.4vw, 26px);
+  letter-spacing: -0.045em;
+}
+
+.sizu-access-intro p {
+  margin: 4px 0 0;
+  color: rgba(8, 33, 31, 0.54);
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.sizu-secret-preview {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7px;
+}
+
+.sizu-secret-preview span {
+  padding: 7px 10px;
+  border: 1px solid rgba(8, 33, 31, 0.08);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.56);
+  color: rgba(8, 33, 31, 0.42);
+  font-size: 9px;
+  font-weight: 850;
 }
 
 .sizu-access-form label {
