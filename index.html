@@ -667,7 +667,9 @@
         timeline.className = "timeline glass";
 
         experienceState.items.filter((item) => item.category === category).forEach((item) => {
-          const active = isOngoingExperience(item);
+          const active = item.category === "education"
+            ? isCurrentExperience(item)
+            : isOngoingExperience(item);
           const row = document.createElement("div");
           row.className = `timeline-item ${item.planned ? "is-planned" : (active ? "is-active" : "is-past")}`;
           const period = document.createElement("div");
