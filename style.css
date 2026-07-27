@@ -1926,7 +1926,7 @@ h1 {
 }
 
 .university-intro {
-  max-width: 760px;
+  max-width: none;
   margin: 18px 0 0;
   color: rgba(8, 33, 31, 0.68);
   font-size: clamp(12px, 1.45vw, 15px);
