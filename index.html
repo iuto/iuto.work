@@ -864,6 +864,7 @@
         if (!response.ok) return;
         const status = await response.json();
         if (typeof status.message !== "string" || !status.message.trim()) return;
+        if (status.expiresAt && Date.now() >= new Date(status.expiresAt).getTime()) return;
 
         document.getElementById("profile-status-message").textContent = status.message.trim();
         document.getElementById("profile-status-emoji").textContent =
