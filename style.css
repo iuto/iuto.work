@@ -380,6 +380,12 @@ a {
   max-width: 840px;
 }
 
+.hero .profile-card {
+  width: 100%;
+  max-width: none;
+  padding-right: clamp(110px, 12vw, 180px);
+}
+
 .profile-icon {
   width: clamp(92px, 11vw, 116px);
   height: clamp(92px, 11vw, 116px);
@@ -398,6 +404,13 @@ a {
   min-width: 0;
 }
 
+.hero .profile-copy {
+  display: grid;
+  flex: 1;
+  grid-template-columns: max-content minmax(220px, 400px);
+  column-gap: clamp(44px, 7vw, 100px);
+}
+
 h1 {
   margin: 0;
   font-family: Inter, "Arial Black", "Noto Sans JP", system-ui, sans-serif;
@@ -407,7 +420,12 @@ h1 {
   letter-spacing: -0.06em;
 }
 
+.hero h1 {
+  grid-column: 1;
+}
+
 .profile-location {
+  grid-column: 1;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -443,17 +461,21 @@ h1 {
 }
 
 .profile-status {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  align-self: center;
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 10px;
   width: fit-content;
   max-width: 100%;
-  margin: 10px 0 0 2px;
-  padding: 0;
-  color: rgba(247, 248, 255, 0.68);
-  font-size: 11px;
+  margin: 0;
+  padding: 12px 0 12px 18px;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(247, 248, 255, 0.72);
+  font-size: 12px;
   font-weight: 750;
-  line-height: 1.5;
+  line-height: 1.65;
 }
 
 .profile-status[hidden] {
@@ -461,18 +483,13 @@ h1 {
 }
 
 .profile-status-emoji {
-  display: grid;
-  width: 20px;
-  height: 20px;
   flex: 0 0 auto;
-  place-items: center;
-  border-radius: 7px;
-  background: rgba(255, 255, 255, 0.1);
-  font-size: 11px;
-  filter: grayscale(0.18);
+  font-size: 15px;
+  filter: grayscale(0.24);
 }
 
 .profile-socials {
+  grid-column: 1;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -4082,6 +4099,10 @@ h1 {
     flex-direction: column;
   }
 
+  .hero .profile-card {
+    padding-right: 0;
+  }
+
   .profile-icon {
     width: 104px;
     height: 104px;
@@ -4090,6 +4111,18 @@ h1 {
   .profile-location,
   .profile-socials {
     margin-left: 0;
+  }
+
+  .profile-copy {
+    display: block;
+    width: 100%;
+  }
+
+  .profile-status {
+    margin-top: 12px;
+    padding: 0;
+    border-left: 0;
+    font-size: 11px;
   }
 
   .photo-intro .profile-copy {
