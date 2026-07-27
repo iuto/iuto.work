@@ -989,58 +989,6 @@ h1 {
   display: none;
 }
 
-.sizu-access-intro {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  text-align: left;
-}
-
-.sizu-access-intro > span {
-  display: grid;
-  width: 44px;
-  height: 44px;
-  flex: 0 0 auto;
-  place-items: center;
-  border: 1px solid rgba(217, 154, 40, 0.2);
-  border-radius: 14px;
-  background: rgba(255, 197, 100, 0.16);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  font-size: 20px;
-}
-
-.sizu-access-intro strong {
-  display: block;
-  color: #173f3b;
-  font-size: clamp(18px, 2.4vw, 26px);
-  letter-spacing: -0.045em;
-}
-
-.sizu-access-intro p {
-  margin: 4px 0 0;
-  color: rgba(8, 33, 31, 0.54);
-  font-size: 10px;
-  font-weight: 750;
-}
-
-.sizu-secret-preview {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 7px;
-}
-
-.sizu-secret-preview span {
-  padding: 7px 10px;
-  border: 1px solid rgba(8, 33, 31, 0.08);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.56);
-  color: rgba(8, 33, 31, 0.42);
-  font-size: 9px;
-  font-weight: 850;
-}
-
 .sizu-access-form label {
   color: rgba(8, 33, 31, 0.58);
   font-size: 10px;
@@ -1059,34 +1007,67 @@ h1 {
   min-width: 0;
 }
 
+.sizu-password-field::before {
+  content: "🔐";
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 16px;
+  font-size: 17px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
 .sizu-access-form input,
 .sizu-password-row > button {
-  min-height: 46px;
+  min-height: 58px;
   border: 1px solid rgba(8, 33, 31, 0.12);
-  border-radius: 13px;
+  border-radius: 17px;
   font: inherit;
 }
 
 .sizu-access-form input {
   width: 100%;
   min-width: 0;
-  min-height: 46px;
-  padding: 0 58px 0 14px;
+  min-height: 58px;
+  padding: 0 64px 0 50px;
   border: 1px solid rgba(8, 33, 31, 0.12);
-  border-radius: 13px;
-  background: rgba(255, 255, 255, 0.78);
+  border-radius: 17px;
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, 0.94), rgba(255, 250, 230, 0.78));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.94),
+    0 8px 24px rgba(23, 63, 59, 0.06);
   color: #081f1d;
   font: inherit;
   font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sizu-password-field:focus-within input {
+  border-color: rgba(217, 154, 40, 0.54);
+  box-shadow:
+    0 0 0 4px rgba(255, 197, 100, 0.14),
+    0 14px 34px rgba(23, 63, 59, 0.1);
 }
 
 .sizu-password-row > button {
-  padding: 0 18px;
-  background: #173f3b;
+  padding: 0 22px;
+  background: linear-gradient(135deg, #173f3b, #28665f);
+  box-shadow: 0 10px 24px rgba(23, 63, 59, 0.2);
   color: #fff;
   font-size: 11px;
   font-weight: 850;
   cursor: pointer;
+  transition: box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.sizu-password-row > button:hover,
+.sizu-password-row > button:focus-visible {
+  box-shadow: 0 14px 30px rgba(23, 63, 59, 0.28);
+  outline: none;
+  transform: translateY(-1px);
 }
 
 .sizu-password-toggle {
