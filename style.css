@@ -2006,69 +2006,22 @@ h1 {
   border-bottom: 0;
 }
 
-.university-application {
-  margin-top: 30px;
+.university-application-dialog {
+  width: min(86vw, 1000px);
 }
 
-.university-application-toggle {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 30px;
-  align-items: center;
-  gap: 16px;
-  padding: 15px 17px;
-  border: 1px solid rgba(14, 55, 51, 0.12);
-  border-radius: 15px;
-  background: rgba(255, 255, 255, 0.78);
-  color: #163b37;
-  cursor: pointer;
-  list-style: none;
-  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
-}
-
-.university-application-toggle::-webkit-details-marker {
-  display: none;
-}
-
-.university-application-toggle span {
-  font-size: 13px;
-  font-weight: 850;
-}
-
-.university-application-toggle::after {
-  content: "＋";
-  display: grid;
-  width: 30px;
-  height: 30px;
-  place-items: center;
-  border-radius: 50%;
-  background: rgba(255, 197, 100, 0.22);
-  color: #9a6509;
-  font-size: 17px;
-  line-height: 1;
-  transition: transform 0.2s ease;
-}
-
-.university-application-toggle:hover,
-.university-application-toggle:focus-visible {
-  border-color: rgba(217, 154, 40, 0.42);
-  background: #fff;
-  color: #a46d0d;
-  outline: none;
-}
-
-.university-application[open] .university-application-toggle {
-  margin-bottom: 12px;
-}
-
-.university-application[open] .university-application-toggle::after {
-  content: "−";
-  transform: rotate(180deg);
+.university-application-dialog-panel {
+  min-height: min(620px, 80vh);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(255, 197, 100, 0.22), transparent 34%),
+    linear-gradient(160deg, #fffaf0, #edf3f1);
 }
 
 .university-application-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
+  margin-top: 26px;
   animation: university-courses-reveal 0.22s ease both;
 }
 
