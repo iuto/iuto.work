@@ -1792,6 +1792,12 @@ h1 {
   white-space: nowrap;
 }
 
+@media (min-width: 801px) {
+  .period {
+    margin-left: 10px;
+  }
+}
+
 .period-year {
   color: rgba(8, 33, 31, 0.4);
   font-size: 11px;
