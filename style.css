@@ -2105,6 +2105,43 @@ h1 {
   animation: university-courses-reveal 0.22s ease both;
 }
 
+.university-application-prompt {
+  position: relative;
+  margin: 0 0 26px;
+  padding: 18px 20px;
+  border: 1px solid rgba(45, 126, 117, 0.14);
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, rgba(45, 126, 117, 0.09), rgba(255, 197, 100, 0.08)),
+    rgba(255, 255, 255, 0.72);
+}
+
+.university-application-prompt small {
+  display: block;
+  margin-bottom: 7px;
+  color: #2d6f67;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+.university-application-prompt p {
+  margin: 0;
+  color: #163b37;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.8;
+}
+
+.university-application-prompt span {
+  display: block;
+  margin-top: 9px;
+  color: rgba(8, 33, 31, 0.46);
+  font-size: 10px;
+  font-weight: 800;
+  text-align: right;
+}
+
 .university-application-body > p {
   margin: 0 0 1.35em;
 }
