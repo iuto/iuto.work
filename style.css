@@ -1805,6 +1805,11 @@ h1 {
   gap: 8px;
 }
 
+.timeline-heading > h3 {
+  flex: 1 1 100%;
+  min-width: 0;
+}
+
 .timeline-text h3 {
   margin: 0;
   color: rgba(8, 33, 31, 0.58);
@@ -1874,6 +1879,12 @@ h1 {
   cursor: default;
 }
 
+.timeline-open:not(.is-static) {
+  display: grid;
+  grid-template-columns: minmax(0, max-content) 1fr;
+  width: 100%;
+}
+
 .timeline-open::after {
   content: "";
   position: absolute;
@@ -1889,11 +1900,17 @@ h1 {
 }
 
 .timeline-open-arrow {
+  justify-self: end;
+  margin-left: 14px;
   color: rgba(8, 33, 31, 0.46);
   font-size: 0.86em;
   line-height: 1;
   transform: translateY(-1px);
   transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.timeline-open:not(.is-static)::after {
+  display: none;
 }
 
 .timeline-open:not(.is-static):hover,
