@@ -2019,8 +2019,8 @@ h1 {
 
 .university-application-list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
   margin-top: 26px;
   animation: university-courses-reveal 0.22s ease both;
 }
