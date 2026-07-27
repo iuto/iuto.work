@@ -298,18 +298,6 @@ a {
     inset 0 -12px 20px rgba(255,255,255,0.10);
 }
 
-.nav-links a.is-current::after {
-  content: "";
-  position: absolute;
-  right: 6px;
-  top: 6px;
-  width: 5px;
-  height: 5px;
-  border-radius: 999px;
-  background: #ffb84d;
-  box-shadow: 0 0 10px rgba(255,197,100,0.72);
-}
-
 .glass {
   background: var(--card);
   border: 1px solid var(--line);
