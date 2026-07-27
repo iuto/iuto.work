@@ -898,6 +898,7 @@
         const filter = document.getElementById("sizu-filter");
         list.replaceChildren();
         filter.replaceChildren();
+        section.classList.add("has-posts");
 
         const categories = [...new Set(payload.posts.flatMap((post) => post.tags || []))]
           .filter((tag) => typeof tag === "string" && tag.trim())
@@ -958,6 +959,7 @@
         status.hidden = true;
       } catch {
         section.classList.remove("is-loading");
+        section.classList.remove("has-posts");
         form.hidden = false;
         status.textContent = "記事を読み込めませんでした。";
       } finally {
