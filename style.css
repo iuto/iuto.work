@@ -442,9 +442,31 @@ h1 {
   fill: rgba(120, 164, 167, 0.88);
 }
 
-.location-separator {
-  color: rgba(247, 248, 255, 0.44);
-  font-weight: 800;
+.profile-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 8px 0 0;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 12px 12px 12px 4px;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  color: rgba(247, 248, 255, 0.82);
+  font-size: 10px;
+  font-weight: 750;
+  line-height: 1.5;
+}
+
+.profile-status[hidden] {
+  display: none;
+}
+
+.profile-status-emoji {
+  flex: 0 0 auto;
+  font-size: 14px;
 }
 
 .profile-socials {

@@ -54,6 +54,10 @@
                 大阪府吹田市
               </span>
             </div>
+            <p class="profile-status" id="profile-status" hidden>
+              <span class="profile-status-emoji" id="profile-status-emoji" aria-hidden="true"></span>
+              <span id="profile-status-message"></span>
+            </p>
             <div class="profile-socials" aria-label="Social links">
               <a class="profile-social-link" href="https://x.com/iuto_025" target="_blank" rel="noopener" aria-label="X">
                 <img src="https://www.google.com/s2/favicons?domain=x.com&sz=64" alt="" />
@@ -857,6 +861,22 @@
       }
     };
 
+    const loadProfileStatus = async () => {
+      try {
+        const response = await fetch("data/status.json");
+        if (!response.ok) return;
+        const status = await response.json();
+        if (typeof status.message !== "string" || !status.message.trim()) return;
+
+        document.getElementById("profile-status-message").textContent = status.message.trim();
+        document.getElementById("profile-status-emoji").textContent =
+          typeof status.emoji === "string" ? status.emoji : "💭";
+        document.getElementById("profile-status").hidden = false;
+      } catch {
+        // 読み込めない場合はステータスを表示しない
+      }
+    };
+
     const loadSizuPosts = async (password) => {
       const status = document.getElementById("sizu-status");
       const form = document.getElementById("sizu-access-form");
@@ -1066,6 +1086,7 @@
     });
 
     loadExperiences();
+    loadProfileStatus();
     loadPrefectureMap();
 
     (() => {
