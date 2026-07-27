@@ -484,8 +484,37 @@ h1 {
 
 .profile-status-emoji {
   flex: 0 0 auto;
-  font-size: 15px;
+  font-size: 18px;
   filter: grayscale(0.24);
+}
+
+.profile-status-copy {
+  display: grid;
+  gap: 2px;
+}
+
+.profile-status-copy small {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(247, 248, 255, 0.46);
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+}
+
+.profile-status-copy small i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffc564;
+  box-shadow: 0 0 10px rgba(255, 197, 100, 0.68);
+}
+
+#profile-status-message {
+  color: rgba(247, 248, 255, 0.88);
+  font-size: 13px;
+  font-weight: 900;
 }
 
 .profile-socials {
