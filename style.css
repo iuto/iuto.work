@@ -1928,6 +1928,32 @@ h1 {
   line-height: 1.85;
 }
 
+.university-application-inline-open {
+  appearance: none;
+  display: inline;
+  margin: 0;
+  padding: 0 1px;
+  border: 0;
+  background: transparent;
+  color: #286b64;
+  font: inherit;
+  font-weight: 850;
+  line-height: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(40, 107, 100, 0.34);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.university-application-inline-open:hover,
+.university-application-inline-open:focus-visible {
+  color: #b36c0d;
+  text-decoration-color: currentColor;
+  outline: none;
+}
+
 .high-school-dialog .university-courses {
   margin-top: 30px;
 }

@@ -383,9 +383,9 @@
         <p class="work-dialog-period">2026年4月 - 2030年3月 / 卒業予定</p>
         <h2 id="kansai-university-title">関西大学 社会学部 社会学科 社会学専攻</h2>
         <p class="university-intro">
-          感覚過敏研究所でのインターンを通じ、制度の狭間に置かれるマイノリティの社会参画に関心を持ち、AO入試で合格。当事者の声を社会調査で可視化し、マイノリティに関する課題を多角的に捉えるため、社会学専攻を選んだ。
+          感覚過敏研究所でのインターンを通じ、制度の狭間に置かれるマイノリティの社会参画に関心を持ち、<button class="university-application-inline-open" type="button" data-details-open="university-application" aria-controls="university-application" aria-expanded="false">AO入試</button>で合格。当事者の声を社会調査で可視化し、マイノリティに関する課題を多角的に捉えるため、社会学専攻を選んだ。
         </p>
-        <details class="university-application">
+        <details class="university-application" id="university-application">
           <summary class="university-application-toggle">
             <span>AO入試</span>
           </summary>
@@ -1117,6 +1117,19 @@
       })();
       return prefectureMapLoad;
     };
+
+    const universityApplication = document.getElementById("university-application");
+    const universityApplicationInlineOpen = document.querySelector("[data-details-open='university-application']");
+
+    universityApplicationInlineOpen?.addEventListener("click", () => {
+      if (!universityApplication) return;
+      universityApplication.open = true;
+      universityApplication.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+
+    universityApplication?.addEventListener("toggle", () => {
+      universityApplicationInlineOpen?.setAttribute("aria-expanded", String(universityApplication.open));
+    });
 
     document.addEventListener("click", (event) => {
       const button = event.target.closest("[data-dialog-open]");
