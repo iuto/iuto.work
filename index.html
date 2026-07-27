@@ -100,6 +100,7 @@
             </div>
           </form>
           <p class="sizu-status" id="sizu-status" hidden></p>
+          <div class="sizu-filter" id="sizu-filter" aria-label="記事カテゴリー" hidden></div>
           <div class="sizu-post-list" id="sizu-post-list"></div>
         </section>
       </div>
@@ -893,10 +894,34 @@
         }
 
         const list = document.getElementById("sizu-post-list");
+        const filter = document.getElementById("sizu-filter");
         list.replaceChildren();
+        filter.replaceChildren();
+
+        const categories = [...new Set(payload.posts.flatMap((post) => post.tags || []))]
+          .filter((tag) => typeof tag === "string" && tag.trim())
+          .sort((a, b) => a.localeCompare(b, "ja"));
+
+        const createFilterButton = (label, category = "") => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.textContent = label;
+          button.dataset.sizuCategory = category;
+          button.className = category ? "" : "is-active";
+          button.setAttribute("aria-pressed", String(!category));
+          return button;
+        };
+
+        filter.append(createFilterButton("すべて"));
+        categories.forEach((category) => {
+          filter.append(createFilterButton(category, category));
+        });
+        filter.hidden = categories.length === 0;
+
         payload.posts.forEach((post) => {
           const link = document.createElement("a");
           link.className = "sizu-post-card";
+          link.dataset.sizuTags = JSON.stringify(post.tags || []);
           link.href = `https://sizu.me/iuto/posts/${encodeURIComponent(post.slug)}`;
           link.target = "_blank";
           link.rel = "noopener";
@@ -1045,6 +1070,23 @@
       event.currentTarget.textContent = showPassword ? "隠す" : "表示";
       event.currentTarget.setAttribute("aria-pressed", String(showPassword));
       input.focus();
+    });
+
+    document.getElementById("sizu-filter").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-sizu-category]");
+      if (!button) return;
+      const category = button.dataset.sizuCategory;
+
+      document.querySelectorAll("#sizu-filter [data-sizu-category]").forEach((item) => {
+        const active = item === button;
+        item.classList.toggle("is-active", active);
+        item.setAttribute("aria-pressed", String(active));
+      });
+
+      document.querySelectorAll("#sizu-post-list .sizu-post-card").forEach((card) => {
+        const tags = JSON.parse(card.dataset.sizuTags || "[]");
+        card.hidden = Boolean(category) && !tags.includes(category);
+      });
     });
 
     loadExperiences();
