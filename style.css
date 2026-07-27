@@ -1720,7 +1720,7 @@ h1 {
 .timeline-item {
   position: relative;
   display: grid;
-  grid-template-columns: 204px minmax(0, 1fr);
+  grid-template-columns: 194px minmax(0, 1fr);
   gap: 40px;
   padding: 22px 0;
   border-top: 1px solid rgba(14, 55, 51, 0.11);
@@ -1730,7 +1730,7 @@ h1 {
   content: "";
   position: absolute;
   top: 26px;
-  left: 214px;
+  left: 204px;
   width: 9px;
   height: 9px;
   border-radius: 50%;
@@ -1743,7 +1743,7 @@ h1 {
   position: absolute;
   top: 38px;
   bottom: -23px;
-  left: 218px;
+  left: 208px;
   width: 1px;
   background: rgba(14, 55, 51, 0.12);
 }
