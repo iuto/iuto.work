@@ -117,7 +117,6 @@
           <div class="prefecture-legend" id="prefecture-legend"></div>
           <div class="prefecture-map" id="prefecture-map" aria-label="都道府県別の訪問状況"></div>
         </div>
-        <p class="prefecture-selection" id="prefecture-selection">訪問以上の都道府県を選ぶと詳細を表示します。</p>
         <small class="prefecture-map-credit">
           Map: <a href="https://github.com/geolonia/japanese-prefectures" target="_blank" rel="noopener">Geolonia</a>
         </small>
@@ -1011,35 +1010,9 @@
           prefecture.dataset.name = name;
           prefecture.dataset.level = level;
           prefecture.setAttribute("aria-label", `${name}：${prefectureLevels[level].label}`);
-          if (level >= 3) {
-            prefecture.classList.add("is-clickable");
-            prefecture.setAttribute("role", "button");
-            prefecture.setAttribute("tabindex", "0");
-          }
-        });
-
-        const selectPrefecture = (prefecture) => {
-          const [name, level] = prefectures[String(prefecture.dataset.code).padStart(2, "0")] || [];
-          if (!name) return;
-          document.querySelectorAll("#prefecture-map .is-selected").forEach((item) => item.classList.remove("is-selected"));
-          prefecture.classList.add("is-selected");
-          document.getElementById("prefecture-selection").textContent =
-            `${name} · ${prefectureLevels[level].label} — 詳細ページは準備中`;
-        };
-
-        map.addEventListener("click", (event) => {
-          const prefecture = event.target.closest(".prefecture.is-clickable");
-          if (prefecture) selectPrefecture(prefecture);
-        });
-        map.addEventListener("keydown", (event) => {
-          const prefecture = event.target.closest(".prefecture.is-clickable");
-          if (prefecture && (event.key === "Enter" || event.key === " ")) {
-            event.preventDefault();
-            selectPrefecture(prefecture);
-          }
         });
       } catch {
-        document.getElementById("prefecture-selection").textContent = "地図を読み込めませんでした。";
+        document.getElementById("prefecture-map").textContent = "地図を読み込めませんでした。";
       }
     };
 
