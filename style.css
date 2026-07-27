@@ -4274,12 +4274,32 @@ h1 {
   }
 
   .prefecture-map-layout {
-    grid-template-columns: 1fr;
-    gap: 18px;
+    grid-template-columns: minmax(116px, 0.7fr) minmax(0, 1.3fr);
+    gap: 10px;
+    align-items: center;
   }
 
   .prefecture-legend {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .prefecture-legend > span {
+    grid-template-columns: 23px 30px minmax(0, 1fr);
+    gap: 4px;
+    font-size: 9px;
+  }
+
+  .prefecture-legend i {
+    width: 23px;
+    height: 23px;
+    font-size: 9px;
+  }
+
+  .prefecture-legend small {
+    overflow: hidden;
+    font-size: 7px;
+    text-overflow: ellipsis;
   }
 
   .prefecture-map {
