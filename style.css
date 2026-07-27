@@ -1720,7 +1720,7 @@ h1 {
 .timeline-item {
   position: relative;
   display: grid;
-  grid-template-columns: 178px minmax(0, 1fr);
+  grid-template-columns: 204px minmax(0, 1fr);
   gap: 40px;
   padding: 22px 0;
   border-top: 1px solid rgba(14, 55, 51, 0.11);
@@ -1730,7 +1730,7 @@ h1 {
   content: "";
   position: absolute;
   top: 26px;
-  left: 188px;
+  left: 214px;
   width: 9px;
   height: 9px;
   border-radius: 50%;
@@ -1743,7 +1743,7 @@ h1 {
   position: absolute;
   top: 38px;
   bottom: -23px;
-  left: 192px;
+  left: 218px;
   width: 1px;
   background: rgba(14, 55, 51, 0.12);
 }
@@ -1803,11 +1803,6 @@ h1 {
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
-}
-
-.timeline-heading > h3 {
-  flex: 1 1 100%;
-  min-width: 0;
 }
 
 .timeline-text h3 {
@@ -1879,12 +1874,6 @@ h1 {
   cursor: default;
 }
 
-.timeline-open:not(.is-static) {
-  display: grid;
-  grid-template-columns: minmax(0, max-content) 1fr;
-  width: 100%;
-}
-
 .timeline-open::after {
   content: "";
   position: absolute;
@@ -1900,17 +1889,11 @@ h1 {
 }
 
 .timeline-open-arrow {
-  justify-self: end;
-  margin-left: 14px;
   color: rgba(8, 33, 31, 0.46);
   font-size: 0.86em;
   line-height: 1;
   transform: translateY(-1px);
   transition: transform 0.2s ease, color 0.2s ease;
-}
-
-.timeline-open:not(.is-static)::after {
-  display: none;
 }
 
 .timeline-open:not(.is-static):hover,
