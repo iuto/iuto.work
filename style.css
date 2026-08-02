@@ -4602,6 +4602,11 @@ h1 {
     display: none;
   }
 
+  .timeline-item.is-active .timeline-text h3,
+  .timeline-item.is-active .timeline-detail {
+    color: #b9780d;
+  }
+
   .work-dialog {
     width: calc(100vw - 28px);
     max-height: 84vh;
