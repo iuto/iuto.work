@@ -4602,9 +4602,8 @@ h1 {
     display: none;
   }
 
-  .timeline-item.is-active .timeline-text h3,
-  .timeline-item.is-active .timeline-detail {
-    color: #b9780d;
+  .timeline-item.is-active .period {
+    border-left-color: #d99a28;
   }
 
   .work-dialog {
