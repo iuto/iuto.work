@@ -2542,13 +2542,17 @@ h1 {
 }
 
 .work-skills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
   max-width: 820px;
   margin-top: 28px;
 }
 
 .work-skills h3,
 .work-skills h4 {
-  margin: 0 0 12px;
+  margin: 0;
   color: #081f1d;
   font-size: 13px;
   font-weight: 950;
