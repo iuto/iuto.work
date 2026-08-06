@@ -2959,44 +2959,6 @@ h1 {
   letter-spacing: 0.06em;
 }
 
-.admissions-dialog .staff-event-placeholder {
-  display: grid;
-  place-items: center;
-  align-content: center;
-  gap: 8px;
-  background:
-    radial-gradient(circle at 78% 20%, rgba(255, 224, 164, 0.72), transparent 24%),
-    linear-gradient(145deg, #3f7d76, #8bb5ad);
-}
-
-.admissions-dialog .staff-event-placeholder::after {
-  height: 64%;
-}
-
-.admissions-dialog .staff-event-placeholder svg {
-  width: min(180px, 58%);
-  height: 72px;
-  fill: rgba(255, 255, 255, 0.14);
-  stroke: rgba(255, 255, 255, 0.76);
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.admissions-dialog .staff-event-placeholder strong {
-  position: relative;
-  z-index: 1;
-  color: rgba(255, 255, 255, 0.94);
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: 0.18em;
-}
-
-.admissions-dialog .staff-event-time {
-  margin-top: 5px;
-  font-size: 11px;
-}
-
 .admissions-dialog .staff-event-card::before {
   content: "";
   position: absolute;
