@@ -133,13 +133,17 @@
         <button class="work-dialog-close" type="button" data-dialog-close aria-label="閉じる">×</button>
         <div class="prefecture-story-photo">
           <img src="photos/large/P1170314.webp" alt="名古屋港水族館で撮影した写真" />
-          <span>MY HOMETOWN</span>
+          <div class="prefecture-story-heading">
+            <p>AICHI PREFECTURE</p>
+            <h2 id="aichi-story-title">愛知県</h2>
+          </div>
         </div>
         <div class="prefecture-story-copy">
-          <p class="prefecture-story-kicker">AICHI · 01</p>
-          <h2 id="aichi-story-title">愛知県</h2>
-          <p class="prefecture-story-lead">名古屋市緑区で生まれ、18年間暮らしました。</p>
-          <p>自分の原点であり、今も帰るとほっとする場所です。</p>
+          <span class="prefecture-story-number">18</span>
+          <div>
+            <p class="prefecture-story-lead">名古屋市緑区で生まれ、<br />18年間暮らしました。</p>
+            <p class="prefecture-story-note">生まれ育った、私の原点。</p>
+          </div>
         </div>
       </article>
     </dialog>
@@ -727,9 +731,9 @@
       const [endYear, endMonth] = endValue === "current"
         ? [now.getFullYear(), now.getMonth() + 1]
         : endValue.split("-").map(Number);
-      const totalMonths = ((endYear - startYear) * 12) + (endMonth - startMonth) + 1;
+      const totalMonths = ((endYear - startYear) * 12) + (endMonth - startMonth);
 
-      if (totalMonths <= 1) return "1ヶ月未満";
+      if (totalMonths < 1) return "1ヶ月未満";
 
       const years = Math.floor(totalMonths / 12);
       const months = totalMonths % 12;
@@ -1172,7 +1176,6 @@
     document.addEventListener("click", (event) => {
       const prefecture = event.target.closest(".prefecture.is-clickable");
       if (prefecture) {
-        document.getElementById("prefecture-dialog")?.close();
         document.getElementById(prefecture.dataset.storyDialog)?.showModal();
         return;
       }
@@ -1187,7 +1190,6 @@
       const prefecture = event.target.closest(".prefecture.is-clickable");
       if (!prefecture || (event.key !== "Enter" && event.key !== " ")) return;
       event.preventDefault();
-      document.getElementById("prefecture-dialog")?.close();
       document.getElementById(prefecture.dataset.storyDialog)?.showModal();
     });
 

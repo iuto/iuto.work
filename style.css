@@ -970,12 +970,12 @@ h1 {
 }
 
 .prefecture-story-dialog {
-  width: min(92vw, 880px);
+  width: min(92vw, 680px);
   max-width: none;
   padding: 0;
   overflow: hidden;
   border: 0;
-  border-radius: 28px;
+  border-radius: 24px;
   background: #f7f0e3;
   color: #25211d;
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.46);
@@ -988,15 +988,29 @@ h1 {
 
 .prefecture-story-card {
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
-  min-height: 480px;
+  overflow: hidden;
+}
+
+.prefecture-story-card > .work-dialog-close {
+  z-index: 3;
+  border-color: rgba(255, 255, 255, 0.55);
+  background: rgba(247, 240, 227, 0.88);
+  box-shadow: 0 4px 18px rgba(8, 17, 17, 0.2);
+  backdrop-filter: blur(8px);
 }
 
 .prefecture-story-photo {
   position: relative;
-  min-height: 480px;
+  height: min(52vh, 380px);
+  min-height: 280px;
   overflow: hidden;
+}
+
+.prefecture-story-photo::after {
+  position: absolute;
+  inset: 35% 0 0;
+  background: linear-gradient(to bottom, transparent, rgba(8, 17, 17, 0.72));
+  content: "";
 }
 
 .prefecture-story-photo img {
@@ -1005,49 +1019,63 @@ h1 {
   object-fit: cover;
 }
 
-.prefecture-story-photo span {
+.prefecture-story-heading {
   position: absolute;
-  bottom: 20px;
-  left: 20px;
-  padding: 7px 11px;
-  border-radius: 999px;
-  background: rgba(247, 240, 227, 0.9);
+  z-index: 1;
+  right: 34px;
+  bottom: 28px;
+  left: 34px;
+  color: #fff;
+}
+
+.prefecture-story-heading p {
+  margin: 0 0 5px;
   font-size: 10px;
-  font-weight: 900;
-  letter-spacing: 0.16em;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+}
+
+.prefecture-story-heading h2 {
+  margin: 0;
+  font-size: clamp(42px, 7vw, 64px);
+  line-height: 1;
+  letter-spacing: -0.065em;
 }
 
 .prefecture-story-copy {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 68px 42px 42px;
-}
-
-.prefecture-story-kicker {
-  margin: 0 0 12px;
-  color: #b2556f;
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 0.18em;
-}
-
-.prefecture-story-copy h2 {
-  margin: 0 0 26px;
-  font-size: clamp(42px, 7vw, 72px);
-  line-height: 0.95;
-  letter-spacing: -0.07em;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 24px;
+  align-items: center;
+  padding: 28px 34px 32px;
 }
 
 .prefecture-story-copy p {
-  margin: 0 0 14px;
-  line-height: 1.9;
+  margin: 0;
 }
 
 .prefecture-story-copy .prefecture-story-lead {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 800;
-  line-height: 1.75;
+  line-height: 1.65;
+}
+
+.prefecture-story-number {
+  display: grid;
+  width: 66px;
+  height: 66px;
+  place-items: center;
+  border-radius: 50%;
+  background: #eaa0b8;
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+.prefecture-story-note {
+  margin-top: 6px !important;
+  color: rgba(37, 33, 29, 0.58);
+  font-size: 12px;
 }
 
 .prefecture-map-credit {
@@ -4636,20 +4664,33 @@ h1 {
   }
 
   .prefecture-story-card {
-    grid-template-columns: 1fr;
+    min-height: 0;
   }
 
   .prefecture-story-photo {
-    min-height: 260px;
-    max-height: 38vh;
+    height: 42vh;
+    min-height: 240px;
   }
 
   .prefecture-story-copy {
-    padding: 30px 24px 34px;
+    gap: 16px;
+    padding: 22px 20px 24px;
   }
 
-  .prefecture-story-copy h2 {
-    margin-bottom: 18px;
+  .prefecture-story-heading {
+    right: 22px;
+    bottom: 20px;
+    left: 22px;
+  }
+
+  .prefecture-story-number {
+    width: 56px;
+    height: 56px;
+    font-size: 22px;
+  }
+
+  .prefecture-story-copy .prefecture-story-lead {
+    font-size: 15px;
   }
 
   .activity-dialog {
