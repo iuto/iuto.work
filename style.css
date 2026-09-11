@@ -2583,7 +2583,7 @@ h1 {
   position: relative;
   min-height: 62px;
   align-items: center;
-  padding: 7px 25px 7px 7px;
+  padding: 7px;
   border-radius: 9px;
   background: rgba(255, 197, 100, 0.2);
   color: #493716;
@@ -2597,7 +2597,7 @@ h1 {
 .university-timetable td a[data-grade]::after {
   content: attr(data-grade);
   position: absolute;
-  top: 6px;
+  bottom: 5px;
   right: 6px;
   display: grid;
   width: 18px;
@@ -2643,6 +2643,9 @@ h1 {
 }
 
 .university-on-demand-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
   color: #493716;
   font-size: 11px;
   font-weight: 750;
@@ -2650,9 +2653,18 @@ h1 {
 }
 
 .university-on-demand-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.42);
   color: inherit;
-  text-decoration-color: rgba(73, 55, 22, 0.3);
-  text-underline-offset: 3px;
+  text-decoration: none;
+}
+
+.university-on-demand-links > span {
+  display: none;
 }
 
 .university-on-demand-links a[data-grade]::after {
@@ -2660,7 +2672,7 @@ h1 {
   display: inline-grid;
   width: 17px;
   height: 17px;
-  margin-left: 5px;
+  margin-left: 0;
   place-items: center;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.58);
@@ -4991,6 +5003,12 @@ h1 {
     min-height: 38px;
     padding: 8px 32px 8px 10px;
     font-size: 10px;
+  }
+
+  .university-timetable tbody td a[data-grade]::after {
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
   }
 
   .high-school-course-grid {
