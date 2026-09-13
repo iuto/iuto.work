@@ -794,18 +794,35 @@
       let educationSection;
 
       ["education", "work"].forEach((category) => {
+        const categoryItems = experienceState.items.filter((item) => item.category === category);
+        const pastItems = categoryItems.filter((item) => !item.planned && !isCurrentExperience(item));
         const section = document.createElement("section");
         section.className = "background-group";
         if (category === "education") educationSection = section;
+
+        const header = document.createElement("header");
+        header.className = "background-group-head";
+        const headerCopy = document.createElement("div");
+        const eyebrow = document.createElement("span");
+        eyebrow.textContent = category === "education" ? "EDUCATION" : "EXPERIENCE";
+        const groupTitle = document.createElement("h2");
+        groupTitle.textContent = category === "education" ? "学歴" : "仕事・活動";
+        headerCopy.append(eyebrow, groupTitle);
+        const count = document.createElement("span");
+        count.className = "background-group-count";
+        count.textContent = `${categoryItems.length}件`;
+        header.append(headerCopy, count);
+
         const timeline = document.createElement("div");
         timeline.className = "timeline glass";
 
-        experienceState.items.filter((item) => item.category === category).forEach((item) => {
+        categoryItems.forEach((item) => {
           const active = item.category === "education"
             ? isCurrentExperience(item)
             : isOngoingExperience(item);
           const row = document.createElement("div");
           row.className = `timeline-item ${item.planned ? "is-planned" : (active ? "is-active" : "is-past")}`;
+          if (!item.planned && !isCurrentExperience(item)) row.hidden = true;
           const period = document.createElement("div");
           period.className = "period";
           const range = document.createElement("span");
@@ -830,7 +847,7 @@
           const heading = document.createElement("div");
           heading.className = "timeline-heading";
           const title = document.createElement("h3");
-          if (active) title.className = "is-active";
+          if (active || item.planned) title.className = "is-active";
           title.append(createExperienceAction(item));
           heading.append(title);
           if (item.detail) {
@@ -843,7 +860,35 @@
           row.append(period, text);
           timeline.append(row);
         });
-        section.append(timeline);
+
+        const updateTimelineEnd = () => {
+          const rows = [...timeline.querySelectorAll(".timeline-item")];
+          rows.forEach((row) => row.classList.remove("is-visible-end"));
+          rows.filter((row) => !row.hidden).at(-1)?.classList.add("is-visible-end");
+        };
+        updateTimelineEnd();
+
+        if (pastItems.length) {
+          const toggle = document.createElement("button");
+          toggle.className = "timeline-past-toggle";
+          toggle.type = "button";
+          toggle.setAttribute("aria-expanded", "false");
+          toggle.innerHTML = `<span>過去の経歴 ${pastItems.length}件を表示</span><i aria-hidden="true"></i>`;
+          toggle.addEventListener("click", () => {
+            const expanded = toggle.getAttribute("aria-expanded") === "true";
+            timeline.querySelectorAll(".timeline-item.is-past").forEach((row) => {
+              row.hidden = !expanded;
+            });
+            toggle.setAttribute("aria-expanded", String(!expanded));
+            toggle.querySelector("span").textContent = expanded
+              ? `過去の経歴 ${pastItems.length}件を表示`
+              : "過去の経歴を閉じる";
+            updateTimelineEnd();
+          });
+          timeline.append(toggle);
+        }
+
+        section.append(header, timeline);
         container.append(section);
       });
 

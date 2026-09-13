@@ -34,6 +34,15 @@
     "end": "2020-03"
   },
   {
+    "id": "kadoma-hayate-high-school",
+    "category": "work",
+    "title": "門真颯高等学院",
+    "start": "2026-10",
+    "end": null,
+    "planned": true,
+    "badge": "勤務予定"
+  },
+  {
     "id": "student-support",
     "category": "work",
     "title": "関西大学 学生支援スタッフ",
