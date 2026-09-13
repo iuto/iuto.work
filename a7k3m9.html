@@ -19,17 +19,7 @@
       <a class="sizu-page-back" href="/">← ホームへ戻る</a>
       <div class="sizu-page-card glass">
         <section class="sizu-section" id="sizu-posts" aria-label="限定公開記事">
-          <form class="sizu-access-form" id="sizu-access-form">
-            <label for="sizu-access-password">限定公開記事を見るためのパスワード</label>
-            <div class="sizu-password-row">
-              <div class="sizu-password-field">
-                <input id="sizu-access-password" name="password" type="password" autocomplete="current-password" required autofocus />
-                <button class="sizu-password-toggle" id="sizu-password-toggle" type="button" aria-controls="sizu-access-password" aria-pressed="false">表示</button>
-              </div>
-              <button type="submit">記事を見る</button>
-            </div>
-          </form>
-          <p class="sizu-status" id="sizu-status" hidden></p>
+          <p class="sizu-status" id="sizu-status">記事を読み込んでいます…</p>
           <div class="sizu-filter" id="sizu-filter" aria-label="記事カテゴリー" hidden></div>
           <div class="sizu-post-list" id="sizu-post-list"></div>
         </section>
@@ -38,37 +28,23 @@
   </main>
 
   <script>
-    const loadSizuPosts = async (password) => {
+    const loadSizuPosts = async () => {
       const status = document.getElementById("sizu-status");
-      const form = document.getElementById("sizu-access-form");
       const section = document.getElementById("sizu-posts");
-      const submitButton = form.querySelector('button[type="submit"]');
-      form.hidden = true;
       section.classList.add("is-loading");
       status.hidden = false;
       status.textContent = "記事を読み込んでいます…";
-      submitButton.disabled = true;
 
       try {
         const response = await fetch("/api/sizu-posts", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ password })
+          body: JSON.stringify({ accessPath: "a7k3m9" })
         });
-
-        if (response.status === 401) {
-          section.classList.remove("is-loading");
-          form.hidden = false;
-          submitButton.disabled = false;
-          status.textContent = "パスワードが違います。";
-          document.getElementById("sizu-access-password").select();
-          return;
-        }
         if (!response.ok) throw new Error("Request failed");
 
         const payload = await response.json();
         section.classList.remove("is-loading");
-        submitButton.disabled = false;
 
         if (!Array.isArray(payload.posts) || payload.posts.length === 0) {
           status.textContent = "限定公開記事は見つかりませんでした。";
@@ -135,25 +111,9 @@
         status.hidden = true;
       } catch {
         section.classList.remove("is-loading");
-        form.hidden = false;
-        submitButton.disabled = false;
         status.textContent = "記事を読み込めませんでした。";
       }
     };
-
-    document.getElementById("sizu-access-form").addEventListener("submit", (event) => {
-      event.preventDefault();
-      loadSizuPosts(document.getElementById("sizu-access-password").value);
-    });
-
-    document.getElementById("sizu-password-toggle").addEventListener("click", (event) => {
-      const input = document.getElementById("sizu-access-password");
-      const showPassword = input.type === "password";
-      input.type = showPassword ? "text" : "password";
-      event.currentTarget.textContent = showPassword ? "隠す" : "表示";
-      event.currentTarget.setAttribute("aria-pressed", String(showPassword));
-      input.focus();
-    });
 
     document.getElementById("sizu-filter").addEventListener("click", (event) => {
       const button = event.target.closest("[data-sizu-category]");
@@ -170,6 +130,8 @@
         card.hidden = Boolean(category) && !tags.includes(category);
       });
     });
+
+    loadSizuPosts();
   </script>
 </body>
 </html>
