@@ -799,20 +799,6 @@
         const section = document.createElement("section");
         section.className = "background-group";
         if (category === "education") educationSection = section;
-
-        const header = document.createElement("header");
-        header.className = "background-group-head";
-        const headerCopy = document.createElement("div");
-        const eyebrow = document.createElement("span");
-        eyebrow.textContent = category === "education" ? "EDUCATION" : "EXPERIENCE";
-        const groupTitle = document.createElement("h2");
-        groupTitle.textContent = category === "education" ? "学歴" : "仕事・活動";
-        headerCopy.append(eyebrow, groupTitle);
-        const count = document.createElement("span");
-        count.className = "background-group-count";
-        count.textContent = `${categoryItems.length}件`;
-        header.append(headerCopy, count);
-
         const timeline = document.createElement("div");
         timeline.className = "timeline glass";
 
@@ -822,7 +808,7 @@
             : isOngoingExperience(item);
           const row = document.createElement("div");
           row.className = `timeline-item ${item.planned ? "is-planned" : (active ? "is-active" : "is-past")}`;
-          if (!item.planned && !isCurrentExperience(item)) row.hidden = true;
+          if (category === "work" && !item.planned && !isCurrentExperience(item)) row.hidden = true;
           const period = document.createElement("div");
           period.className = "period";
           const range = document.createElement("span");
@@ -868,7 +854,7 @@
         };
         updateTimelineEnd();
 
-        if (pastItems.length) {
+        if (category === "work" && pastItems.length) {
           const toggle = document.createElement("button");
           toggle.className = "timeline-past-toggle";
           toggle.type = "button";
@@ -888,7 +874,7 @@
           timeline.append(toggle);
         }
 
-        section.append(header, timeline);
+        section.append(timeline);
         container.append(section);
       });
 
