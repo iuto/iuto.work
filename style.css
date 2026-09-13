@@ -663,6 +663,62 @@ h1 {
   backdrop-filter: blur(18px);
 }
 
+.sizu-page {
+  display: grid;
+  min-height: 100vh;
+  align-items: center;
+}
+
+.sizu-page-shell {
+  width: min(920px, 100%);
+  margin: auto;
+}
+
+.sizu-page-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  color: rgba(247, 248, 255, 0.68);
+  font-size: 11px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.sizu-page-back:hover,
+.sizu-page-back:focus-visible {
+  color: #fff;
+  outline: none;
+}
+
+.sizu-page-card {
+  min-height: min(680px, calc(100vh - 80px));
+  padding: clamp(24px, 5vw, 52px);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(255, 197, 100, 0.2), transparent 32%),
+    linear-gradient(160deg, #fffaf0, #edf3f1);
+}
+
+.sizu-page-card .sizu-section {
+  display: grid;
+  align-content: center;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  backdrop-filter: none;
+}
+
+.sizu-page-card .sizu-section.has-posts {
+  align-content: start;
+}
+
+.sizu-page-card .sizu-section.is-loading {
+  place-items: center;
+}
+
 .sizu-dialog-open {
   display: flex;
   align-items: center;

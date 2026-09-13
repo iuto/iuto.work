@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>限定公開記事 | iuto</title>
+  <link rel="icon" type="image/png" href="photos/favicon-64.png" />
+  <link rel="apple-touch-icon" href="photos/apple-touch-icon.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-blob blob1"></div>
+  <div class="bg-blob blob2"></div>
+  <div class="bg-blob blob3"></div>
+
+  <main class="page sizu-page">
+    <div class="sizu-page-shell">
+      <a class="sizu-page-back" href="/">← ホームへ戻る</a>
+      <div class="sizu-page-card glass">
+        <section class="sizu-section" id="sizu-posts" aria-label="限定公開記事">
+          <form class="sizu-access-form" id="sizu-access-form">
+            <label for="sizu-access-password">限定公開記事を見るためのパスワード</label>
+            <div class="sizu-password-row">
+              <div class="sizu-password-field">
+                <input id="sizu-access-password" name="password" type="password" autocomplete="current-password" required autofocus />
+                <button class="sizu-password-toggle" id="sizu-password-toggle" type="button" aria-controls="sizu-access-password" aria-pressed="false">表示</button>
+              </div>
+              <button type="submit">記事を見る</button>
+            </div>
+          </form>
+          <p class="sizu-status" id="sizu-status" hidden></p>
+          <div class="sizu-filter" id="sizu-filter" aria-label="記事カテゴリー" hidden></div>
+          <div class="sizu-post-list" id="sizu-post-list"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const loadSizuPosts = async (password) => {
+      const status = document.getElementById("sizu-status");
+      const form = document.getElementById("sizu-access-form");
+      const section = document.getElementById("sizu-posts");
+      const submitButton = form.querySelector('button[type="submit"]');
+      form.hidden = true;
+      section.classList.add("is-loading");
+      status.hidden = false;
+      status.textContent = "記事を読み込んでいます…";
+      submitButton.disabled = true;
+
+      try {
+        const response = await fetch("/api/sizu-posts", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ password })
+        });
+
+        if (response.status === 401) {
+          section.classList.remove("is-loading");
+          form.hidden = false;
+          submitButton.disabled = false;
+          status.textContent = "パスワードが違います。";
+          document.getElementById("sizu-access-password").select();
+          return;
+        }
+        if (!response.ok) throw new Error("Request failed");
+
+        const payload = await response.json();
+        section.classList.remove("is-loading");
+        submitButton.disabled = false;
+
+        if (!Array.isArray(payload.posts) || payload.posts.length === 0) {
+          status.textContent = "限定公開記事は見つかりませんでした。";
+          return;
+        }
+
+        const list = document.getElementById("sizu-post-list");
+        const filter = document.getElementById("sizu-filter");
+        list.replaceChildren();
+        filter.replaceChildren();
+        section.classList.add("has-posts");
+
+        const categories = [...new Set(payload.posts.flatMap((post) => post.tags || []))]
+          .filter((tag) => typeof tag === "string" && tag.trim())
+          .sort((a, b) => a.localeCompare(b, "ja"));
+
+        const createFilterButton = (label, category = "") => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.textContent = label;
+          button.dataset.sizuCategory = category;
+          button.className = category ? "" : "is-active";
+          button.setAttribute("aria-pressed", String(!category));
+          return button;
+        };
+
+        filter.append(createFilterButton("すべて"));
+        categories.forEach((category) => filter.append(createFilterButton(category, category)));
+        filter.hidden = categories.length === 0;
+
+        payload.posts.forEach((post) => {
+          const link = document.createElement("a");
+          link.className = "sizu-post-card";
+          link.dataset.sizuTags = JSON.stringify(post.tags || []);
+          link.href = `https://sizu.me/iuto/posts/${encodeURIComponent(post.slug)}`;
+          link.target = "_blank";
+          link.rel = "noopener";
+
+          const date = document.createElement("time");
+          date.dateTime = post.createdAt;
+          date.textContent = new Intl.DateTimeFormat("ja-JP", {
+            year: "numeric", month: "long", day: "numeric"
+          }).format(new Date(post.createdAt));
+
+          const title = document.createElement("strong");
+          title.textContent = post.title || "無題";
+          const tags = document.createElement("span");
+          tags.className = "sizu-post-tags";
+          (post.tags || []).forEach((tag) => {
+            const item = document.createElement("i");
+            item.textContent = `#${tag}`;
+            tags.append(item);
+          });
+          const arrow = document.createElement("span");
+          arrow.className = "sizu-post-arrow";
+          arrow.ariaHidden = "true";
+          arrow.textContent = "↗";
+          link.append(date, title);
+          if (tags.childElementCount > 0) link.append(tags);
+          link.append(arrow);
+          list.append(link);
+        });
+
+        status.hidden = true;
+      } catch {
+        section.classList.remove("is-loading");
+        form.hidden = false;
+        submitButton.disabled = false;
+        status.textContent = "記事を読み込めませんでした。";
+      }
+    };
+
+    document.getElementById("sizu-access-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      loadSizuPosts(document.getElementById("sizu-access-password").value);
+    });
+
+    document.getElementById("sizu-password-toggle").addEventListener("click", (event) => {
+      const input = document.getElementById("sizu-access-password");
+      const showPassword = input.type === "password";
+      input.type = showPassword ? "text" : "password";
+      event.currentTarget.textContent = showPassword ? "隠す" : "表示";
+      event.currentTarget.setAttribute("aria-pressed", String(showPassword));
+      input.focus();
+    });
+
+    document.getElementById("sizu-filter").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-sizu-category]");
+      if (!button) return;
+      const category = button.dataset.sizuCategory;
+
+      document.querySelectorAll("#sizu-filter [data-sizu-category]").forEach((item) => {
+        const active = item === button;
+        item.classList.toggle("is-active", active);
+        item.setAttribute("aria-pressed", String(active));
+      });
+      document.querySelectorAll("#sizu-post-list .sizu-post-card").forEach((card) => {
+        const tags = JSON.parse(card.dataset.sizuTags || "[]");
+        card.hidden = Boolean(category) && !tags.includes(category);
+      });
+    });
+  </script>
+</body>
+</html>

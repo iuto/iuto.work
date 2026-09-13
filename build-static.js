@@ -3,7 +3,7 @@ const path = require("path");
 
 const root = __dirname;
 const outDir = path.join(root, "dist");
-const files = ["index.html", "photos.html", "health.html", "style.css", "likes-config.js", "health-config.js", "robots.txt"];
+const files = ["index.html", "photos.html", "health.html", "a7k3m9.html", "style.css", "likes-config.js", "health-config.js", "robots.txt"];
 const photoFiles = ["icon.png", "favicon-64.png", "apple-touch-icon.png"];
 const photoFolders = ["thumbs", "large"];
 const dataFolders = ["data"];

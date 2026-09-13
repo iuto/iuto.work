@@ -2,6 +2,12 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "cleanUrls": false,
+  "rewrites": [
+    {
+      "source": "/a7k3m9",
+      "destination": "/a7k3m9.html"
+    }
+  ],
   "headers": [
     {
       "source": "/photos/(.*)",
